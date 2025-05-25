@@ -1,49 +1,48 @@
-* React 프로그래밍
-  - 멋쟁이 사자처럼 FrontEnd BootCamp 13기
-  
+# React 프로그래밍
+* 멋쟁이 사자처럼 FrontEnd BootCamp 13기
 * 예제 테스트(GitHub Page): <https://febc-13.github.io/React/workspace-ins>
 
-## 수업 목차
+# 1 수업 목차
 
-### 1장 리액트 빌드업
+## 1장 리액트 빌드업
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch01-buildup>
 
-### 2장 리액트 시작하기
+## 2장 리액트 시작하기
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch02-start>
 
-### 3장 리액트 훅
-* https://febc-13.github.io/React/tree/main/workspace-ins/ch03-hooks>
+## 3장 클래스 컴포넌트와 컴포넌트의 라이프 사이클
+* https://febc-13.github.io/React/tree/main/workspace-ins/ch03-class>
 
-### 4장 클래스 컴포넌트와 컴포넌트의 라이프 사이클
-* https://febc-13.github.io/React/tree/main/workspace-ins/ch04-class>
+## 4장 리액트 훅
+* https://febc-13.github.io/React/tree/main/workspace-ins/ch04-hooks>
 
-### 5장 리액트 라우터
+## 5장 리액트 라우터
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch05-router>
 
-### 6장 컨텍스트 API
+## 6장 컨텍스트 API
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch06-contextapi>
 
-### 7장 전역 상태 관리
+## 7장 전역 상태 관리
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch07-globalstate>
 
-### 8장 리액트에서 CSS 사용
+## 8장 리액트에서 CSS 사용
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch08-css>
 
-### 9장 HTTP 통신과 Ajax
+## 9장 HTTP 통신과 Ajax
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch09-ajax>
 
-### 10장 Next.js
+## 10장 Next.js
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch10-nextjs>
 
-### 11장 프로젝트 준비
+## 11장 프로젝트 준비
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch11-skeleton>
 
-### 12장 React App
+## 12장 React App
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch12-app>
 
-# 개발 환경 구축
+# 2 개발 환경 구축
 
-## 프로그램 설치
+## 2.1 프로그램 설치
 * 본인의 OS에 맞는 버전 다운로드 후 설치
   - Nodejs 설치 <https://nodejs.org/en/download/>
   - Visual Studio Code 설치 <https://code.visualstudio.com/download>
@@ -52,8 +51,8 @@
     - Postman <https://www.postman.com/downloads>
     - Bruno <https://www.usebruno.com/downloads>
 
-## 실습 준비
-### Github 저장소 복사
+## 2.2 실습 준비
+### 2.2.1 Github 저장소 복사
 1. 리액트 실습 Github 저장소
     * `https://github.com/FEBC-13/React.git`
     
@@ -75,7 +74,7 @@
     git clone https://github.com/FEBC-13/React.git
     ```
 
-### 실습 저장소의 변경사항 동기화
+### 2.2.2 실습 저장소의 변경사항 동기화
 * github 저장소의 변경사항을 가져올 때
     ```sh
     git pull origin main
@@ -86,7 +85,7 @@
     npx degit https://github.com/FEBC-13/React/sample/02 sample/02 
     ```
 
-### Visual Studio Code 설정
+### 2.2.3 Visual Studio Code 설정
 1. VSCode 실행
 2. 프로젝트 선택
     * File > Open Folder... > febc13/03_react/React 선택
@@ -100,7 +99,7 @@
       - Add Pattern > `workspace-ins/**` 입력한 후 OK 선택
       - Add Pattern > `sample/**` 입력한 후 OK 선택
 
-### React 개발용 웹브라우저 플러그인
+### 2.2.4 React 개발용 웹브라우저 플러그인
 
 #### React Developer Tools
 * 리액트 컴포넌트 트리를 확인하고 컴포넌트 내부 데이터를 한눈에 볼 수 있어서 디버깅에 도움
@@ -112,8 +111,8 @@
 * sample/01/workspace 폴더를 복사해서 프로젝트 루트에 붙여넣기
 * 완성된 강사의 코드는 workspace-ins 폴더에서 확인
 
-## 실습 테스트
-### 웹 서버 구동
+## 2.3 실습 테스트
+### 2.3.1 웹 서버 구동
 1. VSCode의 터미널로 이동
     * VSCode 하단의 TERMINAL이 보이지 않으면 View > Terminal
 2. Live Server 구동
@@ -122,7 +121,7 @@
     npx live-server workspace
     ```
 
-### 테스트
+### 2.3.2 테스트
 * 웹 브라우저로 접속
   - <http://127.0.0.1:8080>
   - <http://localhost:8080>
@@ -131,15 +130,15 @@
   - .html: DOM, Ajax 관련 실습은 새로운 화면으로 이동 후 테스트
   - Vite로 생성한 프로젝트는 안내 화면을 참고해서 Node.js 환경에서 테스트
 
-# 팁
-* VSCode에서 소스코드 비교
-  - 비교할 두개의 파일을 VSCode에서 오픈(예시, student.js, ins.js)
-  - student.js 파일이 활성화 되어있는 상태에서
-  - View > Command Palette (단축키 F1) > File: Compare Active File With... 선택
-  - 비교할 대상 파일 선택(ins.js)
-  - student.js <-> ins.js 파일의 차이점 쉽게 확인 가능
+# 3 팁
+## 3.1 VSCode에서 소스코드 비교
+* 비교할 두개의 파일을 VSCode에서 오픈(예시, student.js, ins.js)
+* student.js 파일이 활성화 되어있는 상태에서
+* View > Command Palette (단축키 F1) > File: Compare Active File With... 선택
+* 비교할 대상 파일 선택(ins.js)
+* student.js <-> ins.js 파일의 차이점 쉽게 확인 가능
 
-## 참고 사이트
+## 3.2 참고 사이트
 
 ### 온라인 코드 편집기(HTML, CSS, JS)
 * CodePen: <https://codepen.io>
