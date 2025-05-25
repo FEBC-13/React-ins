@@ -1,10 +1,10 @@
 # 10장 Next.js
-* 코드 실행(GitHub Page): <https://github.com/FEBC-13/React/workspace-ins/index.html#10>
+* 코드 실행(GitHub Page): <https://uzoolove.github.io/febc11-react/workspace-ins/index.html#10>
 
 # 1. Next.js 개요
 ## 1.1 Next.js란?
 - React 기반의 풀스택 웹 애플리케이션을 구축하기 위한 프레임워크
-- 프레임워크란?
+- 프레임워크:
   - 소프트웨어 개발에 필요한 공통 구조와 기능 제공
   - 개발 방식이나 프로젝트 구조를 강제하여 자유도가 낮지만, 제공되는 공통 기능을 활용하면 개발 생산성 향상
 
@@ -25,9 +25,9 @@
 ### package.json 파일 작성
 * 생성
   ```sh
-  cd workspace
-  mkdir 01.manual
-  cd 01.manual
+  cd workspace/ch10-nextjs
+  mkdir 01-manual
+  cd 01-manual
   npm init -y
   ```
 
@@ -46,9 +46,10 @@
   - lint: ESLint를 이용한 코드 스타일 검사
 
 ### Node 패키지 설치
+* Next.js 15가 2024.10.22 출시
+  - React 19 필요(2024.12.05 출시)
+* 호환성 문제 발생할 수 있음
 ```sh
-npm install next@latest react@latest react-dom@latest
-# 또는
 npm install next@latest react@latest react-dom@latest
 ```
 
@@ -58,28 +59,23 @@ npm install next@latest react@latest react-dom@latest
 
 <img src="https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fapp-getting-started.png&w=1920&q=75">
 
-### app/layout.tsx 파일 생성
+### app/layout.jsx 파일 생성
 * 루트 레이아웃
-  ```tsx
-  export default function RootLayout({
-    children,
-  }: {
-    children: React.ReactNode
-  }) {
+  ```jsx
+  export default function RootLayout({ children }) {
     return (
       <html lang="ko">
         <body>{children}</body>
       </html>
-    )
+    );
   }
   ```
-  - layout 파일을 만들지 않으면 개발서버 구동시 자동으로 생성됨
 
-### app/page.tsx 파일 생성
+### app/page.jsx 파일 생성
 * 루트 페이지
-  ```tsx
+  ```jsx
   export default function Page() {
-    return <h1>Hello, Next.js!</h1>
+    return <h1>Hello, Next.js!</h1>;
   }
   ```
 
@@ -87,7 +83,6 @@ npm install next@latest react@latest react-dom@latest
 ```sh
 npm run dev
 ```
-  * Next.js 프로젝트를 위한 tsconfig.json, next-env.d.ts 파일이 자동으로 생성됨
 
 ### 테스트
 * http://localhost:3000
@@ -95,26 +90,25 @@ npm run dev
 ## 2.2 자동 구성
 ### create-next-app
 ```sh
+cd workspace/ch10-nextjs
 npx create-next-app@latest
-# 또는
-npx create-next-app@15
 ```
 
 * Need to install the following packages:
-  - create-next-app@15.3.2
+  - create-next-app@15.0.3
   - Ok to proceed? (y) __y__
-* ? What is your project named? ... 02.cna
-* ? Would you like to use __TypeScript__? ... No / __Yes__
-* ? Would you like to use __ESLint__? ... No / __Yes__
-* ? Would you like to use __Tailwind CSS__? ... No / __Yes__
-* ? Would you like your code inside a __`src/` directory__? ... No / __Yes__
-* ? Would you like to use __App Router__? (recommended) ... No / __Yes__
-* ? Would you like to use __Turbopack__ for `next dev`? ... No / __Yes__
-* ? Would you like to customize the default __import alias__ (`@/*` by default)? ... __No__ / Yes
+* What is your project named? ... 02-cna
+* Would you like to use TypeScript? ... __No__ / Yes
+* Would you like to use ESLint? ... No / __Yes__
+* Would you like to use Tailwind CSS? ... No / __Yes__
+* Would you like your code inside a `src/` directory? ... No / __Yes__
+* Would you like to use App Router? (recommended) ... No / __Yes__
+* Would you like to use Turbopack for next dev? ... No / __Yes__
+* Would you like to customize the import alias (@/* by default)? __No__ / Yes
 
 ### 개발 서버 실행
 ```sh
-cd 02.cna
+cd 02-cna
 npm run dev
 ```
 
@@ -131,13 +125,12 @@ npm run dev
 * `src`: 소스 폴더를 따로 관리할 때 사용
 
 ## 3.2 루트 파일
-* `next-env.d.ts`: Next.js용 타입스크립트 선언 파일
-* `next.config.js`: Next.js 설정 파일
+* `next.config.mjs`: Next.js 설정 파일
 * `package.json`: 프로젝트 종속성 및 스크립트
-* `tsconfig.json`: 타입스크립트 설정 파일
 
 ## 3.3 app 라우터 규칙
 * `app` 폴더 하위에 존재하는 파일이나 폴더 규칙
+
 ### 라우팅용 특수 파일
 * `layout.js`: 동일 폴더와 하위 폴더 페이지의 레이아웃을 정의
 * `page.js`: 페이지 UI
@@ -200,7 +193,6 @@ npm run dev
 
 <img src="https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fdefining-routes.png&w=1920&q=75">
 
-
 ## 4.3 페이지와 레이아웃
 ### 페이지
 * 클라이언트가 요청한 URL과 매칭되는 폴더 하위에 정의
@@ -209,29 +201,29 @@ npm run dev
 
 <img src="https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fpage-special-file.png&w=1920&q=75">
 
-* app/page.tsx
-  ```tsx
+* app/page.jsx
+  ```jsx
   export default function Page() {
     return <h1>Home</h1>
   }
   ```
 
-* app/posts/page.tsx
-  ```tsx
+* app/posts/page.jsx
+  ```jsx
   export default function Page() {
     return <h1>목록 조회</h1>
   }
   ```
 
-* app/posts/[id]/page.tsx
-  ```tsx
+* app/posts/[id]/page.jsx
+  ```jsx
   export default function Page() {
     return <h1>상세 조회</h1>
   }
   ```
 
-* app/posts/new/page.tsx
-  ```tsx
+* app/posts/new/page.jsx
+  ```jsx
   export default function Page() {
     return <h1>글쓰기</h1>
   }
@@ -243,15 +235,11 @@ npm run dev
 * 하위 폴더의 layout과 중첩됨
 * 생략 가능
 * `layout.js`, `layout.jsx`, `layout.tsx`로 작성
-* `app/layout.tsx`
-  ```tsx
+* `app/layout.jsx`
+  ```jsx
   import './globals.css';
 
-  export default function RootLayout({
-    children,
-  }: {
-    children: React.ReactNode
-  }) {
+  export default function RootLayout({ children }) {
     return (
       <html lang="ko">
         <body className="flex flex-col h-screen">
@@ -274,13 +262,9 @@ npm run dev
   ```
   - `children`은 현재 폴더부터 URL 경로와 일치하는 폴더까지 내려가면서 찾은 layout이 중첩되고 마지막엔 URL 경로에 존재하는 page가 된다.
 
-* app/posts/layout.tsx
-  ```tsx
-  export default function PostLayout({
-    children,
-  }: {
-    children: React.ReactNode
-  }) {
+* app/posts/layout.jsx
+  ```jsx
+  export default function PostLayout({ children }) {
     return (
       <div className="flex flex-1 overflow-hidden">
         <aside className="w-48 bg-gray-800 text-white p-4 lg:w-64">
@@ -304,27 +288,25 @@ npm run dev
 
 ### 메타데이터
 * layout, page에서 metadata 변수나 generateMetadata 함수를 내보내기 하면 메타데이터 정의 가능
-* app/page.tsx에 추가
-  ```tsx
-  import { Metadata } from "next"
-  export const metadata: Metadata = {
+* app/page.jsx에 추가
+  ```jsx
+  export const metadata = {
     title: 'Home',
     description: 'Home 페이지입니다.'
   }
   ```
 
-* app/posts/page.tsx에 추가
-  ```tsx
-  import { Metadata } from "next"
-  export const metadata: Metadata = {
+* app/posts/page.jsx에 추가
+  ```jsx
+  export const metadata = {
     title: '게시물 목록 조회',
     description: '게시물 목록 조회 페이지입니다.'
   }
   ```
 
-* app/posts/[id]/page.tsx에 추가
-  ```tsx
-  export async function generateMetadata({ params }: { params: { id: string } }) {
+* app/posts/[id]/page.jsx에 추가
+  ```jsx
+  export async function generateMetadata({ params }) {
     const id = params.id;
     const data = {
       title: `${id} 안녕하세요.`,
@@ -343,8 +325,8 @@ npm run dev
 * a 태그 대신 사용
   - Link 컴포넌트는 렌더링 되면 a 태그로 바뀜
 
-* app/layout.tsx 수정
-  ```tsx
+* app/layout.jsx 수정
+  ```jsx
   import Link from "next/link";
   ...
   <li><Link href="/" className="hover:underline">Home</Link></li>
@@ -353,8 +335,8 @@ npm run dev
   ...
   ```
 
-* app/posts/layout.tsx 수정
-  ```tsx
+* app/posts/layout.jsx 수정
+  ```jsx
   import Link from "next/link";
   ...
   <li><Link href="/posts" className="block hover:bg-gray-700 p-2 rounded">목록 조회</Link></li>
@@ -375,21 +357,17 @@ npm run dev
   }
   ```
 
-* app/layout.tsx 수정
-  ```tsx
+* app/layout.jsx 수정
+  ```jsx
   'use client';
 
   import { usePathname } from "next/navigation";
   import "./globals.css";
   import Link from "next/link";
 
-  export default function RootLayout({
-    children,
-  }: {
-    children: React.ReactNode
-  }) {
+  export default function RootLayout({ children }) {
     const pathname = usePathname();
-    const isActive = (path: string) => pathname === path ? 'cs-active' : '';
+    const isActive = (path) => pathname === path ? 'cs-active' : '';
 
     return (
       <html lang="ko">
@@ -417,8 +395,8 @@ npm run dev
 * 프로그래밍 방식으로 페이지 이동 가능
 * 꼭 필요한 경우가 아니라면 Link 컴포넌트 사용 권장
 
-* app/posts/new/page.tsx 수정
-  ```tsx
+* app/posts/new/page.jsx 수정
+  ```jsx
   'use client';
   import { useRouter } from "next/navigation";
   export default function Page(){
@@ -438,8 +416,8 @@ npm run dev
 * 기본적으로 307(Temporary Redirect, 원래 요청 방식과 본문으로 새로운 페이지 요청, 다음번 요청에도 이전 URI 사용) 응답 상태코드
   - 서버 액션일 경우(POST 요청의 성공 페이지로 이동할 때) 303(See Other, 새로운 페이지로 GET 요청) 응답 상태코드
 
-* app/posts/new/page.tsx
-  ```tsx
+* app/posts/new/page.jsx
+  ```jsx
   'use client';
   import { useRouter, redirect } from "next/navigation"
   export default function Page(){
@@ -494,11 +472,11 @@ npm run dev
 ### NextResponse.redirect
 * 미들웨어에서 사용
 * 사용사례: 로그인되지 않은 사용자를 로그인 페이지로 이동
-  ```ts
-  import { NextResponse, NextRequest } from 'next/server';
+  ```js
+  import { NextResponse } from 'next/server';
   import { authenticate } from 'auth-provider';
   
-  export function middleware(request: NextRequest) {
+  export function middleware(request) {
     const isAuthenticated = authenticate(request);
   
     // 인증된 사용자라면 원래의 요청작업 진행
@@ -558,22 +536,22 @@ npm run dev
 * 렌더링이 완료되면 완료된 컴포넌트로 자동 교체
 * 로딩중 상태에서도 공유 레이아웃 사용 가능
 
-* app/posts/loading.tsx 작성
-  ```tsx
+* app/posts/loading.jsx 작성
+  ```jsx
   export default function Loading() {
     return <div>로딩중...</div>
   }
   ```
 
 * loading 파일과 같은 폴더에 있는 layout 파일에 page를 `<Suspense>`로 감싼 것처럼 동작
-  ```tsx
+  ```jsx
   <Suspense fallback={<Loading />}>
     { children }
   </Suspense>
   ```
 
-* app/posts/page.tsx 수정
-  ```tsx
+* app/posts/page.jsx 수정
+  ```jsx
   export default async function Page(){
     await new Promise(resolve => setTimeout(resolve, 1000*3));
     return ( ... );
@@ -599,7 +577,7 @@ npm run dev
 * 오류가 발생할 경우 error.js 파일에서 오류 처리
   - 클라이언트 컴포넌트여야 함
 * error 파일과 같은 폴더에 있는 layout 파일에 page를 `<ErrorBoundary>`로 감싼 것처럼 동작
-  ```tsx
+  ```jsx
   <ErrorBoundary fallback={<Error />}>
     { children }
   </ErrorBoundary>
@@ -733,7 +711,7 @@ npm run dev
     }
     ```
 
-```tsx
+```jsx
 // before
 import { Button } from '../../../components/button'
  
@@ -766,8 +744,8 @@ import { Button } from '@/components/button'
   - posts/1, posts/2 -> posts/[id]
 * 실제 요청한 URL의 동적 경로 값은 layout, page, route, generateMetadata 함수에 params prop으로 전달됨
 * 요청한 URL이 /posts/3일 경우 3을 꺼내는 방법
-  ```tsx
-  export default function Page({ params: { id } }: { params: { id: string }}) {
+  ```jsx
+  export default function Page({ params: { id } }) {
     return <h1>{ params.id }번 게시물 상세 조회</h1>
   }
   ```
@@ -790,7 +768,7 @@ import { Button } from '@/components/button'
 * 미리 생성할 정적 페이지의 params를 배열로 반환하도록 작성
 
 * 빌드 할 때 동작 순서
-  ```tsx
+  ```jsx
   export async function generateStaticParams() {
     // 공지글에 대한 fetch 작업
     const posts = [
@@ -804,7 +782,7 @@ import { Button } from '@/components/button'
     }))
   }
 
-  export default async function Page({ params: { id } }: { params: { id: string } }){
+  export default async function Page({ params: { id } }){
     const resJson = await fetchPost(id);
     let data = resJson.ok ? resJson.item : null;
     return (
@@ -830,23 +808,11 @@ import { Button } from '@/components/button'
 * 폴더명을 이중 대괄호로 묶어서 작성하면 Catch-all 세그먼트를 선택사항으로 지정
 
 * 특정 게시글과 댓글 목록, 댓글 상세 정보를 하나의 page로 처리할 경우
-  - app/posts/[id]/[[...slug]]/page.js
+  - app/posts/[id]/[[...slug]]/page.jsx
     + /posts/1 -> { id: '1' }
     + /posts/2 -> { id: '2' }
     + /posts/3/replies -> { id: '3', slug: ['replies'] }
     + /posts/3/replies/2 -> { id: '3', slug: ['replies', '2'] }
-
-### 동적 경로에 대한 타입 스크립트 params 타입
-* app/posts/[id]/page.js
-```tsx
-export default function Page({ params }: { params: { id: string } }) {
-  return <h1>My Page</h1>
-}
-```
-
-* app/posts/[...slug]/page.js -> { slug: string[] }
-* app/posts/[[...slug]]/page.js -> { slug?: string[] }
-* app/posts/[id]/[slug]/page.js -> { id: string, slug: string }
 
 ## 4.11 라우트 핸들러
 * API 엔드포인트 생성
@@ -856,8 +822,8 @@ export default function Page({ params }: { params: { id: string } }) {
 * GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS 메서드 지원
   - 지원되지 않은 메서드 호출 시 405 Method Not Allowed 에러 응답
 * page 파일 대신 route.js 나 route.ts 파일로 작성
-```tsx
-export async function GET(request: Request) {
+```js
+export async function GET(request) {
   const res = await fetch('https://api.fesp.shop/posts');
   const data = await res.json();
 
@@ -866,7 +832,7 @@ export async function GET(request: Request) {
 ```
 
 ### 캐싱
-* GET 요청시 Response가 기본적으로 캐시됨(기본값은 30초, Next 15에서는 기본으로 캐시되지 않게 수정됨)
+* GET 요청시 Response가 기본적으로 캐시됨(기본값은 30초, Next 15(2024.10.22)에서는 기본으로 캐시되지 않게 수정됨)
 * 캐시 안되게 하려면
   - Request 객체를 사용
   - 다른 HTTP 메서드를 사용
@@ -876,22 +842,21 @@ export async function GET(request: Request) {
 * 캐시 설정
   - fetch 옵션의 next.revalidate 속성으로 지정
     + 숫자: 초단위의 캐시 시간 지정
-      ```ts
+      ```js
       const res = await fetch('http://localhost/posts', {
         next: { revalidate: 60 }, // Revalidate every 60 seconds
       })
       ```
   - 라우트 세그먼트 설정 옵션의 revalidate 설정
-    ```ts
+    ```js
     export const revalidate = 60;
     ```
 
 ### NextRequest, NextResponse
 * Fetch API의 Request, Response를 확장하여 추가적인 편의 메서드 제공
-```ts
-import { type NextRequest } from 'next/server';
- 
-export function GET(request: NextRequest) {
+
+```js
+export function GET(request) {
   const searchParams = request.nextUrl.searchParams;
   const query = searchParams.get('query');
   // query is "hello" for /api/search?query=hello
@@ -899,7 +864,7 @@ export function GET(request: NextRequest) {
   return NextResponse.json({ data });
 }
 ```
-    
+
 # 5. Data Fetching
 * 데이터 가져오는 방법
   - 서버에서 fetch 함수 사용
@@ -942,7 +907,7 @@ export function GET(request: NextRequest) {
 ### 서버 액션 정의
 * 인라인 수준: 서버 액션 함수의 첫줄에 'use server' 지시어 추가
   - 서버 컴포넌트에서만 사용 가능
-  ```tsx
+  ```jsx
   // Server Component
   export default function Page() {
     // Server Action
@@ -960,7 +925,7 @@ export function GET(request: NextRequest) {
   
 * 모듈 수준: 서버 액션만 정의하기 위해 별도로 분리한 파일의 첫줄에 'use server' 지시어로 모든 export 함수를 서버 액션으로 정의
   - 서버 컴포넌트와 클라이언트 컴포넌트 모두 사용 가능
-  ```tsx
+  ```jsx
   'use server'
   
   export async function create() {
@@ -972,14 +937,14 @@ export function GET(request: NextRequest) {
   ```
 
 * 서버 컴포넌트를 props로 클라이언트 컴포넌트에 전달
-  ```tsx
+  ```jsx
   <ClientComponent create={create} />
   ```
 
 ### 서버 액션 호출
 #### form 요소의 action 속성으로 호출
 * React는 HTML form 요소를 확장해서 action 속성에 서버 액션 지정 가능
-  ```tsx
+  ```jsx
   'use client'
   
   export default function ClientComponent({ create }) {
@@ -991,9 +956,9 @@ export function GET(request: NextRequest) {
     + 자바스크립트가 로드되기 이전에 제출되면 큐에 담은 후 클라이언트 하이드레이션의 우선 순위로 지정됨
   - submit 이후에 새로고침 없음
 
-  ```tsx
+  ```jsx
   export default function Page() {
-    async function createInvoice(formData: FormData) {
+    async function createInvoice(formData) {
       'use server'
   
       const rawFormData = {
@@ -1013,12 +978,12 @@ export function GET(request: NextRequest) {
 * form 데이터에 추가 인자값 전달
   - Function.prototype.bind()를 사용해서 인자값 미리 전달(클라이언트, 서버 컴포넌트 모두 사용 가능)
   - hidden 타입을 이용(인코딩 되지 않은 값이 HTML에 그대로 삽입됨)
-  ```tsx
+  ```jsx
   'use client'
   
   import { updateUser } from './actions'
   
-  export function UserProfile({ userId }: { userId: string }) {
+  export function UserProfile({ userId }) {
     const updateUserWithId = updateUser.bind(null, userId); // bind
   
     return (
@@ -1030,7 +995,7 @@ export function GET(request: NextRequest) {
     )
   }
   ```
-  ```tsx
+  ```jsx
   'use server'
   
   export async function updateUser(userId, formData) {
@@ -1041,7 +1006,7 @@ export function GET(request: NextRequest) {
 * pending 상태를 표시하려면 리액트의 useFormStatus 훅 사용
   - `<form>` 요소의 자식으로 정의
   - 리액트 훅이므로 클라이언트 컴포넌트에서만 사용 가능
-  ```tsx
+  ```jsx
   'use client'  
   import { useFormStatus } from 'react-dom'; 
   export function SubmitButton() {
@@ -1052,7 +1017,7 @@ export function GET(request: NextRequest) {
   }
   ```
 
-  ```tsx
+  ```jsx
   import { SubmitButton } from '@/app/submit-button';
   import { createItem } from '@/app/actions';
   
@@ -1075,11 +1040,11 @@ export function GET(request: NextRequest) {
 
 #### 프로그래밍 방식으로 호출
 * form 요소의 requestSubmit() 함수를 직접 호출
-  ```tsx
+  ```jsx
   'use client'
   
   export function Entry() {
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    const handleKeyDown = (e) => {
       if (
         (e.ctrlKey || e.metaKey) &&
         (e.key === 'Enter' || e.key === 'NumpadEnter') // Ctrl + Enter
@@ -1098,13 +1063,13 @@ export function GET(request: NextRequest) {
   ```
 
 #### 이벤트 핸들러에서 호출
-```tsx
+```jsx
 'use client'
 
 import { incrementLike } from './actions'
 import { useState } from 'react'
 
-export default function LikeButton({ initialLikes }: { initialLikes: number }) {
+export default function LikeButton({ initialLikes }) {
   const [likes, setLikes] = useState(initialLikes)
 
   return (
@@ -1126,13 +1091,13 @@ export default function LikeButton({ initialLikes }: { initialLikes: number }) {
 #### useEffect에서 호출
 * useEffect 훅에서 호출
   - 게시물 상세보기 화면에서 조회수 증가
-    ```tsx
+    ```jsx
     'use client'
     
     import { incrementViews } from './actions'
     import { useState, useEffect } from 'react'
     
-    export default function ViewCount({ initialViews }: { initialViews: number }) {
+    export default function ViewCount({ initialViews }) {
       const [views, setViews] = useState(initialViews)
     
       useEffect(() => {
@@ -1153,7 +1118,7 @@ export default function LikeButton({ initialLikes }: { initialLikes: number }) {
   - required, pattern, type="email" 등 HTML의 기본 유효성 검사 사용
 * 서버측 유효성 검사
   - zod 같은 라이브러리 사용
-  ```tsx
+  ```jsx
   'use server'
   
   import { z } from 'zod'
@@ -1164,7 +1129,7 @@ export default function LikeButton({ initialLikes }: { initialLikes: number }) {
     }),
   })
   
-  export default async function createUser(formData: FormData) {
+  export default async function createUser(formData) {
     const validatedFields = schema.safeParse({
       email: formData.get('email'),
     })
@@ -1181,17 +1146,17 @@ export default function LikeButton({ initialLikes }: { initialLikes: number }) {
   ```
 
 * 서버에서 필드를 검증한 후 클라이언트 컴포넌트에서 리액트의 useFormState 훅을 이용해서 사용자에게 메세지를 표시할 수 있음
-  ```tsx
+  ```jsx
   'use server'
   
-  export async function createUser(prevState: any, formData: FormData) {
+  export async function createUser(prevState, formData) {
     // ...
     return {
       message: 'Please enter a valid email',
     }
   }
   ```
-  ```tsx
+  ```jsx
   'use client'
   
   import { useFormState } from 'react-dom'
@@ -1221,10 +1186,10 @@ export default function LikeButton({ initialLikes }: { initialLikes: number }) {
 ### 에러 처리
 * 에러가 발생하면 가까운 error.js나 `<Suspense>` 에서 처리됨
 * try/catch로 에러 처리를 권장
-  ```tsx
+  ```jsx
   'use server'
   
-  export async function createTodo(prevState: any, formData: FormData) {
+  export async function createTodo(prevState, formData) {
     try {
       // Mutate data
     } catch (e) {
@@ -1236,7 +1201,7 @@ export default function LikeButton({ initialLikes }: { initialLikes: number }) {
 ### 데이터 재검증
 * 서버 액션 작업이 완료되면 기존 캐시된 GET 요청의 결과를 revalidate 해야 갱신된 데이터로 다시 조회 가능
   - revalidatePath(), revalidateTag()
-  ```tsx
+  ```jsx
   'use server'
   
   import { revalidateTag } from 'next/cache'
@@ -1255,13 +1220,13 @@ export default function LikeButton({ initialLikes }: { initialLikes: number }) {
 
 ### 리디렉션
 * 서버 액션 완료 후 다른 페이지로 이동 시 redirect 사용
-  ```tsx
+  ```jsx
   'use server'
   
   import { redirect } from 'next/navigation'
   import { revalidateTag } from 'next/cache'
   
-  export async function createPost(id: string) {
+  export async function createPost(id) {
     try {
       // ...
     } catch (error) {
@@ -1275,7 +1240,7 @@ export default function LikeButton({ initialLikes }: { initialLikes: number }) {
 
 ### 쿠키 관리
 * 서버 액션 내부에서 cookies API의 get, set, delete 사용
-  ```tsx
+  ```jsx
   'use server'
   
   import { cookies } from 'next/headers'
@@ -1326,10 +1291,10 @@ export default function LikeButton({ initialLikes }: { initialLikes: number }) {
 * 다음 데이터를 가져올 때 이전 데이터가 필요한 경우 사용(성능 저하)
 * loading 페이지나 `<Suspense>`를 사용해서 데이터 스트리밍 중에 로딩중 상태를 보여주면 전체가 블로킹 되는 문제를 막을 수 있음
   - 사용자는 이미 로딩된 컨텐츠에 대해서는 인터렉션이 가능
-  ```tsx
+  ```jsx
   // ...
 
-  async function Playlists({ artistID }: { artistID: string }) {
+  async function Playlists({ artistID }) {
     // Wait for the playlists
     const playlists = await getArtistPlaylists(artistID)
   
@@ -1344,8 +1309,6 @@ export default function LikeButton({ initialLikes }: { initialLikes: number }) {
   
   export default async function Page({
     params: { username },
-  }: {
-    params: { username: string }
   }) {
     // Wait for the artist
     const artist = await getArtist(username)
@@ -1365,23 +1328,21 @@ export default function LikeButton({ initialLikes }: { initialLikes: number }) {
 * 데이터 가져오기 작업을 동시에 호출
 * 데이터간 종속성이 없을 경우 사용(성능 향상)
 
-```tsx
+```jsx
 import Albums from './albums'
  
-async function getArtist(username: string) {
+async function getArtist(username) {
   const res = await fetch(`https://api.example.com/artist/${username}`)
   return res.json()
 }
  
-async function getArtistAlbums(username: string) {
+async function getArtistAlbums(username) {
   const res = await fetch(`https://api.example.com/artist/${username}/albums`)
   return res.json()
 }
  
 export default async function Page({
   params: { username },
-}: {
-  params: { username: string }
 }) {
   // Initiate both requests in parallel
   const artistData = getArtist(username)
@@ -1465,7 +1426,7 @@ export default async function Page({
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>Vite + React + JS</title>
     <script type="module" crossorigin src="/assets/index-BzyLkkVx.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-UJILNUew.css">
   </head>
@@ -1597,7 +1558,7 @@ export default async function Page({
 * 빠른 시작을 위해 최소한의 리소스를 사용하므로 패키지 파일 사이즈가 제한될 수 있음
 * Static Rendering 지원 안함
 * layout이나 page에서 정의
-  ```tsx
+  ```jsx
   export const runtime = 'edge' // 'nodejs' (default) | 'edge'
   ```
 
@@ -1606,7 +1567,7 @@ export default async function Page({
 ### 데이터 캐싱
 * fetch의 반환값을 서버의 데이터 캐시에 자동으로 캐시(Next 15에서는 기본으로 캐시되지 않게 수정되었는지 확인 필요)
   - 빌드시, 요청시 데이터를 캐시하고 재사용
-    ```ts
+    ```js
     // 'force-cache'는 기본값이므로 생략 가능
     fetch('https://api.fesp.shop/posts', { cache: 'force-cache' });
     ```
@@ -1616,19 +1577,19 @@ export default async function Page({
 
 * 캐시 미적용
   - fetch의 cache: 'no-store' 속성 사용
-    ```tsx
+    ```jsx
     fetch(`https://api.fesp.shop/posts`, { cache: 'no-store' });
     ```
 
   - layout, page의 라우트 세그먼트 설정 옵션을 사용하면 layout이나 page 내의 모든 요청에 적용됨
-    ```tsx
+    ```jsx
     export const dynamic = 'force-dynamic'; // 외부 라이브러리에서도 캐시 안하도록 설정됨
     ```
 
 <img src="https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fdata-cache.png&w=1920&q=75">
 
 #### 캐시 미적용 옵션
-```tsx
+```jsx
 // fetch의 { cache: 'no-store' } 옵션
 fetch(`https://api.fesp.shop/posts`, { cache: 'no-store' });
 
@@ -1636,7 +1597,7 @@ fetch(`https://api.fesp.shop/posts`, { cache: 'no-store' });
 fetch('https://api.fesp.shop/posts', { next: { revalidate: 0 } });
 
 // POST 라우터 핸들러 내부의 fecth 요청 
-export async function POST(request: Request) {
+export async function POST(request) {
   fetch('https://api.fesp.shop/posts');
 }
 
@@ -1672,12 +1633,12 @@ export const fetchCache = 'default-no-store'; // 기본적으로 캐시를 사�
 
 ##### 시간 기반 재검증
 * next.revalidate 옵션으로 초단위 시간 설정
-```tsx
+```jsx
 fetch('https://api.fesp.shop/posts', { next: { revalidate: 3600 } });
 ```
 
 * 라우트 세그먼트 설정 옵션의 revalidate 값을 지정
-```tsx
+```jsx
 export const revalidate = 3600;
 ```
 
@@ -1689,8 +1650,8 @@ export const revalidate = 3600;
 * revalidatePath()
   - 지정한 경로의 서버 데이터 캐시 무효화
 
-```tsx
-// /posts/page.tsx
+```jsx
+// /posts/page.jsx
 const res = await fetch(`https://api.fesp.shop/posts?type=qna`, {
   next: { tags: ['posts', 'qna'] }
 });
@@ -1747,14 +1708,12 @@ export default nextConfig;
 ### 외부 스크립트 로딩
 * layout이나 page에서 외부 스크립트 로딩
 * layout에서 외부 스크립트 로딩시 동일 레이아웃 내의 여러 페이지 이동에도 한번만 로딩됨
-* app/map/layout.tsx
-```tsx
+* app/map/layout.jsx
+```jsx
 import Script from 'next/script';
 
 export default function DashboardLayout({
   children,
-}: {
-  children: React.ReactNode
 }) {
   return (
     <>
@@ -1767,7 +1726,7 @@ export default function DashboardLayout({
 
 ### 인라인 스크립트
 * 스크립트를 추적하고 최적화 하기 위해서 id 속성 부여
-```tsx
+```jsx
 <Script id="show-banner">
   {`document.getElementById('banner').classList.remove('hidden')`}
 </Script>
@@ -1796,7 +1755,7 @@ export default function DashboardLayout({
 
 ### 인증 구현
 * 로그인 페이지
-```tsx
+```jsx
 import { authenticate } from '@/app/lib/actions'
  
 export default function Page() {
@@ -1811,12 +1770,12 @@ export default function Page() {
 ```
 
 * 인증 공급자의 API 호출
-```ts
+```js
 'use server'
  
 import { signIn } from '@/auth'
  
-export async function authenticate(_currentState: unknown, formData: FormData) {
+export async function authenticate(_currentState, formData) {
   try {
     await signIn('credentials', formData)
   } catch (error) {
@@ -1834,7 +1793,7 @@ export async function authenticate(_currentState: unknown, formData: FormData) {
 ```
 
 * 결과 처리
-```tsx
+```jsx
 'use client'
  
 import { authenticate } from '@/app/lib/actions'
@@ -1879,7 +1838,7 @@ function LoginButton() {
 
 ### 미들웨어 구현 방법
 #### 미들웨어 설정
-* 루트 디렉토리에 middleware.ts 파일 생성
+* 루트 디렉토리에 middleware.js 파일 생성
 * 토큰 확인 등을 통해 사용자 엑세스를 승인하는 로직 작성
 
 #### 보호된 경로 정의
@@ -1894,7 +1853,7 @@ function LoginButton() {
 ```jsx
 import type { NextRequest } from 'next/server'
  
-export function middleware(request: NextRequest) {
+export function middleware(request) {
   const currentUser = request.cookies.get('currentUser')?.value
  
   if (currentUser && !request.nextUrl.pathname.startsWith('/dashboard')) {
@@ -1911,7 +1870,7 @@ export const config = {
 }
 ```
 
-```tsx
+```jsx
 import { redirect } from 'next/navigation'
  
 export default function Page() {
@@ -1947,7 +1906,7 @@ export async function serverAction() {
 ```
 
 #### 라우트 핸들러
-```tsx
+```jsx
 export async function GET() {
   // User authentication and role verification
   const session = await getSession()
@@ -1967,7 +1926,7 @@ export async function GET() {
 ```
 
 #### 서버 컴포넌트
-```tsx
+```jsx
 export default async function Dashboard() {
   const session = await getSession()
   const userRole = session?.user?.role // Assuming 'role' is part of the session object
@@ -1999,8 +1958,8 @@ npx auth secret
 ```
 
 ### Auth.js 구성 파일 생성
-* src/auth.ts
-```ts
+* src/auth.js
+```js
 import NextAuth from "next-auth";
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -2029,7 +1988,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 * signOut: 사용자 로그아웃을 시도하는 비동기 함수
 * auth: 세션 정보를 반환하는 비동기 함수
 
-
 ### 구글 로그인
 * <https://next-auth.js.org/providers/google> 참고
 
@@ -2039,7 +1997,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
 ##### OAuth 동의 화면
 * User Type: 외부
-* 앱 이름: 지디컴
+* 앱 이름: 멋사컴즈
 * 범위 추가 또는 삭제
   - userinfo.email
   - userinfo.profile
@@ -2048,7 +2006,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 ##### 사용자 인증 정보
 * 사용자 인증 정보 만들기 > OAuth 클라이언트 ID
   - 애플리케이션 유형: 웹 애플리케이션
-  - 이름: 지디컴
+  - 이름: 멋사컴즈
   - 승인된 JavaScript 원본 > URI 추가
     + http://localhost:3000
   - 승인된 리디렉션 URI
@@ -2061,8 +2019,8 @@ GOOGLE_CLIENT_ID=abc123
 GOOGLE_CLIENT_SECRET=123ddd
 ```
 
-* src/auth.ts에 추가
-```ts
+* src/auth.js에 추가
+```js
 import google from "next-auth/providers/google";
 ...
 providers: [ 
@@ -2074,15 +2032,15 @@ providers: [
 ]
 ```
 
-* src/data/actions/authAction.ts에 추가
-```ts
+* src/data/actions/authAction.js에 추가
+```js
 export async function signInWithGoogle(){
   await signIn('google', { redirectTo: '/' });
 }
 ```
 
-* src/app/(community)/(user)/login/page.tsx에 추가
-```tsx
+* src/app/(community)/(user)/login/page.jsx 추가
+```jsx
 import { signInWithCredentials, signInWithGoogle } from "@/data/actions/authAction";
 ...
 <Submit formAction={signInWithCredentials}>로그인</Submit>
@@ -2114,7 +2072,7 @@ const nextConfig = {
 * https://github.com/settings/developers
 
 * New OAuth App
-  - Application name: 지디컴
+  - Application name: 멋사컴즈
   - Homepage URL: http://localhost:3000
   - Authorization callback URL: http://localhost:3000/api/auth/callback/github
   - Register application
@@ -2126,8 +2084,8 @@ GITHUB_CLIENT_ID=aaabb12
 GITHUB_CLIENT_SECRET=033a8ef1eadf
 ```
 
-* src/auth.ts에 추가
-```ts
+* src/auth.js에 추가
+```js
 import github from "next-auth/providers/github";
 ...
 providers: [ 
@@ -2139,15 +2097,15 @@ providers: [
 ]
 ```
 
-* src/data/actions/authAction.ts에 추가
-```ts
+* src/data/actions/authAction.js에 추가
+```js
 export async function signInWithGithub(){
   await signIn('github', { redirectTo: '/' });
 }
 ```
 
-* src/app/(community)/(user)/login/page.tsx에 추가
-```tsx
+* src/app/(community)/(user)/login/page.jsx 추가
+```jsx
 import { signInWithCredentials, signInWithGithub } from "@/data/actions/authAction";
 ...
 <Submit formAction={signInWithCredentials}>로그인</Submit>
