@@ -115,6 +115,7 @@
 ### 2.3.1 웹 서버 구동
 1. VSCode의 터미널로 이동
     * VSCode 하단의 TERMINAL이 보이지 않으면 View > Terminal
+    
 2. Live Server 구동
     * 프로젝트 루트에서 실행
     ```sh
@@ -125,7 +126,7 @@
 * 웹 브라우저로 접속
   - <http://127.0.0.1:8080>
   - <http://localhost:8080>
-  
+
 * 각 예제 클릭해서 테스트
   - .js: Javascript 문법 관련 실습은 브라우저 개발자 도구 > 콘솔 탭에서 결과 확인
   - .html: DOM, Ajax 관련 실습은 새로운 화면으로 이동 후 테스트
