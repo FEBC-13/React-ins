@@ -5,7 +5,7 @@
 # 1. 수업 목차
 
 ## 1장 리액트 빌드업
-* https://febc-13.github.io/React/tree/main/workspace-ins/ch01-buildup>
+* https://febc-13.github.io/React/tree/main/workspace-ins/ch01-buildup
 
 ## 2장 리액트 시작하기
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch02-start>
@@ -79,7 +79,7 @@
     ```sh
     git pull origin main
     ```
-    
+
 * 충돌 발생시 임시로 필요한 코드만 복사
     - 현재 폴더 하위에 sample/02 폴더만 복사하는 예시
     ```sh
