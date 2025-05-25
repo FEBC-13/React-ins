@@ -4,7 +4,7 @@
 # 1. Next.js 개요
 ## 1.1 Next.js란?
 - React 기반의 풀스택 웹 애플리케이션을 구축하기 위한 프레임워크
-- 프레임워크:
+- 프레임워크란?
   - 소프트웨어 개발에 필요한 공통 구조와 기능 제공
   - 개발 방식이나 프로젝트 구조를 강제하여 자유도가 낮지만, 제공되는 공통 기능을 활용하면 개발 생산성 향상
 
@@ -47,6 +47,8 @@
 
 ### Node 패키지 설치
 ```sh
+npm install next@latest react@latest react-dom@latest
+# 또는
 npm install next@latest react@latest react-dom@latest
 ```
 
@@ -94,15 +96,21 @@ npm run dev
 ### create-next-app
 ```sh
 npx create-next-app@latest
+# 또는
+npx create-next-app@15
 ```
 
-* What is your project named? 02.cna
-* Would you like to use TypeScript? No / __Yes__
-* Would you like to use ESLint? No / __Yes__
-* Would you like to use Tailwind CSS? No / __Yes__
-* Would you like to use 'src/' directory? No / __Yes__
-* Would you like to use App Router? (recommended) No / __Yes__
-* Would you like to customize the default import alias (@/*)? __No__ / Yes
+* Need to install the following packages:
+  - create-next-app@15.3.2
+  - Ok to proceed? (y) __y__
+* ? What is your project named? ... 02.cna
+* ? Would you like to use __TypeScript__? ... No / __Yes__
+* ? Would you like to use __ESLint__? ... No / __Yes__
+* ? Would you like to use __Tailwind CSS__? ... No / __Yes__
+* ? Would you like your code inside a __`src/` directory__? ... No / __Yes__
+* ? Would you like to use __App Router__? (recommended) ... No / __Yes__
+* ? Would you like to use __Turbopack__ for `next dev`? ... No / __Yes__
+* ? Would you like to customize the default __import alias__ (`@/*` by default)? ... __No__ / Yes
 
 ### 개발 서버 실행
 ```sh
