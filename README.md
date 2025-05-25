@@ -2,7 +2,7 @@
 * 멋쟁이 사자처럼 FrontEnd BootCamp 13기
 * 예제 테스트(GitHub Page): <https://febc-13.github.io/React/workspace-ins>
 
-# 1 수업 목차
+# 1. 수업 목차
 
 ## 1장 리액트 빌드업
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch01-buildup>
@@ -40,7 +40,7 @@
 ## 12장 React App
 * https://febc-13.github.io/React/tree/main/workspace-ins/ch12-app>
 
-# 2 개발 환경 구축
+# 2. 개발 환경 구축
 
 ## 2.1 프로그램 설치
 * 본인의 OS에 맞는 버전 다운로드 후 설치
@@ -125,12 +125,13 @@
 * 웹 브라우저로 접속
   - <http://127.0.0.1:8080>
   - <http://localhost:8080>
+  
 * 각 예제 클릭해서 테스트
   - .js: Javascript 문법 관련 실습은 브라우저 개발자 도구 > 콘솔 탭에서 결과 확인
   - .html: DOM, Ajax 관련 실습은 새로운 화면으로 이동 후 테스트
   - Vite로 생성한 프로젝트는 안내 화면을 참고해서 Node.js 환경에서 테스트
 
-# 3 팁
+# 3. 팁
 ## 3.1 VSCode에서 소스코드 비교
 * 비교할 두개의 파일을 VSCode에서 오픈(예시, student.js, ins.js)
 * student.js 파일이 활성화 되어있는 상태에서
