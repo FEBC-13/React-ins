@@ -79,6 +79,7 @@
     ```sh
     git pull origin main
     ```
+    
 * 충돌 발생시 임시로 필요한 코드만 복사
     - 현재 폴더 하위에 sample/02 폴더만 복사하는 예시
     ```sh
@@ -115,7 +116,7 @@
 ### 2.3.1 웹 서버 구동
 1. VSCode의 터미널로 이동
     * VSCode 하단의 TERMINAL이 보이지 않으면 View > Terminal
-    
+
 2. Live Server 구동
     * 프로젝트 루트에서 실행
     ```sh
