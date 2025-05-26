@@ -1,6 +1,6 @@
 # 수업 개요
 
-- 기간: 2025.05.27(화) ~ 2024.07.03(목) 24일간
+- 기간: 2025.05.27(화) ~ 2025.07.03(목) 24일간
 
 ## 할일
 
@@ -55,11 +55,14 @@
 #### 오전(3시간)
 * 🧑‍💻 [개발 환경 구축](./README.md#2-개발-환경-구축)
 * 🔊 [1장 리액트 빌드업](./workspace-ins/ch01-buildup)
-* 🧑‍💻 [고전적인 방식의 Todo List 테스트](https://todo.fesp.shop)
-* 근대적인 방식의 Todo List 작성 - HTML + vanilla JS
+* 🧑‍💻 [전통적인 방식의 Todo List 테스트](https://todo.fesp.shop)
+* MPA 방식의 Todo List 작성 - HTML + vanilla JS
   - 🧑‍💻 [01 목록 조회](./workspace-ins/ch01-buildup/01)
+    - workspace/ch01-buildup/todolist/sample 폴더 복사해서 01 폴더 생성
   - 🧑‍💻 [02 등록](./workspace-ins/ch01-buildup/02)
+    - workspace/ch01-buildup/todolist/01 폴더 복사해서 02 폴더 생성
   - 🧑‍💻 [03 수정](./workspace-ins/ch01-buildup/03)
+    - workspace/ch01-buildup/todolist/02 폴더 복사해서 03 폴더 생성
   - 🧑‍💻 [04 삭제, 완성](./workspace-ins/ch01-buildup/04)
 
 #### 오후(3시간)
