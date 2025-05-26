@@ -5,40 +5,40 @@
 # 1. 수업 목차
 
 ## 1장 리액트 빌드업
-* [이동](./workspace-ins/ch01-buildup)
+* [ch01-buildup](./workspace-ins/ch01-buildup)
 
 ## 2장 리액트 시작하기
-* ./workspace-ins/ch02-start>
+* [ch02-start](./workspace-ins/ch02-start)
 
 ## 3장 클래스 컴포넌트와 컴포넌트의 라이프 사이클
-* ./workspace-ins/ch03-class>
+* [ch03-class](./workspace-ins/ch03-class)
 
 ## 4장 리액트 훅
-* ./workspace-ins/ch04-hooks>
+* [ch04-hooks](./workspace-ins/ch04-hooks)
 
 ## 5장 리액트 라우터
-* ./workspace-ins/ch05-router>
+* [ch05-router](./workspace-ins/ch05-router)
 
 ## 6장 컨텍스트 API
-* ./workspace-ins/ch06-contextapi>
+* [ch06-contextapi](./workspace-ins/ch06-contextapi)
 
 ## 7장 전역 상태 관리
-* ./workspace-ins/ch07-globalstate>
+* [ch07-globalstate](./workspace-ins/ch07-globalstate)
 
 ## 8장 리액트에서 CSS 사용
-* ./workspace-ins/ch08-css>
+* [ch08-css](./workspace-ins/ch08-css)
 
 ## 9장 HTTP 통신과 Ajax
-* ./workspace-ins/ch09-ajax>
+* [ch09-ajax](./workspace-ins/ch09-ajax)
 
 ## 10장 Next.js
-* ./workspace-ins/ch10-nextjs>
+* [ch10-nextjs](./workspace-ins/ch10-nextjs)
 
 ## 11장 프로젝트 준비
-* ./workspace-ins/ch11-skeleton>
+* [ch11-skeleton](./workspace-ins/ch11-skeleton)
 
 ## 12장 React App
-* ./workspace-ins/ch12-app>
+* [ch12-app](./workspace-ins/ch12-app)
 
 # 2. 개발 환경 구축
 
