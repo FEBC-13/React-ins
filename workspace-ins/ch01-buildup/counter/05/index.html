@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counter</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="module">
+    import gdlib from '/ch01-buildup/gdlib.js';    
+
+    function App(){
+      return (
+        gdlib.createElement('div', { id: 'app' },
+          gdlib.createElement('header', null, 
+            gdlib.createElement('h1', null, 'Counter - 05 createRoot(), render() 함수 만들기'), 
+            gdlib.createElement('p', null, '파일 경로: ', 
+            gdlib.createElement('span', { id: 'filepath' }, `ch${document.URL.split('/ch')[1]}index.html`))), 
+          gdlib.createElement('div', { id: 'counter' }, 
+            gdlib.createElement('button', { type: 'button', onclick: 'handleDown()' }, '-'), 
+            gdlib.createElement('button', { type: 'button', onclick: 'handleReset(event)' }, '0'), 
+            gdlib.createElement('button', { type: 'button', onclick: 'handleUp()' }, '+'), 
+            gdlib.createElement('span', null, 0)))
+      );
+    }
+    
+    // document.getElementById('root').appendChild(App);
+    gdlib.createRoot(document.getElementById('root')).render(App);
+  </script>
+
+  <script>
+    let count = 0;
+
+    // 카운터 감소
+    const handleDown = () => {
+      // TODO 데이터 갱신, count 값 감소
+      count--;
+
+      // TODO 화면 갱신, count 값 화면에 표시
+      document.querySelector('#counter span').textContent = count;
+    };
+
+    // 카운터 증가
+    const handleUp = () => {
+      // TODO 데이터 갱신, count 값 증가
+      count++;
+
+      // TODO 화면 갱신, count 값 화면에 표시
+      document.querySelector('#counter span').textContent = count;
+    };
+
+    // 카운터 초기화
+    const handleReset = event => {
+      // TODO 데이터 갱신, count 값 초기화
+      count = 0;
+
+      // TODO 화면 갱신, count 값 화면에 표시
+      document.querySelector('#counter span').textContent = count;
+    };
+  </script>
+
+</body>
+</html>

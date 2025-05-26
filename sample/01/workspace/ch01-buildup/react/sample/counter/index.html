@@ -11,7 +11,7 @@
 <body>
   <div id="app">
     <header>
-      <h1>Counter - Sample</h1>
+      <h1>Counter - React Sample</h1>
       <p>파일 경로: <span id="filepath"></span></p>
     </header>
     <div id="counter">
@@ -22,20 +22,32 @@
     </div>
   </div>
 
-  <script type="text/javascript">
+  <script>
     document.querySelector('#filepath').textContent = `ch${document.URL.split('/ch')[1]}index.html`;
-  </script>
 
-  <script type="text/javascript">
     let count = 0;
 
+    // 카운터 감소
     const handleDown = () => {
-      
+      // 데이터 갱신, count 값 감소
+
+      // 화면 갱신, count 값 화면에 표시
+
     };
+
+    // 카운터 증가
     const handleUp = () => {
-      
+      // 데이터 갱신, count 값 증가
+
+      // 화면 갱신, count 값 화면에 표시
+
     };
+
+    // 카운터 초기화
     const handleReset = event => {
+      // 데이터 갱신, count 값 초기화
+
+      // 화면 갱신, count 값 화면에 표시
       
     };
   </script>

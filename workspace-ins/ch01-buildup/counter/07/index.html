@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counter</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="module">
+    import gdlib from '/ch01-buildup/gdlib.js';
+
+    function Header(){
+      return (
+        gdlib.createElement('header', null, 
+          gdlib.createElement('h1', null, 'Counter - 07 상태(데이터) 변경시 자동으로 UI 리렌더링'), 
+          gdlib.createElement('p', null, '파일 경로: ', 
+          gdlib.createElement('span', { id: 'filepath' }, `ch${document.URL.split('/ch')[1]}index.html`)))
+      );
+    }
+
+    function Counter(){
+      let count = 0; // 상태(데이터)
+
+      // 카운터 감소
+      const handleDown = () => {
+        // 데이터 갱신, count 값 감소
+        // 데이터가 갱신되면 화면에 자동으로 반영(리렌더링)
+        count--;
+      };
+
+      // 카운터 증가
+      const handleUp = () => {
+        // 데이터 갱신, count 값 증가
+        // 데이터가 갱신되면 화면에 자동으로 반영(리렌더링)
+        count++;
+      };
+
+      // 카운터 초기화
+      const handleReset = event => {
+        // 데이터 갱신, count 값 초기화
+        // 데이터가 갱신되면 화면에 자동으로 반영(리렌더링)
+        count = 0;
+      };
+
+      return (
+        gdlib.createElement('div', { id: 'counter' }, 
+          gdlib.createElement('button', { type: 'button', onclick: handleDown }, '-'), 
+          gdlib.createElement('button', { type: 'button', onclick: (event) => { handleReset(event) } }, '0'), 
+          gdlib.createElement('button', { type: 'button', onclick: handleUp }, '+'), 
+          gdlib.createElement('span', null, 0))
+      );
+    }
+
+    function App(){
+      return (
+        gdlib.createElement('div', { id: 'app' }, Header, Counter)
+      );
+    }
+    
+    // document.getElementById('root').appendChild(App);
+    gdlib.createRoot(document.getElementById('root')).render(App);
+  </script>
+
+</body>
+</html>

@@ -9,7 +9,7 @@
 <body>
   <div id="todo">
     <header>
-      <h1>Todo List - 목록 조회 :)</h1>
+      <h1>Todo List - 01 목록 조회 :)</h1>
       <p>파일 경로: <span id="filepath"></span></p>
     </header>
     <div id="main">
@@ -52,7 +52,9 @@
     // location.href.split('/ch'): ['http://localhost:8800/workspace-ins', '01-buildup/todolist/sample/']
     // ch01-buildup/todolist/sample/index.html
     document.querySelector('#filepath').textContent = `ch${location.href.split('/ch')[1]}index.html`;
-
+  </script>
+  
+  <script>
     // 샘플 목록
     const itemList = [
       { num: 1, title: '자바스크립트 공부', done: true },

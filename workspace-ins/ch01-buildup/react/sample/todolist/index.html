@@ -11,7 +11,7 @@
 <body>
   <div id="todo">
     <header>
-      <h1>Todo List - Sample :()</h1>
+      <h1>Todo List - React Sample :()</h1>
       <p>파일 경로: <span id="filepath"></span></p>
     </header>
     <div id="main">
@@ -53,10 +53,10 @@
     document.querySelector('#filepath').textContent = `ch${document.URL.split('/ch')[1]}index.html`;
 
     // 샘플 목록
-    const sampleItemList = [
-      { no: 1, title: '두부', done: true} ,
-      { no: 2, title: '계란', done: false },
-      { no: 3, title: '라면', done: true },
+    const itemList = [
+      { num: 1, title: '자바스크립트 공부', done: true },
+      { num: 2, title: 'JS 프로젝트', done: true },
+      { num: 3, title: 'React 공부', done: false },
     ];
 
 

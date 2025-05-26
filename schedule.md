@@ -55,16 +55,45 @@
 #### 오전(3시간)
 * 🧑‍💻 [개발 환경 구축](./README.md#2-개발-환경-구축)
 * 🔊 [1장 리액트 빌드업](./workspace-ins/ch01-buildup)
-* 🧑‍💻 [전통적인 방식의 Todo List 테스트](https://todo.fesp.shop)
-* MPA 방식의 Todo List 작성 - HTML + vanilla JS
-  - 🧑‍💻 [01 목록 조회](./workspace-ins/ch01-buildup/01)
+* 01 전통적인 방식의 Todo List 테스트(서버에서 완성된 HTML 응답) 
+  - 🧑‍💻 [01 Todo List](https://todo.fesp.shop)
+* 02 SPA(Single Page Application)
+* Todo List 작성(HTML + vanillaJS)
+  - 🧑‍💻 [01 목록 조회](./workspace-ins/ch01-buildup/todolist/01/index.html)
     - workspace/ch01-buildup/todolist/sample 폴더 복사해서 01 폴더 생성
-  - 🧑‍💻 [02 등록](./workspace-ins/ch01-buildup/02)
-    - workspace/ch01-buildup/todolist/01 폴더 복사해서 02 폴더 생성
-  - 🧑‍💻 [03 수정](./workspace-ins/ch01-buildup/03)
+  - 🧑‍💻 [02 등록](./workspace-ins/ch01-buildup/02/index.html)
+    - workspace/ch01-buildup/todolist/01 폴더 todolist/복사해서 02 폴더 생성
+  - 🧑‍💻 [03 수정](./workspace-ins/ch01-buildup/todolist/03/index.html)
     - workspace/ch01-buildup/todolist/02 폴더 복사해서 03 폴더 생성
-  - 🧑‍💻 [04 삭제, 완성](./workspace-ins/ch01-buildup/04)
-
+  - 🧑‍💻 [04 삭제, 완성](./workspace-ins/ch01-buildup/todolist/04/index.html)
+    - workspace/ch01-buildup/todolist/03 폴더 복사해서 04 폴더 생성
+* Todo List 작성(HTML + jQuery)
+  - 🧑‍💻 [05 jQuery](./workspace-ins/ch01-buildup/todolist/05/index.html)
+    - workspace/ch01-buildup/todolist/04 폴더 복사해서 05 폴더 생성
+    - jQuery CDN 추가: `<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>`
+* Counter(라이브리리 개발) 작성
+  - 🧑‍💻 [01 HTML + JS](./workspace-ins/ch01-buildup/counter/01/index.html)
+    - workspace/ch01-buildup/counter/sample 폴더 복사해서 01 폴더 생성
+  - 🧑‍💻 [02 HTML 대신 JS로 UI 구성](./workspace-ins/ch01-buildup/counter/02/index.html)
+    - workspace/ch01-buildup/counter/01 폴더 복사해서 02 폴더 생성
+  - 🧑‍💻 [03 createElement() 함수 만들기](./workspace-ins/ch01-buildup/counter/03/index.html)
+    - workspace/ch01-buildup/counter/02 폴더 복사해서 03 폴더 생성
+  - 🧑‍💻 [04 createRoot(), render() 함수 만들기](./workspace-ins/ch01-buildup/counter/04/index.html)
+    - workspace/ch01-buildup/counter/03 폴더 복사해서 04 폴더 생성
+  - 🧑‍💻 [05 UI 구성 요소별 각각의 함수로 분리(컴포넌트로 만들기)](./workspace-ins/ch01-buildup/counter/05/index.html)
+    - workspace/ch01-buildup/counter/04 폴더 복사해서 05 폴더 생성
+  - 🧑‍💻 [06 상태(데이터) 변경시 자동으로 UI 리렌더링](./workspace-ins/ch01-buildup/counter/06/index.html)
+    - workspace/ch01-buildup/counter/05 폴더 복사해서 06 폴더 생성
+* Todo List 작성(vanillaJS + Lib)
+  - 🧑‍💻 [06 Mylib.createElement() 사용해서 UI 구성](./workspace-ins/ch01-buildup/counter/06/index.html)
+    - workspace/ch01-buildup/todolist/sample 폴더 복사해서 06 폴더 생성
+  - 🧑‍💻 [06 Mylib.createElement() 사용해서 UI 구성](./workspace-ins/ch01-buildup/counter/06/index.html)
+    - workspace/ch01-buildup/todolist/06 폴더 복사해서 07 폴더 생성
+  - 🧑‍💻 [06 Mylib.createElement() 사용해서 UI 구성](./workspace-ins/ch01-buildup/counter/06/index.html)
+    - workspace/ch01-buildup/todolist/07 폴더 복사해서 08 폴더 생성
+  - 🧑‍💻 [06 Mylib.createElement() 사용해서 UI 구성](./workspace-ins/ch01-buildup/counter/06/index.html)
+    - workspace/ch01-buildup/todolist/08 폴더 복사해서 09 폴더 생성
+    
 #### 오후(3시간)
 * 
 

@@ -89,9 +89,27 @@ const { userName, userAge: age } = kim;
 console.log(userName, age); // 구분핑 35
 ```
 
-## 2.3 전개 구문 (Spread syntax)
+## 2.3 나머지 매개변수 (Rest parameters)
+* 정해지지 않은 수의 매개변수를 배열로 전달 받음
+* 함수의 마지막 매개변수 앞에 `...` 을 붙임
+
+### 예시
+```js
+function fn(a, b, ...args) {
+  console.log(a, b, args);
+}
+
+fn(); // undefined undefined []
+fn(1); // 1 undefined []
+fn(2, 3); // 2 3 []
+fn(4, 5, 6); // 4 5 [6]
+fn(7, 8, 9, 10, 11); // 7 8 [9, 10, 11]
+```
+
+## 2.4 전개 구문 (Spread syntax)
 * 배열이나 객체의 요소, 속성을 분해해서 배열, 객체, 함수에 전달
 * 배열, 객체의 리터럴이나 함수의 인자값 변수 앞에 `...` 을 붙임
+* `나머지 매개변수`는 여러 매개변수를 하나의 배열로 모아서 처리 하는 반면 `전개 연산자`는 하나의 배열, 객체를 여러개의 요소, 속성으로 분해해서 전달
 * 이터러블 객체(배열, 객체 등)를 손쉽게 복사
 
 ### 예시
@@ -113,7 +131,7 @@ const numbers = [ 1, 2 ];
 console.log(sum(...numbers)); // 3
 ```
   
-## 2.4 삼항 연산자 (조건부 연산자)
+## 2.5 삼항 연산자 (조건부 연산자)
 * 조건에 따라 값을 선택하는 연산자
 * 조건 ? 참일 때의 값 : 거짓일 때의 값
 
@@ -130,14 +148,14 @@ var result = num % 2 === 0 ? '짝수' : '홀수';
 console.log(result);  // '홀수'
 ```
 
-## 2.5 ESM (ECMAScript Modules)
+## 2.6 ESM (ECMAScript Modules)
 * 코드를 파일 단위로 분리하고, 불필요한 전역 오염 없이 재사용할 수 있게 해줌
 * 파일 자체가 독립된 스코프를 가지므로 모듈내에서 선언한 변수는 전역변수가 아닌 모듈변수로써 모듈 내부에서만 접근 가능 
 * 모듈 구성 요소(변수, 함수, 클래스, 타입 별칭, 인터페이스 등)를 명시적으로 내보내기(export) 하면 다른 모듈에서 사용 가능
 * 다른 모듈에서 `export`한 값을 참조하려면 `import` 구문을 사용
 * 브라우저에서 모듈을 사용하려면 `<script>` 태그에 `type="module"` 속성을 추가
 
-### 2.5.1 `export` 키워드
+### 2.6.1 `export` 키워드
 * 모듈 구성 요소(변수, 함수, 클래스, 타입 별칭, 인터페이스 등)를 외부로 내보내 다른 모듈에서 사용할 수 있게 해주는 키워드
 
 #### Named Export
@@ -150,7 +168,7 @@ console.log(result);  // '홀수'
 * `export default`는 모듈 내에서 한번만 사용 가능
 * `import`시 이름은 자유롭게 지정 가능
 
-### 2.5.2 `import` 키워드
+### 2.6.2 `import` 키워드
 * 다른 모듈에서 `export`한 구성 요소를 가져올 때 사용하는 키워드
 
 #### Named Import
@@ -167,7 +185,7 @@ console.log(result);  // '홀수'
 #### Type Import
 * 타입 별칭이나 인터페이스를 `export` 했을 경우 `import` 시 `type` 키워드 추가 (생략 가능)
 
-### 2.5.3 예시 
+### 2.6.3 예시 
 * math.ts
 ```ts
 // Named Export
@@ -201,11 +219,11 @@ MyMath.minus(2, 3);
 <script type="module" src="index.js"></script>
 ```
 
-## 2.6 Promise
+## 2.7 Promise
 * 비동기 작업의 성공 또는 실패 결과를 나중에 전달하기 위한 객체(ES2015에 추가)
 * 어떤 함수가 Promise 객체를 반환한다면 현재 작업을 처리 중이며 작업이 처리 완료되는 미래에 어떤 값을 준비해서 전달할 것이라는 약속
 
-### 2.6.1 Promise 생성자 함수
+### 2.7.1 Promise 생성자 함수
 * Promise 객체 생성에 사용
 
 * `executor`: 비동기로 처리할 작업을 가진 함수
@@ -220,10 +238,10 @@ new Promise<T>(
 )
 ```
 
-### 2.6.2 Promise 객체 반환
+### 2.7.2 Promise 객체 반환
 * Promise 객체를 반환하는 함수는 비동기 함수가 됨
 
-### 2.6.3 Promise 생성자 함수의 `executor` 함수 작성
+### 2.7.3 Promise 생성자 함수의 `executor` 함수 작성
 * `executor` 함수에서 처리할 작업 구현
 * 작업 성공 시 `resolve()`를 호출하고 인자값으로 작업 결과 전달
 * 작업 실패 시 `reject()`를 호출하고 인자값으로 실패 사유 전달
@@ -243,7 +261,7 @@ function f1(){
 }
 ```
 
-### 2.6.4 Promise 객체의 메서드
+### 2.7.4 Promise 객체의 메서드
 * `then(onfulfilled?: value => (void | Promise), onrejected?: reason => (void | Promise)): Promise`
   - `onfulfilled`: resolve()가 호출될 때 실행되는 함수
   - `value`: 비동기 함수에서 작업 성공 시 호출한 resolve()에 전달한 인자값
@@ -280,11 +298,11 @@ function f1(){
   }
   ```
 
-## 2.7 async/await
+## 2.8 async/await
 * Promise를 쉽게 다루기 위해 ES2017에 추가된 문법
 * 콜백헬이나 `then()`의 복잡한 체인 방식을 사용하지 않고도 비동기 함수의 순차적인 호출이 가능해서 비동기 코드를 마치 동기 코드처럼 작성할 수 있음
 
-### 2.7.1 `async` 키워드
+### 2.8.1 `async` 키워드
 * 함수 선언부에 붙이는 키워드
 * `async` 키워드가 붙은 함수는 자동으로 Promise 객체를 반환
 * `async` 함수가 리턴한 값은 Promise의 `resolve()`에 값을 전달하는 효과
@@ -300,7 +318,7 @@ async function a1(){ // async
 }
 ```
 
-### 2.7.2 `await` 키워드
+### 2.8.2 `await` 키워드
 * Promise 객체 앞에 붙여서, Promise가 처리될 때까지(settled) 기다렸다가, 그 결과값을 반환해주는 키워드
 * `async` 함수 안에서만 사용 가능
 * 코드의 흐름이 동기함수를 호출하는 것과 비슷해서 가독성이 좋아짐
@@ -337,8 +355,8 @@ async function test(){
 }
 ```
 
-## 2.8 배열 메서드
-### 2.8.1 push, pop
+## 2.9 배열 메서드
+### 2.9.1 push, pop
 * `push(...items): number`
   - 배열의 마지막 위치에 items 요소들을 추가하고 새로운 배열 길이를 반환
 
@@ -362,7 +380,7 @@ lastFruit = fruits.pop();
 console.log(lastFruit, fruits);   // 딸기 ['사과', '바나나', '오렌지']
 ```
 
-### 2.8.2 unshife, shift
+### 2.9.2 unshife, shift
 * `unshift(...items): number`
   - 배열의 맨앞에 items 요소들을 삽입하고 새로운 배열 길이를 반환
 
@@ -386,7 +404,7 @@ firstFruit = fruits.shift();
 console.log(firstFruit,  fruits); // 포도 ['딸기', '사과', '바나나']
 ```
 
-### 2.8.3 indexOf, lastIndexOf
+### 2.9.3 indexOf, lastIndexOf
 * `indexOf(searchElement, fromIndex?: number): number`
   - 배열의 요소 중 `searchElement`와 일치하는 첫 번째 요소의 인덱스를 반환. 일치하는 요소가 없으면 -1 반환
   - `fromIndex`에 지정한 인덱스부터 탐색을 시작 (기본값 0)
@@ -405,7 +423,7 @@ console.log(arr.find(num => num % 2 === 0));
 console.log(arr.findIndex(num => num % 2 === 0));
 ```
 
-### 2.8.4 includes, concat
+### 2.9.4 includes, concat
 * `includes(searchElement, fromIndex?: number): boolean`
   - 배열의 요소 중 `searchElement` 값이 있는지 여부를 반환
   - `fromIndex`에 지정한 인덱스부터 탐색을 시작 (기본값 0)
@@ -426,7 +444,7 @@ console.log(arr); // [ '오렌지', '딸기', '레몬' ]
 console.log(arr2); // [ '오렌지', '딸기', '레몬', '사과', '바나나', '포도' ]
 ```
 
-### 2.8.5 splice
+### 2.9.5 splice
 * `splice(start: number, deleteCount?: number, ...items)`
   - 배열에서 요소를 추가, 제거 또는 교체 한다.
   - `start`: 시작 인덱스
@@ -450,7 +468,7 @@ arr2 = arr1.splice(1, 1, '두식이', '석삼'); // 인덱스 1부터 1개 추�
 console.log(arr1, arr2); // ['한놈', '두식이', '석삼'] ['너구리']
 ```
 
-### 2.8.6 slice
+### 2.9.6 slice
 * `slice(start?: number, end?: number)`
   - 배열의 지정한 범위를 복사해서 새 배열로 반환
   - `start`: 시작 인덱스 (기본값 0)
@@ -475,7 +493,7 @@ console.log(arr2); // ['육개장', '칠뜨기']
 console.log(arr1); // ['한놈', '두식이', '석삼', '너구리', '오징어', '육개장', '칠뜨기'];
 ```
 
-### 2.8.7 forEach
+### 2.9.7 forEach
 * `forEach(callbackFn: (currentValue, index, array), thisArg?): void`
   - 배열의 각 요소에 대해 `callbackFn` 함수를 실행한다.
   - 콜백 함수의 `currentValue`에는 배열의 요소가, `index`에는 전달되는 요소의 인덱스가, `array`에는 원본 배열이 전달된다.
@@ -494,7 +512,7 @@ arr.forEach((elem, i) => {
 console.log('forEach', newArr); // [100, 400, 900]
 ```
 
-### 2.8.8 map
+### 2.9.8 map
 * `map(callbackfn: (currentValue, index, array), thisArg?): any[]`
   - forEach와 동일
   - forEach는 리턴값이 없지만 map은 콜백 함수에서 리턴한 값을 새로운 배열로 만들어서 반환한다.
@@ -512,7 +530,7 @@ const newArr = arr.map(function(elem, i) {
 console.log('map', newArr); // [100, 400, 900]
 ```
 
-### 2.8.9 find, findIndex, filter
+### 2.9.9 find, findIndex, filter
 * `find(callbackFn: (currentValue, index, array), thisArg?): any | undefined`
   - 배열의 각 요소에 대해 `callbackFn` 함수가 호출된다.
   - `true`를 반환한 첫 콜백 함수에 전달된 엘리먼트가 `find`의 결과로 반환된다.
@@ -537,7 +555,7 @@ console.log(arr.findIndex(num => num % 2 === 0)); // 3
 console.log(arr.filter(n => n % 2 === 0)); // [8, 4]
 ```
 
-### 2.8.10 some, every
+### 2.9.10 some, every
 * `some(callbackfn: (currentValue, index, array), thisArg?): boolean`
   - 배열의 각 요소에 대해 `callbackFn` 함수가 호출된다. 
   - 콜백 함수 중 하나라도 `true`를 반환하면 `some`은 `true`를 반환한다.
@@ -558,7 +576,7 @@ const isAllEven = arr.every(n => n % 2 === 0); // false
 console.log(hasEven, isAllEven);
 ```
 
-### 2.8.11 reduce
+### 2.9.11 reduce
 * `reduce(accumulator: (previousValue, currentValue, index, array), initialValue): any`
   - 배열의 각 요소에 대해 제공한 `reducerfn`을 실행
   - 이전 `reducerfn`의 반환값이 다음 `reducerfn`의 인자값으로 전달되며 최종적으로 하나의 결과값을 반환
@@ -589,21 +607,21 @@ const sum = arr.reduce(function(accumulator, currentValue){
 console.log(sum); // 0 + 1 + 2 + 3 + 4
 ```
 
-## 2.9 메모이제이션
+## 2.10 메모이제이션
 * 이전의 계산 결과를 기억하는 기능을 갖춘 함수
 * 함수는 객체이기 때문에 함수의 속성값으로 계산 결과 캐시
 * 함수에 종속된 속성을 이용하기 때문에 외부에 노출하지 않고 함수 자체적으로 구현 가능
 
-### 2.9.1 장점
+### 2.10.1 장점
 * 이미 수행한 복잡한 연산을 반복하지 않도록 함으로서 성능을 향상
 * 사용자가 알 수 없게 내부적으로만 동작
 
-### 2.9.2 단점
+### 2.10.2 단점
 * 캐시에 필요한 메모리 사용량 증가
 * 비즈니스 로직과 캐싱 기능의 혼재
 * 부하 테스트(Load test)나 알고리즘의 성능 테스트가 어려워짐
 
-### 2.9.3 예시
+### 2.10.3 예시
 * 함수에서 직접 구현
 ```js
 // 지정한 수가 소수인지 여부를 반환

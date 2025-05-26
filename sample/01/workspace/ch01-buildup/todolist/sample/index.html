@@ -52,7 +52,9 @@
     // location.href.split('/ch'): ['http://localhost:8800/workspace-ins', '01-buildup/todolist/sample/']
     // ch01-buildup/todolist/sample/index.html
     document.querySelector('#filepath').textContent = `ch${location.href.split('/ch')[1]}index.html`;
-
+  </script>
+  
+  <script>
     // 샘플 목록
     const itemList = [
       { num: 1, title: '자바스크립트 공부', done: true },
@@ -139,10 +141,10 @@
     // 할일 추가
     function addItem(title){
       console.log('할일 추가');
-      // TODO 데이터 갱신, itemList에 item 추가
+      // 데이터 갱신, itemList에 item 추가
       // num, title, done 속성을 가진 item 객체 생성
 
-      // TODO 화면 갱신, item을 DOM 객체로 만들어 ul 요소에 자식으로 추가
+      // 화면 갱신, item을 DOM 객체로 만들어 ul 요소에 자식으로 추가
       
     }
 
@@ -161,21 +163,21 @@
     // 완료/미완료 처리
     function toggleDone(num){
       console.log(num, '완료/미완료');
-      // TODO 데이터 갱신, itemList에서 num에 해당하는 item의 done 값을 수정
+      // 데이터 갱신, itemList에서 num에 해당하는 item의 done 값을 수정
       // itemList에서 num 값으로 item 조회
 
       // item의 done 값을 수정
 
-      // TODO 화면 갱신, done 값에 따라서 <s> 추가 또는 삭제
+      // 화면 갱신, done 값에 따라서 <s> 추가 또는 삭제
       
     }
 
     // 할일 삭제
     function deleteItem(num){
       console.log('할일 삭제');
-      // TODO 데이터 갱신, itemList에서 num에 해당하는 item 삭제
+      // 데이터 갱신, itemList에서 num에 해당하는 item 삭제
 
-      // TODO 화면 갱신, 화면에서 num에 해당하는 item 제거
+      // 화면 갱신, 화면에서 num에 해당하는 item 제거
 
     }
   </script>
