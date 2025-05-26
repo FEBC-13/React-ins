@@ -5,7 +5,7 @@
 # 1. 수업 목차
 
 ## 1장 리액트 빌드업
-* ./workspace-ins/ch01-buildup
+* [이동](./workspace-ins/ch01-buildup)
 
 ## 2장 리액트 시작하기
 * ./workspace-ins/ch02-start>
