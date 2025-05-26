@@ -91,7 +91,7 @@ console.log(userName, age); // 구분핑 35
 
 ## 2.3 전개 구문 (Spread syntax)
 * 배열이나 객체의 요소, 속성을 분해해서 배열, 객체, 함수에 전달
-* 배열, 객체의 리터럴이나 함수의 인자값 변수 앞에 ... 을 붙임
+* 배열, 객체의 리터럴이나 함수의 인자값 변수 앞에 `...` 을 붙임
 * 이터러블 객체(배열, 객체 등)를 손쉽게 복사
 
 ### 예시
@@ -134,7 +134,7 @@ console.log(result);  // '홀수'
 * 코드를 파일 단위로 분리하고, 불필요한 전역 오염 없이 재사용할 수 있게 해줌
 * 파일 자체가 독립된 스코프를 가지므로 모듈내에서 선언한 변수는 전역변수가 아닌 모듈변수로써 모듈 내부에서만 접근 가능 
 * 모듈 구성 요소(변수, 함수, 클래스, 타입 별칭, 인터페이스 등)를 명시적으로 내보내기(export) 하면 다른 모듈에서 사용 가능
-* 다른 모듈에서 export한 값을 참조하려면 import 구문을 사용
+* 다른 모듈에서 `export`한 값을 참조하려면 `import` 구문을 사용
 * 브라우저에서 모듈을 사용하려면 `<script>` 태그에 `type="module"` 속성을 추가
 
 ### 2.5.1 `export` 키워드
@@ -155,7 +155,7 @@ console.log(result);  // '홀수'
 
 #### Named Import
 * `export`로 내보낸 구성 요소를 중괄호로 감싸서 가져옴
-* 이름이 정확히 일치 해야 하며 필요한 것만 선택해서 import 가능
+* 이름이 정확히 일치 해야 하며 필요한 것만 선택해서 `import` 가능
 * 별칭 사용 가능
 
 #### Default Import
@@ -208,9 +208,9 @@ MyMath.minus(2, 3);
 ### 2.6.1 Promise 생성자 함수
 * Promise 객체 생성에 사용
 
-* executor: 비동기로 처리할 작업을 가진 함수
-* resolve: 작업이 성공적으로 완료 되었을 때 호출할 함수. 인자값은 작업 결과를 전달하는데 사용
-* reject: 작업이 실패 했을 때 호출할 함수. 인자값은 실패 사유를 전달하는데 사용
+* `executor`: 비동기로 처리할 작업을 가진 함수
+* `resolve`: 작업이 성공적으로 완료 되었을 때 호출할 함수. 인자값은 작업 결과를 전달하는데 사용
+* `reject`: 작업이 실패 했을 때 호출할 함수. 인자값은 실패 사유를 전달하는데 사용
 ```ts
 new Promise<T>(
   executor: (
@@ -223,10 +223,10 @@ new Promise<T>(
 ### 2.6.2 Promise 객체 반환
 * Promise 객체를 반환하는 함수는 비동기 함수가 됨
 
-### 2.6.3 Promise 생성자 함수의 executor 함수 작성
-* executor 함수에서 처리할 작업 구현
-* 작업 성공 시 resolve()를 호출하고 인자값으로 작업 결과 전달
-* 작업 실패 시 reject()를 호출하고 인자값으로 실패 사유 전달
+### 2.6.3 Promise 생성자 함수의 `executor` 함수 작성
+* `executor` 함수에서 처리할 작업 구현
+* 작업 성공 시 `resolve()`를 호출하고 인자값으로 작업 결과 전달
+* 작업 실패 시 `reject()`를 호출하고 인자값으로 실패 사유 전달
 ```ts
 function f1(){
   return new Promise<string>((resolve, reject) => {
@@ -245,12 +245,12 @@ function f1(){
 
 ### 2.6.4 Promise 객체의 메서드
 * `then(onfulfilled?: value => (void | Promise), onrejected?: reason => (void | Promise)): Promise`
-  - onfulfilled: resolve()가 호출될 때 실행되는 함수
-  - value: 비동기 함수에서 작업 성공 시 호출한 resolve()에 전달한 인자값
-  - onrejected: reject()가 호출될 때 실행되는 함수
-  - reason: 비동기 함수에서 작업 실패 시 호출한 reject()에 전달한 인자값
+  - `onfulfilled`: resolve()가 호출될 때 실행되는 함수
+  - `value`: 비동기 함수에서 작업 성공 시 호출한 resolve()에 전달한 인자값
+  - `onrejected`: reject()가 호출될 때 실행되는 함수
+  - `reason`: 비동기 함수에서 작업 실패 시 호출한 reject()에 전달한 인자값
   - 리턴값: 새로운 Promise가 반환되어 체인 방식으로 호출이 가능
-  - onfulfilled나 onrejected 가 Promise를 반환하는 함수일 경우 여러 비동기 함수를 순차적으로 호출하는데 사용
+  - `onfulfilled`나 `onrejected` 가 `Promise`를 반환하는 함수일 경우 여러 비동기 함수를 순차적으로 호출하는데 사용
   ```ts
   function test(){
     f1().then((result) => {
@@ -261,11 +261,11 @@ function f1(){
   }
   ```
 * `catch(onrejected?: reason => (void | Promise)): Promise`
-  - onrejected: then()의 onrejected와 동일
-  - then()의 두번째 인자인 onrejected에서 처리하지 않은 에러는 catch()에서 처리됨
+  - `onrejected`: `then()`의 `onrejected`와 동일
+  - `then()`의 두번째 인자인 `onrejected`에서 처리하지 않은 에러는 `catch()`에서 처리됨
 
 * `finally(onfinally?: () => void): Promise`
-  - onfinally: Promise의 성공 실패와 상관없이 항상 호출되는 함수
+  - `onfinally`: Promise의 성공 실패와 상관없이 항상 호출되는 함수
   ```ts
   function test(){
     f1().then((result) => {
@@ -282,13 +282,13 @@ function f1(){
 
 ## 2.7 async/await
 * Promise를 쉽게 다루기 위해 ES2017에 추가된 문법
-* 콜백헬이나 then()의 복잡한 체인 방식을 사용하지 않고도 비동기 함수의 순차적인 호출이 가능해서 비동기 코드를 마치 동기 코드처럼 작성할 수 있음
+* 콜백헬이나 `then()`의 복잡한 체인 방식을 사용하지 않고도 비동기 함수의 순차적인 호출이 가능해서 비동기 코드를 마치 동기 코드처럼 작성할 수 있음
 
-### 2.7.1 async 키워드
+### 2.7.1 `async` 키워드
 * 함수 선언부에 붙이는 키워드
-* async 키워드가 붙은 함수는 자동으로 Promise 객체를 반환
-* async 함수가 리턴한 값은 Promise의 resolve()에 값을 전달하는 효과
-* async 함수가 throw한 값은 Promise의 reject()에 값을 전달하는 효과
+* `async` 키워드가 붙은 함수는 자동으로 Promise 객체를 반환
+* `async` 함수가 리턴한 값은 Promise의 `resolve()`에 값을 전달하는 효과
+* `async` 함수가 throw한 값은 Promise의 `reject()`에 값을 전달하는 효과
 ```ts
 function p1(){ // Promise
   return new Promise((resolve) => {
@@ -300,9 +300,9 @@ async function a1(){ // async
 }
 ```
 
-### 2.7.2 await 키워드
+### 2.7.2 `await` 키워드
 * Promise 객체 앞에 붙여서, Promise가 처리될 때까지(settled) 기다렸다가, 그 결과값을 반환해주는 키워드
-* async 함수 안에서만 사용 가능
+* `async` 함수 안에서만 사용 가능
 * 코드의 흐름이 동기함수를 호출하는 것과 비슷해서 가독성이 좋아짐
 ```ts
 function test(){
@@ -388,12 +388,12 @@ console.log(firstFruit,  fruits); // 포도 ['딸기', '사과', '바나나']
 
 ### 2.8.3 indexOf, lastIndexOf
 * `indexOf(searchElement, fromIndex?: number): number`
-  - 배열의 요소 중 searchElement와 일치하는 첫 번째 요소의 인덱스를 반환. 일치하는 요소가 없으면 -1 반환
-  - fromIndex에 지정한 인덱스부터 탐색을 시작 (기본값 0)
+  - 배열의 요소 중 `searchElement`와 일치하는 첫 번째 요소의 인덱스를 반환. 일치하는 요소가 없으면 -1 반환
+  - `fromIndex`에 지정한 인덱스부터 탐색을 시작 (기본값 0)
 
 * `lastIndexOf(searchElement, fromIndex?: number): number`
-  - 배열의 요소 중 searchElement와 일치하는 마지막 요소의 인덱스를 반환. 일치하는 요소가 없으면 -1 반환
-  - fromIndex에 지정한 인덱스부터 탐색을 시작 (기본값 0)
+  - 배열의 요소 중 `searchElement`와 일치하는 마지막 요소의 인덱스를 반환. 일치하는 요소가 없으면 -1 반환
+  - `fromIndex`에 지정한 인덱스부터 탐색을 시작 (기본값 0)
 
 #### 예시
 ```ts
@@ -407,8 +407,8 @@ console.log(arr.findIndex(num => num % 2 === 0));
 
 ### 2.8.4 includes, concat
 * `includes(searchElement, fromIndex?: number): boolean`
-  - 배열의 요소 중 searchElement 값이 있는지 여부를 반환
-  - fromIndex에 지정한 인덱스부터 탐색을 시작 (기본값 0)
+  - 배열의 요소 중 `searchElement` 값이 있는지 여부를 반환
+  - `fromIndex`에 지정한 인덱스부터 탐색을 시작 (기본값 0)
   
 * `concat(...items)`
   - items 배열들을 병합한 새로운 배열을 반환
@@ -429,9 +429,9 @@ console.log(arr2); // [ '오렌지', '딸기', '레몬', '사과', '바나나', 
 ### 2.8.5 splice
 * `splice(start: number, deleteCount?: number, ...items)`
   - 배열에서 요소를 추가, 제거 또는 교체 한다.
-  - start: 시작 인덱스
-  - deleteCount: 제거할 요소 수
-  - items: 삽입할 요소 목록
+  - `start`: 시작 인덱스
+  - `deleteCount`: 제거할 요소 수
+  - `items`: 삽입할 요소 목록
 
 #### 예시
 ```ts
@@ -453,8 +453,8 @@ console.log(arr1, arr2); // ['한놈', '두식이', '석삼'] ['너구리']
 ### 2.8.6 slice
 * `slice(start?: number, end?: number)`
   - 배열의 지정한 범위를 복사해서 새 배열로 반환
-  - start: 시작 인덱스 (기본값 0)
-  - end: 종료 인덱스 (기본값 length)
+  - `start`: 시작 인덱스 (기본값 0)
+  - `end`: 종료 인덱스 (기본값 length)
 
 #### 예시
 ```ts
@@ -477,9 +477,9 @@ console.log(arr1); // ['한놈', '두식이', '석삼', '너구리', '오징어'
 
 ### 2.8.7 forEach
 * `forEach(callbackFn: (currentValue, index, array), thisArg?): void`
-  - 배열의 각 요소에 대해 callbackFn 함수를 실행한다.
-  - 콜백 함수의 currentValue에는 배열의 요소가, index에는 전달되는 요소의 인덱스가, array에는 원본 배열이 전달된다.
-  - thisArg는 콜백 함수에서 this로 사용할 객체를 전달
+  - 배열의 각 요소에 대해 `callbackFn` 함수를 실행한다.
+  - 콜백 함수의 `currentValue`에는 배열의 요소가, `index`에는 전달되는 요소의 인덱스가, `array`에는 원본 배열이 전달된다.
+  - `thisArg`는 콜백 함수에서 `this`로 사용할 객체를 전달
   
 #### 예시
 ```ts
@@ -514,19 +514,19 @@ console.log('map', newArr); // [100, 400, 900]
 
 ### 2.8.9 find, findIndex, filter
 * `find(callbackFn: (currentValue, index, array), thisArg?): any | undefined`
-  - 배열의 각 요소에 대해 callbackFn 함수가 호출된다.
-  - true를 반환한 첫 콜백 함수에 전달된 엘리먼트가 find의 결과로 반환된다.
-  - true를 반환한 콜백 함수가 없을 경우 undefined가 반환된다. 
+  - 배열의 각 요소에 대해 `callbackFn` 함수가 호출된다.
+  - `true`를 반환한 첫 콜백 함수에 전달된 엘리먼트가 `find`의 결과로 반환된다.
+  - `true`를 반환한 콜백 함수가 없을 경우 `undefined`가 반환된다. 
 
 * `findIndex(callbackFn: (currentValue, index, array), thisArg?): number`
-  - 배열의 각 요소에 대해 callbackFn 함수가 호출된다.
-  - true를 반환한 첫 콜백 함수에 전달된 인덱스가 find의 결과로 반환된다.
-  - true를 반환한 콜백 함수가 없을 경우 0이 반환된다.
+  - 배열의 각 요소에 대해 `callbackFn` 함수가 호출된다.
+  - `true`를 반환한 첫 콜백 함수에 전달된 인덱스가 `find`의 결과로 반환된다.
+  - `true`를 반환한 콜백 함수가 없을 경우 `0`이 반환된다.
 
 * `filter(callbackFn: (currentValue, index, array), thisArg?): any | undefined`
-  - 배열의 각 요소에 대해 callbackFn 함수가 호출된다.
-  - true를 반환한 콜백 함수에 전달된 요소만 모아서 새로운 배열로 반환
-  - true를 반환한 콜백 함수가 없을 경우 undefined가 반환된다.
+  - 배열의 각 요소에 대해 `callbackFn` 함수가 호출된다.
+  - `true`를 반환한 콜백 함수에 전달된 요소만 모아서 새로운 배열로 반환
+  - `true`를 반환한 콜백 함수가 없을 경우 `undefined`가 반환된다.
 
 #### 예시
 ```ts
@@ -539,14 +539,14 @@ console.log(arr.filter(n => n % 2 === 0)); // [8, 4]
 
 ### 2.8.10 some, every
 * `some(callbackfn: (currentValue, index, array), thisArg?): boolean`
-  - 배열의 각 요소에 대해 callbackFn 함수가 호출된다. 
-  - 콜백 함수 중 하나라도 true를 반환하면 some은 true를 반환한다.
-  - 콜백 함수 전부 true를 반환하지 않으면 some은 false를 반환한다.
+  - 배열의 각 요소에 대해 `callbackFn` 함수가 호출된다. 
+  - 콜백 함수 중 하나라도 `true`를 반환하면 `some`은 `true`를 반환한다.
+  - 콜백 함수 전부 `true`를 반환하지 않으면 `some`은 `false`를 반환한다.
 
 * `every(callbackfn: (currentValue, index, array), thisArg?): boolean`
-  - 배열의 각 요소에 대해 callbackFn 함수가 호출된다. 
-  - 콜백 함수 전부 true를 반환하면 every는 true를 반환한다.
-  - 콜백 함수 중 하나라도 true를 반환하지 않으면 every는 false를 반환한다.
+  - 배열의 각 요소에 대해 `callbackFn` 함수가 호출된다. 
+  - 콜백 함수 전부 `true`를 반환하면 `every`는 `true`를 반환한다.
+  - 콜백 함수 중 하나라도 `true`를 반환하지 않으면 `every`는 `false`를 반환한다.
 
 #### 예시
 ```ts
@@ -560,13 +560,13 @@ console.log(hasEven, isAllEven);
 
 ### 2.8.11 reduce
 * `reduce(accumulator: (previousValue, currentValue, index, array), initialValue): any`
-  - 배열의 각 요소에 대해 제공한 reducerfn을 실행
-  - 이전 reducerfn의 반환값이 다음 reducerfn의 인자값으로 전달되며 최종적으로 하나의 결과값을 반환
-  - reducerfn이 처음 실행되면 "이전 리듀서의 반환값"이 없으므로 reduce 함수의 두번째 인자로 전달하는 initialValue 값을 사용하거나 두번째 인자가 생략될 경우 배열의 index 0 값이 지정되고 배열의 두번째 요소부터 리듀서가 실행
+  - 배열의 각 요소에 대해 제공한 `reducerfn`을 실행
+  - 이전 `reducerfn`의 반환값이 다음 `reducerfn`의 인자값으로 전달되며 최종적으로 하나의 결과값을 반환
+  - `reducerfn`이 처음 실행되면 "이전 리듀서의 반환값"이 없으므로 `reduce` 함수의 두번째 인자로 전달하는 `initialValue` 값을 사용하거나 두번째 인자가 생략될 경우 배열의 `첫번째 index` 값이 지정되고 배열의 `두번째 요소`부터 리듀서가 실행
   - 함수형 스타일로 개발
   
 #### 예시
-* forEach 함수 사용
+* `forEach` 함수 사용
 ```ts
 const arr = [1, 2, 3, 4];
 
@@ -578,7 +578,7 @@ arr.forEach(function(value) {
 console.log(sum); // 0 + 1 + 2 + 3 + 4
 ```
 
-* reduce 함수 사용
+* `reduce` 함수 사용
 ```ts
 const arr = [1, 2, 3, 4];
 
