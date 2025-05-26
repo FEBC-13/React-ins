@@ -53,7 +53,7 @@ const add = function(x, y) {
 const add = (x, y) => {
   return x + y;
 }
-// 화살표 함수 축약
+// 화살표 함수 본문의 중괄호 생략
 const add = (x, y) => x + y;
 ```
 
@@ -67,7 +67,7 @@ const add10 = function(x) {
 const add = (x) => {
   return x + 10;
 }
-// 화살표 함수 축약
+// 화살표 함수 매개변수의 괄호와 본문의 중괄호 생략
 const add = x => x + 10;
 ```
 
@@ -91,32 +91,31 @@ console.log(userName, age); // 구분핑 35
 
 ## 2.3 전개 구문 (Spread syntax)
 * 배열이나 객체의 요소, 속성을 분해해서 배열, 객체, 함수에 전달
-* 이터러블 객체(배열, 객체 등)를 손쉽게 복사
 * 배열, 객체의 리터럴이나 함수의 인자값 변수 앞에 ... 을 붙임
-* 나머지 매개변수는 여러 매개변수를 하나의 배열로 압축 하는 반면 전개 연산자는 하나의 배열, 객체를 여러개의 요소, 속성으로 분해해서 전달
+* 이터러블 객체(배열, 객체 등)를 손쉽게 복사
 
 ### 예시
 ```js
-const state = ['orange', 'yellow', 'green'];
-const newState = [ ...state ]; // ['orange', 'yellow', 'green']
+const state = [ 'orange', 'yellow', 'green' ];
+const newState = [ ...state ]; // 복사된 배열 ['orange', 'yellow', 'green']
 ```
 
 ```js
-const state = {name: '전구핑', age: 30};
-const newState = { ...state }; // {name: '전구핑', age: 30}
+const state = { name: '전구핑', age: 30 };
+const newState = { ...state }; // 복사된 객체 { name: '전구핑', age: 30 }
 ```
 
 ```js
 function sum(x, y) {
   return x + y;
 }
-const numbers = [1, 2];
+const numbers = [ 1, 2 ];
 console.log(sum(...numbers)); // 3
 ```
   
 ## 2.4 삼항 연산자 (조건부 연산자)
 * 조건에 따라 값을 선택하는 연산자
-* 조건 ? 참일 때의 값 : 거짓일 때의 값;
+* 조건 ? 참일 때의 값 : 거짓일 때의 값
 
 ### 예시
 ```js
@@ -136,37 +135,37 @@ console.log(result);  // '홀수'
 * 파일 자체가 독립된 스코프를 가지므로 모듈내에서 선언한 변수는 전역변수가 아닌 모듈변수로써 모듈 내부에서만 접근 가능 
 * 모듈 구성 요소(변수, 함수, 클래스, 타입 별칭, 인터페이스 등)를 명시적으로 내보내기(export) 하면 다른 모듈에서 사용 가능
 * 다른 모듈에서 export한 값을 참조하려면 import 구문을 사용
-* 브라우저에서 모듈을 사용하려면 <script> 태그에 type="module" 속성을 추가
+* 브라우저에서 모듈을 사용하려면 `<script>` 태그에 `type="module"` 속성을 추가
 
-### 2.5.1 export
+### 2.5.1 `export` 키워드
 * 모듈 구성 요소(변수, 함수, 클래스, 타입 별칭, 인터페이스 등)를 외부로 내보내 다른 모듈에서 사용할 수 있게 해주는 키워드
 
 #### Named Export
-* 내보내기할 각 구성 요소 앞에 export 키워드 지정하거나 export { plus, minus } 형태로 선언과 분리해서 따로 작성 가능
-* export는 여러번 사용 가능
-* import 시 중괄호 안에 정확한 구성 요소명을 사용
+* 내보내기할 각 구성 요소 앞에 `export` 키워드를 지정하거나 `export { plus, minus }` 형태로 선언과 분리해서 따로 작성 가능
+* `export`는 여러번 사용 가능
+* `import`시 중괄호 안에 정확한 구성 요소명을 사용
 
 #### Default Export
-* 내보내기할 구성 요소 앞에 export default 키워드 지정
-* export default는 모듈 내에서 한번만 사용 가능
-* import 시 이름은 자유롭게 지정 가능
+* 내보내기할 구성 요소 앞에 `export default` 키워드 지정
+* `export default`는 모듈 내에서 한번만 사용 가능
+* `import`시 이름은 자유롭게 지정 가능
 
-### 2.5.2 import
-* 다른 모듈에서 export한 구성 요소를 가져올 때 사용하는 키워드
+### 2.5.2 `import` 키워드
+* 다른 모듈에서 `export`한 구성 요소를 가져올 때 사용하는 키워드
 
 #### Named Import
-* export로 내보낸 구성 요소를 중괄호로 감싸서 가져옴
+* `export`로 내보낸 구성 요소를 중괄호로 감싸서 가져옴
 * 이름이 정확히 일치 해야 하며 필요한 것만 선택해서 import 가능
 * 별칭 사용 가능
 
 #### Default Import
-* export default 로 내보낸 구성 요소는 중괄호 없이 자유롭게 이름을 지정해서 import 가능
+* `export default`로 내보낸 구성 요소는 중괄호 없이 자유롭게 이름을 지정해서 `import` 가능
 
 #### Mixed Import
 * Named Import와 Default Import를 같이 사용 (일관성과 가독성 저하로 권장하지 않음)
 
 #### Type Import
-* 타입 별칭이나 인터페이스를 export 했을 경우 import 시 type 키워드 추가 (생략 가능)
+* 타입 별칭이나 인터페이스를 `export` 했을 경우 `import` 시 `type` 키워드 추가 (생략 가능)
 
 ### 2.5.3 예시 
 * math.ts
