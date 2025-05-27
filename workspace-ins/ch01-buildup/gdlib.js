@@ -1,8 +1,8 @@
-const GDlib = (() => {
+const gdlib = (() => {
   // 지정한 속성과 자식 노드를 가지는 요소 노드를 생성해서 반환
   // <button type="button" onclick="handleUp()">+</button>
-  // const downBtn = GDlib.createElement('button', { type: 'button', onclick: 'handleDown()' }, '-');
-  // const Counter = GDlib.createElement('div', { id: 'counter' }, downBtn, resetBtn, upBtn, span);
+  // const downBtn = gdlib.createElement('button', { type: 'button', onclick: 'handleDown()' }, '-');
+  // const Counter = gdlib.createElement('div', { id: 'counter' }, downBtn, resetBtn, upBtn, span);
   const createElement = (tag, props, ...children) => {
     // 요소 노드 생성
     const elem = document.createElement(tag);
@@ -48,4 +48,4 @@ const GDlib = (() => {
 
 })();
 
-export default GDlib;
+export default gdlib;

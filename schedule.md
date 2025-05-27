@@ -51,26 +51,12 @@
 * Todo List - Valilla JS + Library
 * Counter App/Todo List - React
 
-### 1일차(2025.05.27 화)
-#### 오전(3시간)
-* 🧑‍💻 [개발 환경 구축](./README.md#2-개발-환경-구축)
-* 🔊 [1장 리액트 빌드업](./workspace-ins/ch01-buildup)
-* 01 전통적인 방식의 Todo List 테스트(서버에서 완성된 HTML 응답) 
-  - 🧑‍💻 [01 Todo List](https://todo.fesp.shop)
-* 02 SPA(Single Page Application)
 * Todo List 작성(HTML + vanillaJS)
-  - 🧑‍💻 [01 목록 조회](./workspace-ins/ch01-buildup/todolist/01/index.html)
-    - workspace/ch01-buildup/todolist/sample 폴더 복사해서 01 폴더 생성
-  - 🧑‍💻 [02 등록](./workspace-ins/ch01-buildup/02/index.html)
-    - workspace/ch01-buildup/todolist/01 폴더 todolist/복사해서 02 폴더 생성
-  - 🧑‍💻 [03 수정](./workspace-ins/ch01-buildup/todolist/03/index.html)
-    - workspace/ch01-buildup/todolist/02 폴더 복사해서 03 폴더 생성
   - 🧑‍💻 [04 삭제, 완성](./workspace-ins/ch01-buildup/todolist/04/index.html)
     - workspace/ch01-buildup/todolist/03 폴더 복사해서 04 폴더 생성
 * Todo List 작성(HTML + jQuery)
   - 🧑‍💻 [05 jQuery](./workspace-ins/ch01-buildup/todolist/05/index.html)
     - workspace/ch01-buildup/todolist/04 폴더 복사해서 05 폴더 생성
-    - jQuery CDN 추가: `<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>`
 * Counter(라이브리리 개발) 작성
   - 🧑‍💻 [01 HTML + JS](./workspace-ins/ch01-buildup/counter/01/index.html)
     - workspace/ch01-buildup/counter/sample 폴더 복사해서 01 폴더 생성
@@ -94,8 +80,31 @@
   - 🧑‍💻 [06 Mylib.createElement() 사용해서 UI 구성](./workspace-ins/ch01-buildup/counter/06/index.html)
     - workspace/ch01-buildup/todolist/08 폴더 복사해서 09 폴더 생성
     
+
+### 1일차(2025.05.27 화)
+#### 오전(3시간)
+* 🧑‍💻 [개발 환경 구축](./README.md#2-개발-환경-구축)
+* 🔊 [1장 리액트 빌드업](./workspace-ins/ch01-buildup)
+  - 1. 웹 개발의 변천사
+  - 2. 리액트 개발에 자주 사용하는 자바스크립트 문법
+
+
 #### 오후(3시간)
-* 
+* 01 전통적인 방식의 Todo List 테스트(서버에서 완성된 HTML 응답) 
+  - 🧑‍💻 [01 Todo List](https://todo.fesp.shop)
+* 02 SPA(Single Page Application)
+* Todo List 작성(HTML + vanillaJS)
+  - 🧑‍💻 [01 목록 조회](./workspace-ins/ch01-buildup/todolist/01/index.html)
+    - workspace/ch01-buildup/todolist/sample 폴더 복사해서 01 폴더 생성
+  - 🧑‍💻 [02 등록](./workspace-ins/ch01-buildup/02/index.html)
+    - workspace/ch01-buildup/todolist/01 폴더 todolist/복사해서 02 폴더 생성
+  - 🧑‍💻 [03 수정](./workspace-ins/ch01-buildup/todolist/03/index.html)
+    - workspace/ch01-buildup/todolist/02 폴더 복사해서 03 폴더 생성
+
+#### 회고(1시간)
+* 황수곤
+  - Promise 이해 안됨
+  - 피드백: Promise는 이전에 동기/비동기 함수의 차이와 콜백 함수의 차이를 먼저 이해해야 하므로 해당 단원의 PPT와 실습 예제 먼저 확인해 보고 정확히 모르는 부분에 대해서 다시 질문
 
 #### 병아리반(1시간)
 * 
