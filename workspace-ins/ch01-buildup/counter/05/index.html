@@ -9,7 +9,7 @@
   <div id="root"></div>
 
   <script type="module">
-    import gdlib from '/ch01-buildup/gdlib.js';    
+    import gdlib from './gdlib.js';    
 
     function App(){
       return (
@@ -19,9 +19,9 @@
             gdlib.createElement('p', null, '파일 경로: ', 
             gdlib.createElement('span', { id: 'filepath' }, `ch${document.URL.split('/ch')[1]}index.html`))), 
           gdlib.createElement('div', { id: 'counter' }, 
-            gdlib.createElement('button', { type: 'button', onclick: 'handleDown()' }, '-'), 
-            gdlib.createElement('button', { type: 'button', onclick: 'handleReset(event)' }, '0'), 
-            gdlib.createElement('button', { type: 'button', onclick: 'handleUp()' }, '+'), 
+            gdlib.createElement('button', { type: 'button', onclick: handleDown }, '-'), 
+            gdlib.createElement('button', { type: 'button', onclick: (event) => handleReset(event) }, '0'), 
+            gdlib.createElement('button', { type: 'button', onclick: handleUp }, '+'), 
             gdlib.createElement('span', null, 0)))
       );
     }

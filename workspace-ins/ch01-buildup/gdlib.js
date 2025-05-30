@@ -1,9 +1,12 @@
-const gdlib = (() => {
+let _root;
+let _stateValue;
+
+const gdlib = {
   // 지정한 속성과 자식 노드를 가지는 요소 노드를 생성해서 반환
   // <button type="button" onclick="handleUp()">+</button>
   // const downBtn = gdlib.createElement('button', { type: 'button', onclick: 'handleDown()' }, '-');
   // const Counter = gdlib.createElement('div', { id: 'counter' }, downBtn, resetBtn, upBtn, span);
-  const createElement = (tag, props, ...children) => {
+  createElement: (tag, props, ...children) => {
     // 요소 노드 생성
     const elem = document.createElement(tag);
 
@@ -11,8 +14,7 @@ const gdlib = (() => {
     if(props){
       for(const attrName in props){
         const value = props[attrName];
-        // elem.setAttribute(attrName, value);
-        if(attrName.startsWith('on') && typeof value === 'function'){
+        if(attrName.toLowerCase().startsWith('on')){
           elem.addEventListener(attrName.toLowerCase().substring(2), value);
         }else{
           elem.setAttribute(attrName, value);
@@ -27,25 +29,49 @@ const gdlib = (() => {
       }else if(typeof child === 'function'){
         child = child();
       }
-      elem.appendChild(child);
+
+      if(Array.isArray(child)){
+        child.forEach(c => elem.appendChild(c));
+      }else{
+        elem.appendChild(child);
+      }
+      
     }
 
     return elem;
-  };
+  },
 
   // 루트노드를 관리하는 객체를 생성해서 반환
   // createRoot(document.getElementById('root')).render(App);
-  const createRoot = (rootNode) => {
-    return {
+  createRoot: (rootNode) => {
+    let _appComponent;
+    return _root = {
       // 루트노드 하위에 지정한 함수를 실행해서 받은 컴포넌트를 렌더링 한다.
       render(appFn){
-        rootNode.appendChild(appFn())
+        _appComponent = _appComponent || appFn;
+        rootNode.firstChild?.remove();
+        rootNode.appendChild(_appComponent())
       }
     };
-  };
+  },
 
-  return { createElement, createRoot };
+  // 상태값 관리
+  // let [count, setCount] = Reaction.useState(10);
+  useState: (initValue) => {
+    _stateValue = _stateValue || initValue;
 
-})();
+    function setValue(newValue){
+      const oldValue = _stateValue;
+      _stateValue = newValue;
+
+      // 두 값이 같은지 비교해서 같지 않을 경우에(상태가 변경된 경우) 리렌더링한다.
+      if(!Object.is(oldValue, newValue)){
+        _root.render();
+      }
+    }
+
+    return [_stateValue, setValue];
+  }
+};
 
 export default gdlib;

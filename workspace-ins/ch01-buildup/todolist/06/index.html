@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List App</title>
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <!-- <div id="todo">
+    <header>
+      <h1>Todo List - 05 데이터를 기반으로 화면 렌더링 :)</h1>
+      <p>파일 경로: <span id="filepath"></span></p>
+    </header>
+    <div id="main">
+      <div id="container">
+        <ul>
+          <li>
+            <h2>할일 목록</h2>
+            <div class="todoinput">
+              <input type="text" autofocus onkeydown="handleAddKeydown(event)">
+              <button type="button" onclick="handleAdd()">추가</button>
+            </div>
+            <ul class="todolist">
+              <li data-num="1">
+                <span>1</span>
+                <span onclick="toggleDone(1)"><s>샘플1</s></span>
+                <button type="button" onclick="deleteItem(1)">삭제</button>
+              </li>
+              <li data-num="2">
+                <span>2</span>
+                <span onclick="toggleDone(2)">샘플2</span>
+                <button type="button" onclick="deleteItem(2)">삭제</button>
+              </li>
+              <li data-num="3">
+                <span>3</span>
+                <span onclick="toggleDone(3)">샘플3</span>
+                <button type="button" onclick="deleteItem(3)">삭제</button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <footer>
+      <p>멋쟁이 사자처럼 FrontEnd BootCamp</p>
+    </footer>
+  </div> -->
+
+  <div id="root"></div>
+
+  <script type="module">
+    import Reaction from '/ch01-buildup/gdlib.js';
+
+    /*
+          ┌───────── App ──────────┐
+          │           │            │
+        Header       Todo        Footer
+                      │
+                  ┌───┴────┐
+            TodoInput   TodoList
+                           │
+                        TodoItem
+    */
+
+    function App(){
+      return (
+        Reaction.createElement('div', { id: 'todo' }, 
+          Reaction.createElement('header', null,
+            Reaction.createElement('h1', null, 'Todo List - 06 Reaction.createElement() 사용해서 UI 구성 :)'),
+            Reaction.createElement('p', null, '파일 경로: ',
+              Reaction.createElement('span', { id: 'filepath' }, `ch${location.href.split('/ch')[1]}index.html`))),
+          Reaction.createElement('div', { id: 'main' },
+            Reaction.createElement('div', { id: 'container' },
+              Reaction.createElement('ul', null,
+                Reaction.createElement('li', null,
+                  Reaction.createElement('h2', null, '할일 목록'),
+                  Reaction.createElement('div', { class: 'todoinput' },
+                    Reaction.createElement('input', { type: 'text', autofocus: true }),
+                    Reaction.createElement('button', { type: 'button' }, '추가')),
+                  Reaction.createElement('ul', { class: 'todolist' },
+                    Reaction.createElement('li', { 'data-num': '1' },
+                      Reaction.createElement('span', null, '1'),
+                      Reaction.createElement('span', null, Reaction.createElement('s', null, '샘플1')),
+                      Reaction.createElement('button', { type: 'button' }, '삭제'))))))),
+          Reaction.createElement('footer', null,
+            Reaction.createElement('p', null, '멋쟁이 사자처럼 FrontEnd BootCamp'))
+        )
+      );
+    }
+
+    Reaction.createRoot(document.querySelector('#root')).render(App);
+  </script>
+</body>
+</html>

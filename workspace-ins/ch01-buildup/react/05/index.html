@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List App</title>
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+</head>
+<body>
+  
+  <div id="root"></div>
+
+  <script type="text/babel">
+    /*
+          ┌───────── App ──────────┐
+          │           │            │
+        Header       Todo        Footer
+                      │
+                  ┌───┴────┐
+            TodoInput   TodoList
+                           │
+                        TodoItem
+    */
+
+    function Header(){
+      return (
+        <header>
+          <h1>05 Todo List - React 기능 추가</h1>
+          <p>파일 경로: <span id="filepath">{ `ch${document.URL.split('/ch')[1]}index.html` }</span></p>
+        </header>
+      );
+    }
+
+    function Footer(){
+      return (
+        <footer>
+          <p>멋쟁이 사자처럼 FrontEnd BootCamp</p>
+        </footer>
+      );
+    }
+
+    function TodoInput({ addItem }){
+      // 리렌더링 되면 일반 input 요소의 값은 사라지므로 state로 관리
+      // 사용자 입력을 다루는 경우에는 대부분 state로 관리
+      const [title, setTitle] = React.useState('');
+      console.log(title);
+
+      const handleAdd = () => {
+        addItem(title);
+        setTitle('');
+      };
+
+      const handleKeydown = (e) => {
+        if (e.key === 'Enter') {
+          handleAdd();
+        }
+      };
+
+      return (
+        <div className="todoinput">
+          <input type="text" autoFocus value={ title } onKeyDown={ handleKeydown } onChange={ (e) => setTitle(e.target.value) } />
+          <button type="button" onClick={ handleAdd }>추가</button>
+        </div>
+      );
+    }
+
+    function TodoItem({ item, deleteItem, toggleDone }){
+      return (
+        <li>
+          <span>{ item.num }</span>
+          <span onClick={ () => toggleDone(item.num) }>{ item.done ? <s>{ item.title }</s> : item.title }</span>
+          <button type="button" onClick={ () => deleteItem(item.num) }>삭제</button>
+        </li>
+      );
+    }
+    
+    function TodoList({ itemList, deleteItem, toggleDone }){
+      const list = itemList.map(item => <TodoItem key={ item.num } item={ item } deleteItem={ deleteItem } toggleDone={ toggleDone } />);
+      return (
+        <ul className="todolist">
+          { list }
+        </ul>
+      );
+    }
+
+    function Todo(props){
+      return (
+        <div id="main">
+          <div id="container">
+            <ul>
+              <li>
+                <h2>쇼핑 목록</h2>
+                <TodoInput addItem={ props.addItem } />
+                <TodoList { ...props } />
+              </li>
+            </ul>
+          </div>
+        </div>
+      );
+    }
+
+    function App(){
+      // 샘플 목록
+      const initItemList = [
+        { num: 1, title: '자바스크립트 공부', done: true },
+        { num: 2, title: 'JS 프로젝트', done: true },
+        { num: 3, title: 'React 공부', done: false },
+      ];
+
+      const [itemList, setItemList] = React.useState(initItemList);
+      const [lastNum, setLastNum] = React.useState(itemList.length);
+
+      const addItem = (title) => {
+        const newItem = { num: lastNum+1, title, done: false };
+        setItemList([...itemList, newItem]);
+        setLastNum(lastNum+1);
+      };
+
+      const toggleDone = (num) => {
+        const newItemList = itemList.map(item => item.num === num ? { ...item, done: !item.done } : item);
+        setItemList(newItemList);
+      };
+      
+      const deleteItem = (num) => {
+        const newItemList = itemList.filter(item => item.num !== num);
+        setItemList(newItemList);
+      };
+
+      return (
+        <div id="todo">
+          <Header />
+          <Todo itemList={ itemList } addItem={ addItem } deleteItem={ deleteItem } toggleDone={ toggleDone } />
+          <Footer />
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+  </script>
+</body>
+</html>
