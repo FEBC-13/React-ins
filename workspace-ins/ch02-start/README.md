@@ -494,6 +494,7 @@ function TodoList({ list }){
 * 상태의 불변성을 구현할 경우 추후 성능 최적화를 위해 메모이제이션 작업을 수행할 때 Props의 변경 여부를 얕은 비교만으로 확인 할수 있어서 렌더링 최적화에 도움 
 * immer 라이브러리
   - 객체를 불변성으로 만들어주는 라이브러리
+  - https://immerjs.github.io/immer 참고
   - 설치
     ```sh
     npm i immer
