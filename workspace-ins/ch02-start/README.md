@@ -20,19 +20,6 @@
 * 가상 DOM을 사용해 성능 저하를 최소화함
 
 ## 1.2 주요 특징
-2) 가상 DOM (Virtual DOM)
-실제 DOM의 가벼운 복사본
-상태 변경 시 실제 DOM과 가상 DOM을 비교(Diffing)
-변경된 부분만 실제 DOM에 적용(Reconciliation)
-불필요한 DOM 조작을 최소화하여 성능 최적화
-3) 단방향 데이터 흐름
-
-4) JSX (JavaScript XML)
-JavaScript에 XML/HTML 문법을 추가한 문법
-선언적인 UI 작성 가능
-JavaScript 표현식 사용 가능
-컴파일 시 최적화되어 성능상 이점
-
 ### 1.2.1 컴포넌트 기반 개발
 * UI를 재사용 가능한 독립적인 컴포넌트로 분할
 * 각 컴포넌트는 자체 상태와 로직을 가질 수 있음
@@ -40,7 +27,7 @@ JavaScript 표현식 사용 가능
 * 컴포넌트는 자바스크립트로 개발되며 코드 재사용성과 유지보수성 향상
 
 ### 1.2.2 상태 관리와 단방향 데이터 바인딩
-* 각 컴포넌트는 내부에서 상태 관리 기능을 제공(setState())
+* 각 컴포넌트는 내부에서 상태 관리 기능을 제공(useState())
 * 전역 상태 관리를 위한 라이브러리(Context API, Redux, MobX, Recoil, Zustand 등)를 사용할 수 있음
 * 상태 변경 시 뷰(UI, HTML)가 자동으로 렌더링됨
 * 단방향 데이터 바인딩: State -> View, View -> Event Handler -> setState() -> State
@@ -80,7 +67,7 @@ JavaScript 표현식 사용 가능
 * 수정 전후의 가상 DOM을 비교하여(Diffing) 바뀐 부분만 실제 브라우저 DOM에 반영(Reconciliation)
 * 불필요한 DOM 조작을 최소화하여 성능 최적화
 
-##### DOM API를 이용한 화면 갱신
+#### DOM API를 이용한 화면 갱신
 * 수정된 부분만 찾아서 갱신
   - 장점: 화면 렌더링을 최소화하여 성능이 좋음
   - 단점: 기존 데이터와 새로운 데이터를 비교하여 달라진 부분을 확인하고 해당 요소를 DOM에서 찾아 갱신해야 하므로 코드가 복잡해짐
@@ -88,28 +75,32 @@ JavaScript 표현식 사용 가능
   - 장점: 기존 요소를 지우고 새로운 데이터로 전체를 교체하면 되므로, 기존 데이터와 비교하거나 수정된 부분을 찾아서 갱신할 필요가 없어 코드가 간결해짐
   - 단점: 필요한 부분만 수정할 수 있는데도 관련 영역 전체를 다시 렌더링하므로 성능 이슈가 발생할 수 있음
 
-##### 가상 DOM 이용
+#### 가상 DOM 이용
 * 새로운 데이터를 기반으로 생성된 가상 DOM과 기존 DOM을 비교하여 바뀐 부분만 찾아서 브라우저 DOM을 갱신하므로 성능에 유리함
 * 리렌더링 작업은 React가 담당하므로 코드가 간결해짐
 
 # 2. React 개발 환경 구축
-## 2.1 툴체인
-* React 앱 개발에 필요한 환경을 자동으로 구축해주는 도구
-  - 보일러플레이트 코드 제공
-  - 프로젝트 설정 파일 자동 구성
-  - 필요한 라이브러리 설치
+## 2.1 프론트엔드 빌드 도구
+* 프론트엔드 개발에 필요한 환경을 자동으로 구축해주는 도구
+  - 보일러플레이트(Boilerplate) 코드 제공
+    + 반복적으로 자주 사용되는 프로젝트의 기본 구조 제공
+    + 프로젝트 설정 파일 자동 구성
+    + 필요한 라이브러리 설치
   - HMR(Hot Module Replacement): 개발 중 소스 코드를 수정하면 컴포넌트가 자동으로 리로딩되어 브라우저를 새로고침하지 않고도 바로 화면에 적용됨
   - 프로덕션 배포를 위한 번들링 기능 제공
+    + 번들링: 여러 자바스크립트 파일을 하나 또는 몇개의 파일로 묶는 작업(Webpack, Rollup, Parcel, Esbuild 등)
 
 ### 2.1.1 Vite
 * 프랑스어로 "빠르다"는 뜻
-* Webpack을 번들러로 사용하는 CRA 대비 ESBuild와 Rollup을 번들러로 사용하면서 10~100배 빠른 속도로 개발 서버 구동
-* 반면 Vite는 Vanilla JS, React, Svelte, Solid 등의 다양한 SPA 개발 환경을 지원
+* Webpack을 번들러로 사용하는 CRA(create-react-app) 대비 ESBuild(개발용)와 Rollup(프로덕션 빌드)을 번들러로 사용하면서 10~100배 빠른 속도로 개발 서버 구동
+* Vanilla JS 뿐만 아니라 React, Svelte, Solid 등의 다양한 SPA 개발 환경을 지원
 * workspace/ch02-start 폴더로 이동 후 다음 명령 실행
   ```sh
   npm init vite@latest
+  # 또는
+  npm init vite@6
   ```
-  - 프로젝트 명: vite
+  - 프로젝트 명: todo
   - 개발환경 선택: React
   - 개발언어 선택: TypeScript
 
@@ -144,14 +135,13 @@ JavaScript 표현식 사용 가능
         { find: "@", replacement: "/src" },
         { find: "@components", replacement: "/src/components" },
         { find: "@pages", replacement: "/src/pages" },
-        { find: "@hooks", replacement: "/src/hooks" },
       ],
     },
   })
   ```
 
 #### VSCode에서 alias 인식
-* 프로젝트 루트에 jsconfig.json 파일 생성
+* 프로젝트 루트의 tsconfig.app.json 파일에 추가
   ```json
   {
     "compilerOptions": {
@@ -160,8 +150,7 @@ JavaScript 표현식 사용 가능
         "@/*": ["/*"],
         "@components/*": ["components/*"],
         "@pages/*": ["pages/*"],
-        "@hooks/*": ["hooks/*"],
-      }
+      },
     }
   }
   ```
@@ -177,7 +166,7 @@ JavaScript 표현식 사용 가능
   npm run build
   ```
 * 프로젝트 빌드
-  - build(CRA), dist(Vite) 폴더에 프로덕션 배포용 파일 생성
+  - dist 폴더에 프로덕션 배포용 파일 생성
   - JSX 문법을 Javascript 코드로 변환
   - 트랜스파일링: ES6+ 문법을 지원하지 않는 구 버전의 브라우저를 위해 ES5 수준의 코드로 변환
   - 압축: 주석 제거, 변수명 축약, 화이트 스페이스 제거
@@ -186,27 +175,22 @@ JavaScript 표현식 사용 가능
   - css 파일도 번들링, 압축됨
 
 ## 3.2 빌드된 파일로 서버 실행
-* CRA
-  ```sh
-  npx serve -s build
-  ```
 * Vite
   ```sh
   npm run preview
   ```
-* serve의 -s 옵션: React는 index.html 파일 하나에서 모든 페이지를 서비스하므로 클라이언트가 요청한 모든 URL에 대해서 index.html을 응답함
 
 # 4. JSX
 
 ## 4.1 JSX란?
 * JSX(JavaScript XML)는 자바스크립트 파일 내에 HTML과 유사한 마크업을 작성할 수 있게 해주는 자바스크립트 확장 구문
 * React에서 사용할 목적으로 개발되기는 했지만 JSX가 React에 포함된 기술은 아니기 때문에 React에서 JSX 사용이 필수는 아님
-  - React.createElement() 직접 사용
+  - `React.createElement()` 직접 사용
 
 ## 4.2 JSX 규칙
 1 단일 루트 요소를 반환해야 한다.
 * JSX는 자바스크립트 객체로 변환되는데 함수가 여러 객체를 반환 할 수 없으므로 단일 객체를 반환하도록 해야함
-* Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? 에러 발생
+* 만약 단일 요소를 반환하지 않을 경우 `Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>?` 에러 발생
   
   ```jsx
   return (
@@ -273,39 +257,43 @@ JavaScript 표현식 사용 가능
 
 3 요소의 속성명은 카멜 표기법(camel case)을 준수해야 한다.
 * 속성명은 HTML 표준 속성명이 아닌 DOM API 스펙에 기반을 둠
-  - stroke-width -> strokeWidth
-  - onclick -> onClick
-  - onkeyup -> onKeyUp
+  - `stroke-width` -> `strokeWidth`
+  - `onclick` -> `onClick`
+  - `onkeyup` -> `onKeyUp`
 
-* HTML에서 class 속성 추가
+* HTML에서 `class` 속성 추가
   ```html
   <div id="todolist" class="todo"></div>
   ```
 
-* 자바스크립트에서 class 속성 추가
+* 자바스크립트에서 `class` 속성 추가
   ```js
   document.querySelector('#todolist').className = 'todo';
   ```
 
-* JSX에서 class 속성 추가
+* JSX에서 `class` 속성 추가
   ```html
   <div id="todolist" className="todo"></div>
   ```
 
-* JSX에서 class 속성을 동적으로 추가
+* JSX에서 `class` 속성을 동적으로 추가
   ```jsx
   const todoClass = 'todo';
   <div id="todolist" className={ todoClass }></div>
   ```
 
+* 자바스크립트 예약어라 충돌을 피하기 위해 속성명 자체가 바뀐 경우
+  - `class` -> `className`
+  - `for` -> `htmlFor`
+
 4 보간법{ }을 사용할 때에는 표현식을 사용해야 함
 * { } 안에는 변수값, 메서드 리턴값 등 값만 사용 가능
-* if문, for 문 등은 사용할 수 없음
-  - if문 대신 삼항 연산자 사용
+* `if` 문, `for` 문 등은 사용할 수 없음
+  - `if` 문 대신 삼항 연산자 사용
     ```jsx
     { item.done ? <s>두부</s> : '두부' }
     ```
-  - for 문 대신 forEach(), map() 등 사용
+  - `for` 문 대신 `forEach()`, `map()` 등 사용
     ```jsx
     {
       for(let i=0; i<itemList.length; i++){
@@ -350,31 +338,30 @@ JavaScript 표현식 사용 가능
     ```
 
 # 5. 속성 (Props)
-* 상위 컴포넌트에서 하위 컴포넌트로 데이터를 전달할 때 사용
+* 부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달할 때 사용
   ```jsx
-  // ch02-start/todo/03.html
+  // ch02-start/todo/08.html
   function App(){
-    const title = 'React Props';
-    let list = [
-      { _id: 1, title: '리그오브 레전드', done: false},
-      { _id: 2, title: '영화 보기(집에서)', done: false},
-      { _id: 3, title: '던파', done: false},
+    const list = [
+      { _id: 1, title: 'React 공부', done: false},
+      { _id: 2, title: 'Javascript 프로젝트', done: true},
+      { _id: 3, title: 'Javascript 공부', done: true},
     ];
 
     return (
       <div id="app">
         <div>
-          <Title title={ title } />
+          <Title title="08 Simple Todo List - React Props" />
           <TodoList list={ list } />
         </div>
       </div>
     );
   }
-
-  function Title({ title='Default Title' }){
+  
+  function Title({ title = 'Todo List' }){
     return (
       <div>
-        <h1>Simple Todo List - { title } :()</h1>
+        <h1>{ title }</h1>
         <hr />
       </div>
     );
@@ -383,7 +370,7 @@ JavaScript 표현식 사용 가능
   function TodoList({ list }){
     const itemList = list.map(item => {
       return (
-        <li key={ item._id }>{ item.title }</li>
+        <li key={ item._id }>{ item.title } - { item.done ? '완료' : '진행중' }</li>
       );
     });
 
@@ -391,15 +378,23 @@ JavaScript 표현식 사용 가능
       <ul className="todolist">
         { itemList }
       </ul>
-    );
-  }    
+    )
+  }
   ```
 * 함수에 데이터를 전달할 때 인수를 사용하듯이 컴포넌트에 데이터를 전달할 때 Props를 사용
-  - JSX에서 하위 컴포넌트를 HTML 태그처럼 사용할 때 HTML 태그의 속성을 지정하는 것처럼 사용
-* 하위 컴포넌트에는 상위 컴포넌트가 전달한 여러 속성이 하나의 Props 객체로 전달되므로 주로 구조 분해 할당을 이용해서 필요한 속성을 바로 꺼내서 사용
+  - JSX에서 자식 컴포넌트를 HTML 태그처럼 사용할 때 HTML 태그의 속성을 지정하는 것처럼 사용
+  ```jsx
+  <TodoList list={ list } />
+  ```
+* 부모 컴포넌트가 전달한 여러 속성이 자식 컴포넌트에는 하나의 Props 객체로 전달되므로 주로 구조 분해 할당을 이용해서 필요한 속성을 바로 꺼내서 사용
+```jsx
+function TodoList({ list }){
+  ....
+}
+```
 * 기본값 매개변수를 사용하면 Props가 전달되지 않거나 undefined가 명시적으로 전달될 때 적용됨
   - null, 0 값은 기본값으로 대체되지 않음
-* 자신이 전달받은 Props 전체를 하위 컴포넌트에 전달하고 싶을때는 전개 연산자를 사용
+* 자신이 전달받은 Props 전체를 자식 컴포넌트에 전달하고 싶을 때는 전개 연산자를 사용
   ```jsx
   function Profile(props) {
     return (
@@ -410,11 +405,11 @@ JavaScript 표현식 사용 가능
   }
   ```
 * Props로 객체를 전달 받을 때 자식 컴포넌트가 그 값을 직접 변경하는 것은 권장하지 않음
-  - React의 데이터는 상위 컴포넌트에서 하위 컴포넌트로 전달되는데 하위 컴포넌트에서 상위 컴포넌트의 데이터를 직접 수정하면 데이터의 흐름을 예측하기 어려워서 디버깅하기 어려운 오류를 만들 수 있음
+  - React의 데이터는 부모 컴포넌트에서 자식 컴포넌트로 전달되는데 자식 컴포넌트에서 부모 컴포넌트의 데이터를 직접 수정하면 데이터의 흐름을 예측하기 어려워서 디버깅하기 어려운 오류를 만들 수 있음
 
 # 6. 상태 (State)
 * React에서는 시간이 지남에 따라 변하는 데이터를 상태라고 함
-* 상태가 변경되면 해당 컴포넌트와 하위 컴포넌트가 리렌더링 됨
+* 상태가 변경되면 해당 컴포넌트와 자식 컴포넌트가 리렌더링 됨
 
 ## 6.1 React.useState()
 * 상태값(컴포넌트에서 관리하는 데이터)을 추가하기 위한 훅(Hook)
@@ -425,7 +420,7 @@ JavaScript 표현식 사용 가능
   ```
 
 #### 매개변수
-* initialState: 상태값의 초기값(초기 렌더링 후 무시됨)
+* initialState: 상태값의 초기값(초기 렌더링에 사용되고 리렌더링때는 무시됨)
 
 #### 리턴값
 * state: 저장된 상태값
@@ -450,7 +445,12 @@ JavaScript 표현식 사용 가능
 * state가 변경되는 즉시 리렌더링이 되지 않고 이벤트 큐에 리렌더링 작업이 등록되므로 이벤트 핸들러의 모든 코드가 실행될 때까지 기다리게 됨
   - 이벤트 핸들러와 그 안의 코드가 완료될 때까지 UI가 업데이트되지 않는다는 의미
   - 이벤트 핸들러 내에서 상태값을 여러번 바꾼 후 읽어오면 바로 반영되지 않음
-* 상태를 객체나 배열로 지정한 경우 상태를 변경하기 위해서 객체나 배열의 내부 속성을 직접 변경해도 참조 주소는 바뀌지 않으므로 React가 상태의 변경을 인지하지 못함(얕은 비교). 대신 새로운 객체나 배열을 생성해서 교체해야 리렌더링이 발생
+* 상태를 객체나 배열로 지정한 경우 상태를 변경하기 위해서 객체나 배열의 내부 속성을 직접 변경해도 참조 주소는 바뀌지 않으므로 React가 상태의 변경을 인지하지 못함(Object.is()를 통한 얕은 비교). 대신 새로운 객체나 배열을 생성해서 교체해야 리렌더링이 발생
+  - 객체일때 같은 메모리 주소를 가지고 있으면 true
+  - 두 값이 모두 undefined 이거나 null 이면 true
+  - 두 값이 모두 true 이거나 false 이면 true
+  - String 이라면 두 값의 글자수, 순서, 모든 글자가 같으면 true
+  - Number 라면 같은 값을 가지고 있거나 둘다 NaN이면 true
 
 ## 6.3 상태의 불변성 (immutability)
 * 한번 정의한 상태는 그 값이 바뀌지 않도록 한다.
@@ -462,15 +462,14 @@ JavaScript 표현식 사용 가능
   {
     "_id": 4,
     "email": "u1@market.com",
-    "name": "데이지",
+    "name": "불변핑",
     "phone": "01044445555",
     "address": "서울시 강남구 논현동 222",
     "type": "user",
-    "createdAt": "2024.01.25 21:08:14",
-    "updatedAt": "2024.02.04 09:38:14",
+    "createdAt": "2025.05.25 21:08:14",
+    "updatedAt": "2025.06.04 09:38:14",
     "extra": {
       "birthday": "11-30",
-      "membershipClass": "MC02",
       "addressBook": [
         {
           "id": 1,
@@ -486,7 +485,7 @@ JavaScript 표현식 사용 가능
     }
   }
   ```
-* 배열의 불변성을 위해 피해야 할 메서드와 추천하는 메서드
+* 배열의 불변성을 위해 피해야 할 메서드(기존 배열을 수정하는 메서드)와 추천하는 메서드(새로운 배열을 반환하는 메서드)
   - 추가: push(), unshift() 대신 concat(), [ ...arr ]
   - 삭제: pop(), shift() 대신 filter(), slice()
   - 수정: splice(), arr[i] 대신 map()
@@ -536,6 +535,7 @@ JavaScript 표현식 사용 가능
 # 7. 유효성 검증
 ## 7.1 prop-types
 * 컴포넌트에 전달된 Props의 유효성을 검증하는 기능
+* 바닐라 자바스크립트 환경에서 필요하며 타입스크립트에서는 인터페이스나 타입 별칭을 사용하므로 필요 없음
 * 설치
   ```sh
   npm i prop-types
@@ -682,6 +682,7 @@ JavaScript 표현식 사용 가능
 
 ## 7.2 Form의 유효성 검증
 * Form 태그의 사용자의 입력 데이터를 검증
+* https://www.react-hook-form.com 참고
 * react-hook-form 설치
   ```sh
   npm i react-hook-form
@@ -690,8 +691,6 @@ JavaScript 표현식 사용 가능
 # 8. 컴포넌트 구분
 
 ## 8.1 컨테이너 컴포넌트와 표현 컴포넌트
-
-
 * 상태와 비즈니스 로직을 처리하는 컨테이너와 UI를 담당하는 컨테이너를 분리해서 설계
 * 각 컴포넌트의 역할이 명확해지고 코드의 유지보수성이 향상
 * 표현 컴포넌트에서는 상태 관련 로직이 제거되므로 상태 관리와 UI 로직을 분리할 수 있으며, 결과적으로 상태 추적과 디버깅이 쉬워짐
@@ -705,7 +704,7 @@ JavaScript 표현식 사용 가능
 * API 호출
 * 데이터 가공
 * 이벤트 핸들러 정의
-* 하위 컴포넌트로의 데이터 및 콜백 함수 전달
+* 자식 컴포넌트로의 데이터 및 콜백 함수 전달
 * 하위에 표현 컴포넌트를 포함하여, 이 컴포넌트들이 UI를 렌더링할 때 필요한 데이터와 동작을 제공
 
 ```jsx

@@ -1,0 +1,17 @@
+interface TitleProps {
+  title: string;
+}
+
+// 컴포넌트 만들어서 재사용을 하려면???
+// 1. 독립된 파일로 작성(모듈)
+// 2. 범용성(타이틀 값을 각 페이지 별로 다르게 전달 받아서 출력해야 함)
+function Title(props: TitleProps){
+  return (
+    <div>
+      <h1>{ props.title }</h1>
+      <hr />
+    </div>
+  );
+}
+
+export default Title;
