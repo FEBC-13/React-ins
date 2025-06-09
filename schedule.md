@@ -66,7 +66,7 @@
     - 🧑‍💻 [01 목록 조회](./workspace-ins/ch01-buildup/todolist/01/index.html)
       + workspace/ch01-buildup/todolist/sample 폴더 복사해서 01 폴더 생성
     - 🧑‍💻 [02 등록](./workspace-ins/ch01-buildup/todolist/02/index.html)
-      + workspace/ch01-buildup/todolist/01 폴더 todolist/복사해서 02 폴더 생성
+      + workspace/ch01-buildup/todolist/01 폴더 복사해서 02 폴더 생성
     - 🧑‍💻 [03 수정](./workspace-ins/ch01-buildup/todolist/03/index.html)
       + workspace/ch01-buildup/todolist/02 폴더 복사해서 03 폴더 생성
 
@@ -165,12 +165,11 @@
 * 김현지
   - 튀는 이력서와 면접에서 어떻게 해야 하나?
   
-
 #### 병아리반(1시간)
 * day05
   - 04.js
   - 05.js
-* day05
+* day06
   - 01.js
   - 02.js
 
@@ -180,57 +179,9 @@
 * JSX, 가상 DOM, 리액트 렌더링
 * 리액트의 핵심 Props, State
 
-* [2장 React 시작하기](./workspace-ins/ch02-start)
-* 🔊 [1. React란?](./workspace-ins/ch02-start#1-react란)
-
-* 2-1 리액트란?
-  - 🧑‍💻 [01 Hello HTML](./workspace-ins/ch02-start/hello/01.html)
-  - 🧑‍💻 [02 Hello DOM](./workspace-ins/ch02-start/hello/02.html)
-  - 🧑‍💻 [03 Hello React](./workspace-ins/ch02-start/hello/03.html)
-    + workspace/ch02-start/hello/02.html 복사해서 03.html 생성
-  - 🧑‍💻 [04 Hello JSX with babel](./workspace-ins/ch02-start/hello/04.html)
-    + workspace/ch02-start/hello/03.html 복사해서 04.html 생성
-  - 🧑‍💻 [05 Simple Todo List - HTML](./workspace-ins/ch02-start/todo/05.html)
-  - 🧑‍💻 [06 Simple Todo List - React](./workspace-ins/ch02-start/todo/06.html)
-  - 🧑‍💻 [07 Simple Todo List - React Component](./workspace-ins/ch02-start/todo/07.html)
-    + workspace/ch02-start/todo/06.html 복사해서 07.html 생성
-  - 🧑‍💻 [08 Simple Todo List - React Props](./workspace-ins/ch02-start/todo/08.html)
-    + workspace/ch02-start/todo/07.html 복사해서 08.html 생성
-
-* 🔊 [2. React 개발 환경 구축](./workspace-ins/ch02-start#2-react-개발-환경-구축)
-* 🔊 [3. React 애플리케이션 배포](./workspace-ins/ch02-start#3-react-애플리케이션-배포)
-
-* 2-2 리액트 개발 환경 구축
-  - 🧑‍💻 [09 Vite로 개발 환경 구축 및 빌드, 배포](./workspace-ins/ch02-start/vite/09)
-    + workspace/ch02-start/vite 폴더에서 다음 명령 실행
-    ```sh
-    npm init vite@latest
-      Project name: 09
-      Select a fremerork: React
-      Select a variant: TypeScript
-    cd 09
-    npm i
-    npm run dev
-    ```
-
-* 🔊 [4. JSX](./workspace-ins/ch02-start#4-jsx)
-* 🔊 [5. 속성 (Props)](./workspace-ins/ch02-start#5-속성-props)
-* 🔊 [6. 상태 (State)](./workspace-ins/ch02-start#6-상태-state)
-
-* 2-3 Props
-  - 🧑‍💻 [10 Button 컴포넌트에 Props 전달](./workspace-ins/ch02-start/props/10)
-
-* 2-4 State
-  - 🧑‍💻 [11 state 대신 컴포넌트 외부의 변수 사용시 문제점](./workspace-ins/ch02-start/state/11)
-  - 🧑‍💻 [12 이벤트 핸들러에서 state 값을 여러번 변경했을 때 문제점](./workspace-ins/ch02-start/state/12)
-  - 🧑‍💻 [13 상태관리 대상이 객체일 경우 주의 사항](./workspace-ins/ch02-start/state/13)
-  - 🧑‍💻 [14 상태관리 대상이 복합 객체일 경우 불변성 (feat. immer)](./workspace-ins/ch02-start/state/14)
-  - 🧑‍💻 [15 회원가입 입력값 상태 관리](./workspace-ins/ch02-start/state/15)
-  - 🧑‍💻 [16 회원가입 입력값 검증 (feat. react-hook-form)](./workspace-ins/ch02-start/state/16)
 
 
-
-### 5일차(2025.06.02 화)
+### 5일차(2025.06.02 월)
 #### 오전(3시간)
 * 03 React
   - 🧑‍💻 [04 Todo List - React 컴포넌트 분리](./workspace-ins/ch01-buildup/react/04/index.html)
@@ -246,39 +197,110 @@
   * Todo List 작성(vanillaJS + Lib)
     - 🧑‍💻 [09 컴포넌트를 모듈로 분리](./workspace-ins/ch01-buildup/todolist/09/index.html)
       - workspace/ch01-buildup/todolist/08 폴더 복사해서 09 폴더 생성
-    - 🧑‍💻 [06 Todo List - React 컴포넌트를 모듈로 분리](./workspace-ins/ch01-buildup/react/06)
-      - `npm init vite@latest` 명령어로 프로젝트 생성
-      - ins
-        ```sh
-        cd: workspace-ins/ch01-buildup/react
-        npm init vite@latest
-        ```
-        - Project name: 06
-        - 개발환경 선택: React
-        - 개발언어 선택: TypeScript
 
-#### 병아리반(1시간)
+#### 회고(1시간)
 * 
+
+#### 병아리반(30분)
+* day06
+  - 03.js
+  - 04.js
+  - 05.js
 
 ### 6일차(2025.06.04 수)
 #### 오전(3시간)
-* 
+* 03 React
+  - 🧑‍💻 [06 Todo List - React 컴포넌트를 모듈로 분리](./workspace-ins/ch01-buildup/react/06)
+    + workspace/ch01-buildup/react 폴더에서 다음 명령 실행
+    ```sh
+    npm init vite@latest
+      Project name: 06
+      Select a fremerork: React
+      Select a variant: TypeScript
+    cd 06
+    npm i
+    npm run dev
+    ```
 
 #### 오후(3시간)
-* 
+* 🔊 [2장 React 시작하기](./workspace-ins/ch02-start)
+  - 🔊 [1. React란?](./workspace-ins/ch02-start#1-react란)
+
+* 2-1 리액트란?
+  * Hello React
+    - 🧑‍💻 [01 Hello HTML](./workspace-ins/ch02-start/hello/01.html)
+    - 🧑‍💻 [02 Hello DOM](./workspace-ins/ch02-start/hello/02.html)
+    - 🧑‍💻 [03 Hello React](./workspace-ins/ch02-start/hello/03.html)
+      + workspace/ch02-start/hello/02.html 복사해서 03.html 생성
+    - 🧑‍💻 [04 Hello JSX with babel](./workspace-ins/ch02-start/hello/04.html)
+      + workspace/ch02-start/hello/03.html 복사해서 04.html 생성
+  * Simple Todo List
+    - 🧑‍💻 [05 Simple Todo List - HTML](./workspace-ins/ch02-start/todo/05.html)
+    - 🧑‍💻 [06 Simple Todo List - React](./workspace-ins/ch02-start/todo/06.html)
+    - 🧑‍💻 [07 Simple Todo List - React Component](./workspace-ins/ch02-start/todo/07.html)
+      + workspace/ch02-start/todo/06.html 복사해서 07.html 생성
+    - 🧑‍💻 [08 Simple Todo List - React Props](./workspace-ins/ch02-start/todo/08.html)
+      + workspace/ch02-start/todo/07.html 복사해서 08.html 생성
+
+* 🔊 [2. React 개발 환경 구축](./workspace-ins/ch02-start#2-react-개발-환경-구축)
+* 🔊 [3. React 애플리케이션 배포](./workspace-ins/ch02-start#3-react-애플리케이션-배포)
+
+#### 회고(1시간)
+* 이호정
+  - 왜 어떤 예제는 vite로 실행해야 하는가?
+  - ch02-start/vite/09에서 Title 컴포넌트의 title Props는 없애고 하드코딩 하는것과 뭐가 다른가?
 
 #### 병아리반(1시간)
-* 
+* day06
+  - 05.js
+* day07
+  - 01.js
+  - 02.js
 
 ### 7일차(2025.06.05 목)
 #### 오전(3시간)
-* 
+* 2-2 리액트 개발 환경 구축
+  - 🧑‍💻 [09 Vite로 개발 환경 구축 및 빌드, 배포](./workspace-ins/ch02-start/vite/09)
+    + workspace/ch02-start/vite 폴더에서 다음 명령 실행
+    ```sh
+    npm init vite@latest
+      Project name: 09
+      Select a fremerork: React
+      Select a variant: TypeScript
+    cd 09
+    npm i
+    npm run dev
+    ```
 
 #### 오후(3시간)
-* 
+* 🔊 [4. JSX](./workspace-ins/ch02-start#4-jsx)
+* 🔊 [5. 속성 (Props)](./workspace-ins/ch02-start#5-속성-props)
+
+* 2-3 Props
+  - 🧑‍💻 [10 Button 컴포넌트에 Props 전달](./workspace-ins/ch02-start/props/10)
+    + workspace/ch02-start/props 폴더에서 다음 명령 실행
+    ```sh
+    npm init vite@latest
+      Project name: 10
+      Select a fremerork: React
+      Select a variant: TypeScript
+    cd 10
+    npm i # workspace/package.json에서 npm i 한 상태라면 생략
+    npm run dev
+    ```
+    + workspace/ch01-buildup/react/02/index.html에서 컴포넌트 복사
+
+* 🔊 [6. 상태 (State)](./workspace-ins/ch02-start#6-상태-state)
+  - 🔊 [6.1 React.useState()](./workspace-ins/ch02-start#61-reactusestate)
+
+#### 회고(1시간)
+* 리액트 질의 응답
 
 #### 병아리반(1시간)
-* 
+* day07
+  - 03.js
+  - 04.js
+  - 05.js
 
 ## 3주차 (2025.06.09 월 ~ 2025.06.13 금, 5일)
 ### 공식 시간표
@@ -288,15 +310,54 @@
 * 리액트 훅 - useRef, useReducer
 * 리액트 훅 - useMemo, useCallback
 
+
+
+
+* 🔊 [7. 유효성 검증](./workspace-ins/ch02-start#7-유효성-검증)
+  - 🧑‍💻 [15 회원가입 입력값 상태 관리](./workspace-ins/ch02-start/state/15)
+    + workspace/vite-template 폴더 복사해서 15 폴더 생성
+    + workspace/ch02-start/state/sample/15.html 참고해서 컴포넌트 생성
+  - 🧑‍💻 [16 회원가입 입력값 검증 (feat. react-hook-form)](./workspace-ins/ch02-start/state/16)
+    + workspace/ch02-start/state/15 폴더 복사해서 16 폴더 생성
+    + workspace 폴더에서 react-hook-form 라이브러리 설치
+      - `npm i react-hook-form`
+
+* 12장 앱 개발
+  * 12-1 Todo List
+    - 🧑‍💻 [01 기본 Todo List](./workspace-ins/ch12-app/todolist/01-basic)
+      + sample/03 복사
+    - 🧑‍💻 [02 컨테이너 컴포넌트 추가](./workspace-ins/ch12-app/todolist/02-container)
+
 ### 8일차(2025.06.09 월)
 #### 오전(3시간)
-* 
+* 2-4 State
+  - 🧑‍💻 [11 state 대신 컴포넌트 외부의 변수 사용시 문제점](./workspace-ins/ch02-start/state/11)
+    + workspace/ch02-start/state 폴더에서 vite 프로젝트 생성(11)
+    + workspace/ch02-start/state/sample/11.html 참고해서 컴포넌트 생성
+* 🔊 [6.2 상태 사용시 유의사항](./workspace-ins/ch02-start#62-상태-사용시-유의사항)
+  - 🧑‍💻 [12 이벤트 핸들러에서 state 값을 여러번 변경했을 때 문제점](./workspace-ins/ch02-start/state/12)
+    + workspace/ch02-start/state 폴더에서 vite 프로젝트 생성(12)
+    + workspace/ch02-start/state/sample/12.html 참고해서 컴포넌트 생성
+  - 🧑‍💻 [13 상태관리 대상이 객체일 경우 주의 사항](./workspace-ins/ch02-start/state/13)
+    + workspace/ch02-start/state 폴더에서 vite 프로젝트 생성(13)
+    + workspace/ch02-start/state/sample/13.html 참고해서 컴포넌트 생성
 
 #### 오후(3시간)
-* 
+* 🧑‍💻 workspace/vite-template 프로젝트 생성
+  - `npm init vite@latest vite-template`
+  - [vite.config.js 파일 수정](./workspace-ins/ch02-start#viteconfigjs)
+  - 불필요한 파일 삭제
+* 🔊 [6.3 상태의 불변성 (immutability)](./workspace-ins/ch02-start#63-상태의-불변성-immutability)
+  - 🧑‍💻 [14 상태관리 대상이 복합 객체일 경우 불변성 (feat. immer)](./workspace-ins/ch02-start/state/14)
+    + workspace/vite-template 폴더 복사해서 14 폴더 생성
+    + workspace/ch02-start/state/sample/14.html 참고해서 컴포넌트 생성
+    + workspace 폴더에서 immer 라이브러리 설치
+      - `npm i immer`
 
-#### 병아리반(1시간)
-* 
+#### 회고(1시간)
+* 오서현
+  - ch02/14 예제 설명
+  
 
 ### 9일차(2025.06.10 화)
 #### 오전(3시간)
