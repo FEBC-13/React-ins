@@ -311,22 +311,28 @@
 * 리액트 훅 - useMemo, useCallback
 
 
+* 🔊 [4장 리액트 훅](./workspace-ins/ch04-hooks#4장-리액트-훅)
+  - 🔊 [useMemo](./workspace-ins/ch04-hooks#usememo)
+    + 🧑‍💻 [05 useMemo - 함수의 반환값을 memoize](./workspace-ins/ch04-hooks/05-useMemo)
+  - 🔊 [useCallback](./workspace-ins/ch04-hooks#usecallback)
+    + 🧑‍💻 [06 useCallback(함수 자체를 memoize), React.memo(컴포넌트를 memoize)](./workspace-ins/ch04-hooks/06-useCallback)
 
 
-* 🔊 [7. 유효성 검증](./workspace-ins/ch02-start#7-유효성-검증)
-  - 🧑‍💻 [15 회원가입 입력값 상태 관리](./workspace-ins/ch02-start/state/15)
-    + workspace/vite-template 폴더 복사해서 15 폴더 생성
-    + workspace/ch02-start/state/sample/15.html 참고해서 컴포넌트 생성
-  - 🧑‍💻 [16 회원가입 입력값 검증 (feat. react-hook-form)](./workspace-ins/ch02-start/state/16)
-    + workspace/ch02-start/state/15 폴더 복사해서 16 폴더 생성
-    + workspace 폴더에서 react-hook-form 라이브러리 설치
-      - `npm i react-hook-form`
 
 * 12장 앱 개발
   * 12-1 Todo List
-    - 🧑‍💻 [01 기본 Todo List](./workspace-ins/ch12-app/todolist/01-basic)
-      + sample/03 복사
-    - 🧑‍💻 [02 컨테이너 컴포넌트 추가](./workspace-ins/ch12-app/todolist/02-container)
+    - 🧑‍💻 [03 useRef, useReducer로 상태 관리](./workspace-ins/ch12-app/todolist/03-hooks)
+      + workspace/ch12-app/02-container 폴더 복사해서 03-hooks 폴더 생성
+    - 🧑‍💻 [04 React.memo, useCallback으로 메모이제이션](./workspace-ins/ch12-app/todolist/04-memo)
+      + workspace/ch12-app/03-hooks 폴더 복사해서 04-memo 폴더 생성
+    - 🧑‍💻 [05 리액트 라우터 적용](./workspace-ins/ch12-app/todolist/05-router)
+      + workspace/ch12-app/04-memo 폴더 복사해서 05-router 폴더 생성
+    - 🧑‍💻 [06 API 서버 연동](./workspace-ins/ch12-app/todolist/06-api)
+      + workspace/ch12-app/05-router 폴더 복사해서 06-api 폴더 생성
+    - 🧑‍💻 [07 전역 상태 관리](./workspace-ins/ch12-app/todolist/07-global-state)
+      + workspace/ch12-app/06-api 폴더 복사해서 07-global-state 폴더 생성
+    - 🧑‍💻 [08 TanStack Query 사용](./workspace-ins/ch12-app/todolist/08-tanstack-query)
+      + workspace/ch12-app/07-global-state 폴더 복사해서 08-tanstack-query 폴더 생성
 
 ### 8일차(2025.06.09 월)
 #### 오전(3시간)
@@ -357,47 +363,97 @@
 #### 회고(1시간)
 * 오서현
   - ch02/14 예제 설명
-  
+
 
 ### 9일차(2025.06.10 화)
 #### 오전(3시간)
-* 
+* 🔊 [7. 유효성 검증](./workspace-ins/ch02-start#7-유효성-검증)
+  - 🧑‍💻 [15 회원가입 입력값 상태 관리](./workspace-ins/ch02-start/state/15)
+    + workspace/vite-template 폴더 복사해서 15 폴더 생성
+    + workspace/ch02-start/state/sample/15.html 참고해서 컴포넌트 생성
 
 #### 오후(3시간)
-* 
+  - 🧑‍💻 [16 회원가입 입력값 검증 (feat. react-hook-form)](./workspace-ins/ch02-start/state/16)
+    + workspace/ch02-start/state/15 폴더 복사해서 16 폴더 생성
+    + workspace 폴더에서 react-hook-form 라이브러리 설치
+      - `npm i react-hook-form`
+* 🔊 [3장 클래스 컴포넌트와 컴포넌트의 라이프 사이클](./workspace-ins/ch03-class)
+  - 🧑‍💻 [01 클래스 컴포넌트](./workspace-ins/ch03-class/01-classbase)
+
+#### 회고(1시간)
+* 김지연: ch04-class 폴더에서 오류
+  - vscode reload
 
 #### 병아리반(1시간)
-* 
+* day08
+  - 01.js
+  - 02.js
 
 ### 10일차(2025.06.11 수)
 #### 오전(3시간)
-* 
+* 🔊 [3장 클래스 컴포넌트와 컴포넌트의 라이프 사이클](./workspace-ins/ch03-class#3장-클래스-컴포넌트와-컴포넌트의-라이프-사이클)
+  - 🧑‍💻 [02 클래스 컴포넌트 - 함수형 컴포넌트와 같이 사용](./workspace-ins/ch03-class/02-functionbase)
+  - 🧑‍💻 [03 클래스 컴포넌트 - 컴포넌트의 라이프 사이클](./workspace-ins/ch03-class/03-lifecycle)
 
 #### 오후(3시간)
-* 
+* 🔊 [4장 리액트 훅](./workspace-ins/ch04-hooks#4장-리액트-훅)
+  - 🔊 [useState](./workspace-ins/ch04-hooks#usestate)
+    + 🧑‍💻 [01 useState - 상태 관리](./workspace-ins/ch04-hooks/01-useState)
+  - 🔊 [useEffect](./workspace-ins/ch04-hooks#useeffect)
+    + 🧑‍💻 [02 useEffect - side effect 관리](./workspace-ins/ch04-hooks/02-useEffect)
+
+#### 회고(1시간)
+* 임현욱: 순수함수를 위해서 데이터 페칭을 할때 useEffect를 쓰는데 SSR을 쓰면 매번 달라지는 데이터를 받아올 수 있는데 순수성이 없는건가?
+  - SSR의 영역은 리액트가 아니고 서버이므로 수순함과 상관이 없음
+* 황수곤: 수업 내용의 포인트를 놓치는 경우가 많은데 수업 듣는 태도가 문제가 있는건가?
+  - 필기에 집중해서 놓치는 경향이 있음(노션에 따로 필기하고 있음)
+    + 필기를 안하는건 어떤가?
+  - 그러면 걱정되는 부분은 수업이 끝난 후에 정리를 못하겠음
+  - 이해 못한 내용이 있으면 자꾸 머릿속에 맴돌아서 다음 수업을 놓침
+    + 필기 하지 말고 모르는 부분만 메모해 두고 잊어버리라
+    + 수업 끝나면 회고에서 질문하거나 개인적으로 질문하거나 찾아보기
 
 #### 병아리반(1시간)
 * 
 
 ### 11일차(2025.06.12 목)
 #### 오전(3시간)
-* 
+- 🔊 [useReducer](./workspace-ins/ch04-hooks#usereducer)
+  + 🧑‍💻 [03 useReducer - 상태 관리 로직을 한곳에](./workspace-ins/ch04-hooks/03-useReducer)
 
 #### 오후(3시간)
-* 
+- 🔊 [useRef](./workspace-ins/ch04-hooks#useref)
+  + 🧑‍💻 [04 useRef - 값이 유지되는 데이터 관리, DOM 엘리먼트 참조](./workspace-ins/ch04-hooks/04-useRef)
+
+#### 회고(1시간)
+* 황유빈: 자바스크립트 객체중에 1급 객체가 아닌게 있나?
+  - 자바스크립트의 객체를 일급 객체라고 하고 자바 같은 다른 언어는 일급 객체가 아님
+  - 함수도 일급 객체임
 
 #### 병아리반(1시간)
 * 
 
 ### 12일차(2025.06.13 금)
 #### 오전(3시간)
-* 
+- 🔊 [useMemo](./workspace-ins/ch04-hooks#usememo)
+  + 🧑‍💻 [05 useMemo - 함수의 반환값을 memoize](./workspace-ins/ch04-hooks/05-useMemo)
+- 🔊 [useCallback](./workspace-ins/ch04-hooks#usecallback)
+  + 🧑‍💻 [06 useCallback(함수 자체를 memoize), React.memo(컴포넌트를 memoize)](./workspace-ins/ch04-hooks/06-useCallback)
 
-#### 오후(3시간)
-* 
+#### 오후(3시간 반)
+- 🔊 [리액트 컴파일러](./workspace-ins/ch04-hooks#리액트-컴파일러)
+  + 🧑‍💻 [07 React Compiler를 사용한 메모이제이션](./workspace-ins/ch04-hooks/07-useCallback-RC)
+* 12장 앱 개발
+  * 12-1 Todo List
+    - 🧑‍💻 [01 기본 Todo List](./workspace-ins/ch12-app/todolist/01-basic)
+    - 🧑‍💻 [02 컨테이너 컴포넌트 추가](./workspace-ins/ch12-app/todolist/02-container)
 
-#### 병아리반(1시간)
-* 
+#### 회고(1시간 반)
+* 오서현: useEffect의 의존성 배열 모르겠음
+  - ch04/02-useEffect 예제 보고 설명
+* 이호정: useMemo에서 리액트 컴파일러 모르겠음, 메모이제이션이 자동으로 되었는데 프로파일에는 왜 회색으로 안보이나?
+  - Product가 자동 메모이제이션 된거는 Product가 사용하는 함수나 자식 컴포넌트에 대해서 메모이제이션을 했다는 의미
+  - App이 "use no memo" 지시어로 메모이제이션이 안되었기 때문에 Product가 다시 렌더링 된 것
 
 
 ## 4주차 (2025.06.16 월 ~ 2025.06.19 목, 4일)
@@ -409,43 +465,152 @@
 
 ### 13일차(2025.06.16 월)
 #### 오전(3시간)
-* 
+* 과제 풀이
+  - 🧑‍💻 [03 useRef, useReducer로 상태 관리](./workspace-ins/ch12-app/todolist/03-hooks)
+  - 🧑‍💻 [04 React.memo, useCallback으로 메모이제이션](./workspace-ins/ch12-app/todolist/04-memo)
+
+* 커스텀 훅 설명
+  - 🧑‍💻 [08 customHook - useCounter 커스텀 훅 사용](./workspace-ins/ch12-app/todolist/08-customCounter)
 
 #### 오후(3시간)
-* 
+  - 🧑‍💻 [09 customHook - 커스텀 훅 없이 fetch API 사용](./workspace-ins/ch12-app/todolist/09-fetch)
+  - 🧑‍💻 [10 customHook - useFatch, useAxios 커스텀 훅 사용](./workspace-ins/ch12-app/todolist/10-customFetch)
+
+
+#### 회고(1시간)
+* 오서현
+  - 주말에 공부하다가 console.time() 사용법
+    + time(), timeEnd() 사이의 시간 구하기(문자열이 같아야 함)
+* 박선영
+  - useAxios() 만드는 실습 뭐해야 하는지 모르겠음
+  - js 수업때 ex05-14 번 예제 참고
 
 #### 병아리반(1시간)
-* 
+* 김지연, 김혜민, 남상호, 배동초, 이호정, 장아영, 정유진, 차형주, 홍예린, 황수곤
+* day10
+  - 01.js
+  - 02.js
+  - 03.js
+  - 04.js
+  - 05.js
+
+### 13일차(2025.06.16 월)
+#### 오전(3시간)
+* 12장 앱 개발
+  * 12-1 Todo List
+    - 🧑‍💻 [03 useRef, useReducer로 상태 관리](./workspace-ins/ch12-app/todolist/03-hooks)
+    - 🧑‍💻 [04 React.memo, useCallback으로 메모이제이션](./workspace-ins/ch12-app/todolist/04-memo)
+* 4장 리액트 훅
+  * 🔊 [Custom Hook](./workspace-ins/ch04-hooks#custom-hook)
+    - 🧑‍💻 [08 customHook - useCounter 커스텀 훅 사용](./workspace-ins/ch12-app/todolist/08-customCounter)
+
+#### 오후(3시간)
+* 4장 리액트 훅
+  * Custom Hook
+    - 🧑‍💻 [09 customHook - 커스텀 훅 없이 fetch API 사용](./workspace-ins/ch12-app/todolist/09-fetch)
+    - 🧑‍💻 [10 customHook - useFatch, useAxios 커스텀 훅 사용](./workspace-ins/ch12-app/todolist/10-customFetch)
 
 ### 14일차(2025.06.17 화)
 #### 오전(3시간)
-* 
+* 4장 리액트 훅
+  * Custom Hook
+    - 🧑‍💻 [10 customHook - useFatch, useAxios 커스텀 훅 사용](./workspace-ins/ch12-app/todolist/10-customFetch)
 
 #### 오후(3시간)
-* 
+* 🔊 [5장 리액트 라우터](./workspace-ins/ch05-router#5장-리액트-라우터)
+  * 🔊 [1. 클라이언트 측 라우팅이란?](./workspace-ins/ch05-router#1-클라이언트-측-라우팅이란)
+    - 🧑‍💻 [01 클라이언트 라우팅 직접 구현](./workspace-ins/ch05-router/01-my-router)
+  * 🔊 [2. 리액트 라우터란?](./workspace-ins/ch05-router#2-리액트-라우터란)
+  * 🔊 [3. 리액트 라우터가 제공하는 라우터](./workspace-ins/ch05-router#3-리액트-라우터가-제공하는-라우터)
+  * 🔊 [4. 리액트 라우터가 제공하는 컴포넌트](./workspace-ins/ch05-router#4-리액트-라우터가-제공하는-컴포넌트)
+    - 🧑‍💻 [02 리액트 라우터 사용](./workspace-ins/ch05-router/02-react-router)
+
+
+
+
+
+  * 🔊 [7. 레이지 로딩 (lazy loading)](./workspace-ins/ch05-router#7-레이지-로딩-lazy-loading)
+  * 🔊 [8. React.Suspense 컴포넌트](./workspace-ins/ch05-router#8-reactsuspense-컴포넌트)
+  * 🔊 [9. 라우터가 적용된 프로젝트 구조](./workspace-ins/ch05-router#9-라우터가-적용된-프로젝트-구조)
+
+
+
+#### 회고(1시간)
+* 배동초
+  - react-router 인식 못함
+  - js 프로젝트에 설치함
+* 유진혁
+  - 설문내용중 회고조로 파이널 하고 싶은데 어떻게 생각하나?
+  - 회고조는 실력으로 편성한게 아니라서 팀별로 차이가 많이 날듯
+  - 빌런 황수곤 이외에도 빌런제조기 역할
+  - 오서현은 실력이 어떤지
+    + 이해도가 낮다
+* 오서현
+  - ch12-app/todolist/05-router 내용이 비어있음
 
 #### 병아리반(1시간)
-* 
+* 김지연, 김혜민, 남상호, 이호정, 장아영, 정유진, 차형주, 홍예린
+  - 1번 지금처럼: 장아영, 김혜민, 김지연
+  - 2번 리액트: 이호정, 장아영, 남상호, 김지연, 정유진, 홍예린
+* 리액트 수업 진행 방향
+  - 했던 실습 위주로 중요한 개념에 대해서 학습하고 이론 같이 설명
 
 ### 15일차(2025.06.18 수)
 #### 오전(3시간)
-* 
+* 12장 앱 개발
+  * 12-1 Todo List
+    - 🧑‍💻 [05 리액트 라우터 적용](./workspace-ins/ch12-app/todolist/05-router)
 
 #### 오후(3시간)
-* 
+* 5장 리액트 라우터
+  * 🔊 [5. 리액트 라우터가 제공하는 기능](./workspace-ins/ch05-router#5-리액트-라우터가-제공하는-기능)
+  * 🔊 [6. 리액트 라우터가 제공하는 Hook](./workspace-ins/ch05-router#6-리액트-라우터가-제공하는-hook)
+* 12장 앱 개발
+  * 12-1 Todo List
+    - 🧑‍💻 [05 리액트 라우터 적용](./workspace-ins/ch12-app/todolist/05-router)
+
+#### 회고(1시간)
+* 황수곤
+  - 리액트 책을 샀는데 TS가 아니라 JS임
+  - 따로 설치해서 실습하고 싶은데 환경은 우리의 실습 환경으로 해도 되나?
+    + 따로 JS 환경으로 구성
+* 황우빈: 두 코드의 차이점
+  - const { item } = useOutletContext<OutletProps>();
+  - const { item }: OutletProps = useOutletContext();
+  - 기능상 차이는 없는것 같지만 generic이 지원되면 사용하면 좋을듯
 
 #### 병아리반(1시간)
-* 
+* todolist 1일차
+  - 기본 버전 처음부터 다시 설명
+  - html -> JSX 변환
+  - Header, Footer, Todo 컴포넌트 분리
 
 ### 16일차(2025.06.19 목)
 #### 오전(3시간)
-* 
+* 12장 앱 개발
+  * 12-1 Todo List
+    - 🧑‍💻 [05 리액트 라우터 적용](./workspace-ins/ch12-app/todolist/05-router)
 
 #### 오후(3시간)
-* 
+* 🔊 [9장 HTTP 통신과 Ajax](./workspace-ins/ch09-ajax#9장-http-통신과-ajax)
+  * 🔊 [1. HTTP](./workspace-ins/ch09-ajax#1-http)
+  * 🔊 [2. API 테스트](./workspace-ins/ch09-ajax#2-api-테스트)
+    - 🧑‍💻 [06 API 서버 연동](./workspace-ins/ch12-app/todolist/06-api)
+
+#### 회고(1시간)
+* 오서현
+  - 10시쯤 외출해서 수업 못들었는데 과제 무엇인가?
+  + 12장 todolist/06-api 코드 공부
+  + 9장 todolist postman 테스트
 
 #### 병아리반(1시간)
-* 
+* todolist 2일차
+  - Todo 컴포넌트 분리
+    + TodoInput
+    + TodoList
+    + TodoListItem
+  - initItemList로 목록 렌더링
+    + props로 데이터 전달
 
 ## 5주차 (2025.06.23 월 ~ 2025.06.26 목, 4일)
 ### 공식 시간표
@@ -454,11 +619,24 @@
 * CSS Modules, styled-components, Tailwind CSS와 리액트 통합
 * fetch와 axios를 활용한 HTTP 요청, React Query로 데이터 캐싱과 상태 관리
 
+* 5장 리액트 라우터
+  * 🔊 [7. 레이지 로딩 (lazy loading)](./workspace-ins/ch05-router#7-레이지-로딩-lazy-loading)
+  * 🔊 [8. React.Suspense 컴포넌트](./workspace-ins/ch05-router#8-reactsuspense-컴포넌트)
+  * 🔊 [9. 라우터가 적용된 프로젝트 구조](./workspace-ins/ch05-router#9-라우터가-적용된-프로젝트-구조)
+    - 🧑‍💻 [05 리액트 라우터 적용](./workspace-ins/ch12-app/todolist/05-router)
+
+* 9장 HTTP 통신과 Ajax
+  * 🔊 [3. Ajax](./workspace-ins/ch09-ajax#3-ajax)
+  * 🔊 [4. 데이터 패칭 패턴](./workspace-ins/ch09-ajax#4-데이터-패칭-패턴)
+
 ### 17일차(2025.06.23 월)
 #### 오전(3시간)
 * 
 
 #### 오후(3시간)
+* 
+
+#### 회고(1시간)
 * 
 
 #### 병아리반(1시간)
@@ -471,6 +649,9 @@
 #### 오후(3시간)
 * 
 
+#### 회고(1시간)
+* 
+
 #### 병아리반(1시간)
 * 
 
@@ -481,6 +662,9 @@
 #### 오후(3시간)
 * 
 
+#### 회고(1시간)
+* 
+
 #### 병아리반(1시간)
 * 
 
@@ -489,6 +673,9 @@
 * 
 
 #### 오후(3시간)
+* 
+
+#### 회고(1시간)
 * 
 
 #### 병아리반(1시간)
@@ -508,6 +695,9 @@
 #### 오후(3시간)
 * 
 
+#### 회고(1시간)
+* 
+
 #### 병아리반(1시간)
 * 
 
@@ -516,6 +706,9 @@
 * 
 
 #### 오후(3시간)
+* 
+
+#### 회고(1시간)
 * 
 
 #### 병아리반(1시간)
@@ -528,6 +721,9 @@
 #### 오후(3시간)
 * 
 
+#### 회고(1시간)
+* 
+
 #### 병아리반(1시간)
 * 
 
@@ -538,656 +734,11 @@
 #### 오후(3시간)
 * 
 
+#### 회고(1시간)
+* 
+
 #### 병아리반(1시간)
 * 
 
-## 1주차 - 2일, 2025.03.27(목) ~ 2025.03.28(금)
 
-### 1일차(2025.03.27 목)
-##### 오전(3시간)
-* 아이 컨택
-* https://github.com/FEBC-13/JS README
-* 💻 개발환경 구성
 
-##### 오후(5시간)
-* 개발환경 점검
-* 📜 자바스크립트란? ~ 자바스크립트 코드의 위치
-  - 💻 01-01 인라인 자바스크립트
-
-##### boj
-* 백준 그룹 가입
-  - https://www.acmicpc.net/group/23092
-  - 💻 boj/01/01.js
-
-### 2일차(2025.03.28 금)
-#### 실제
-##### 오전(3시간)
-* 📜 자바스크립트 코드의 위치
-  - 💻 ex01-02.html, ex01-02.js
-* 📜 명령문과 주석
-  - 💻 ex01-04.js
-
-##### 오후(3시간)
-* 📜 변수
-  - 💻 ex01-05.js
-* 📜 원시 타입
-  - 💻 ex01-06.js
-* 📜 산술 연산자
-  - 💻 ex01-08.js
-  - 💻 ex01-08-02.js
-
-##### boj
-* 문제 풀이
-  - 💻 boj/01/02.js
-  - 💻 boj/01/10.js
-* 문제 추천
-  - boj/01/03.js ~ 13.js
-
-##### 회고
-* 오서현: boj/01/07.js에서 입력값 주고 엔터쳐도 결과가 안나옴
-  - Ctrl + d로 입력을 종료해야 됨
-
-## 2주차 - 4일, 2025.03.31(월) ~ 2025.04.03(목)
-### 3일차(2025.03.31 월)
-##### 오전(3시간)
-* 지난주 수업내용 정리
-* 📜 대입 연산자
-  - 💻 ex01-09.js
-  - 💻 ex01-09-02.js
-* 📜 증감 연산자
-  - 💻 ex01-10.js
-  - 💻 ex01-10-02.js
-* 📜 비교 연산자
-  - 💻 ex01-11.js
-  
-##### 오후(3시간)
-  - 💻 ex01-11-02.js
-* 📜 일치, 동등 연산자
-* 📜 논리 연산자
-  - 💻 ex01-13.js
-* 📜 삼항 연산자
-  - 💻 ex01-14.js
-  - 💻 ex01-14-02.js
-* 📜 연산자 우선순위
-  - 💻 ex01-15.js
-
-##### boj
-* 문제 풀이
-  - 💻 boj/01/02.js
-  - 💻 boj/01/10.js
-* 문제 추천
-  - boj/02/01.js
-
-### 4일차(2025.04.01 화)
-##### 오전(3시간)
-* 📜 if문
-  - 💻 ex01-16.js
-  - 💻 ex01-16-02.js
-  - 💻 ex01-16-03.js
-* 📜 if-else문
-  - 💻 ex01-17.js
-
-##### 오후(3시간)
-  - 💻 ex01-17-02.js
-  - 💻 ex01-17-03.js
-* 📜 if-else if문
-  - 💻 ex01-18.js
-  - 💻 ex01-18-02.js
-  - 💻 ex01-18-03.js
-  - 💻 ex01-18-04.js
-
-##### boj
-* 문제 풀이
-  - 💻 boj/02/01.js
-* 문제 추천
-  - 💻 boj/02/03.js ~ 07.js
-
-### 5일차(2025.04.02 수)
-
-#### 실제
-##### 오전(3시간)
-* 📜 if-else if문
-  - 💻 ex01-18-05.js
-* 📜 switch문
-  - 💻 ex01-19.js
-  - 💻 ex01-19-02.js
-  - 💻 ex01-19-03.js
-
-##### 오후(3시간)
-* 📜 while문
-  - 💻 ex01-20.js
-  - 💻 ex01-20-02.js
-  - 💻 ex01-20-03.js
-  - 💻 ex01-20-04.js
-* 📜 for문
-  - 💻 ex01-21.js
-  - 💻 ex01-21-02.js
-
-##### boj
-* 문제 풀이
-  - 💻 boj/02/01.js(if문으로 수정)
-
-### 6일차(2025.04.03 목)
-#### 실제
-##### 오전(3시간)
-* 📜 for문
-  - 💻 ex01-21-03.js
-  - 💻 ex01-22.js
-* 📜 참조 타입(Object, 객체)
-  - 💻 ex01-23-01.js
-  - 💻 ex01-23-02.js
-
-##### 오후(3시간)
-* 📜 참조 타입(Function, 함수)
-  - 💻 ex01-30.js
-  - 💻 ex01-31.js
-  - 💻 ex01-32.js
-  - 💻 ex01-33.js
-  - 💻 ex01-34.js
-
-##### boj
-* 문제 추천
-  - 💻 boj/03/01.js ~ 12.js
-
-## 3주차 - 5일, 2025.04.07(월) ~ 2025.04.11(금)
-### 7일차(2025.04.07 월)
-#### 실제
-##### 오전(3시간)
-* 수업 못따라오는 수강생 위해서 실습 정리
-  - ex01-01.html ~ ex01-11.js
-
-##### 오후(5시간)
-* 수업 못따라오는 수강생 위해서 실습 정리
-  - ex01-13.js ~ ex01-22.js
-* boj 문제 풀이
-  - 💻 A-B - [boj/01/03.js](./workspace-ins/boj/01/03.js)
-  - 💻 A×B - [boj/01/04.js](./workspace-ins/boj/01/04.js)
-  - 💻 A/B - [boj/01/05.js](./workspace-ins/boj/01/05.js)
-  - 💻 사칙연산 - [boj/01/06.js](./workspace-ins/boj/01/06.js)
-  - 💻 ??! - [boj/01/07.js](./workspace-ins/boj/01/07.js)
-  - 💻 1998년생인 내가 태국에서는 2541년생?! - [boj/01/08.js](./workspace-ins/boj/01/08.js)
-  - 💻 나머지 - [boj/01/09.js](./workspace-ins/boj/01/09.js)
-
-### 8일차(2025.04.08 화)
-#### 실제
-##### 오전(3시간)
-* boj 문제 풀이
-  - 💻 곱셈 - [boj/01/10.js](./workspace-ins/boj/01/10.js)
-  - 💻 꼬마 정민 - [boj/01/11.js](./workspace-ins/boj/01/11.js)
-  - 💻 고양이 - [boj/01/12.js](./workspace-ins/boj/01/12.js)
-  - 💻 개 - [boj/01/13.js](./workspace-ins/boj/01/13.js)
-  - 💻 두 수 비교하기 - [boj/02/01.js](./workspace-ins/boj/02/01.js)
-  - 💻 시험 성적 - [boj/02/02.js](./workspace-ins/boj/02/02.js)
-  - 💻 윤년 - [boj/02/03.js](./workspace-ins/boj/02/03.js)
-  - 💻 사분면 고르기 - [boj/02/04.js](./workspace-ins/boj/02/04.js)
-
-##### 오후(3시간 반)
-* boj 문제 풀이
-  - 💻 알람 시계 - [boj/02/05.js](./workspace-ins/boj/02/05.js)
-* 📜 참조 타입(Object, 객체)
-  - 💻 ex01-23.js
-  - 💻 ex01-24.js
-  - 💻 ex01-24-02.js
-
-##### 회고(1시간 반)
-* 수업 정리
-* 팀별 회고 방문
-  - 9조: 배열 선행 학습중(김재현 발표)
-  - 6조
-    + 전공자: 모닝핑, 김준성
-    + 홍예린: 정보통신 공학
-    + 정원식, 남유지, 최영준: 프로그램 완전 처음
-    + 정원식: 수업 자체는 괜찮으나 이해안될때 자신과의 싸움에서 몇번 무너질 뻔 했음
-      - 반복문 중첩이 될때 이해가 안되었을때 보기 싫고 하기 싫어서 위축됨
-    + 남유지: 이해는 되는데 혼자서는 못 만들겠음
-    + 최영준: HTML, CSS는 안어려웠는데 JS는 더 생각해야 되는 언어다 보니까 처음에는 너무 힘들었지만 서현, 준성이 많이 알려줘서 백준 3단계 까지는 풀수 있음
-
-### 9일차(2025.04.09 수)
-#### 실제
-##### 오전(3시간)
-* 📜 JSON 표기법
-  - 💻 ex01-25.js
-* 📜 참조 타입(Array, 배열)
-  - 💻 ex01-26.js
-
-##### 오후(5시간)
-* 📜 참조 타입(Array, 배열)
-  - 💻 ex01-27.js
-* 📜 유사 배열 객체
-  - 💻 ex01-28.js
-* 📜 2차원 배열
-  - 💻 ex01-29.js
-* boj 문제 풀이
-  - 💻 입력값 2차원 배열로 추출하는 샘플 완성 - [boj/input/sample.js](./workspace-ins/boj/input/sample.js)
-  - 💻 오븐 시계 - [boj/02/06.js](./workspace-ins/boj/02/06.js)
-
-### 10일차(2025.04.10 목)
-#### 실제
-##### 오전(3시간)
-* boj 문제 풀이
-  - 💻 주사위 세개 - [boj/02/07.js](./workspace-ins/boj/02/07.js)
-  - 💻 구구단 - [boj/03/01.js](./workspace-ins/boj/03/01.js)
-  - 💻 A+B를 여러 번 출력하는 문제 - [boj/03/02.js](./workspace-ins/boj/03/02.js)
-  - 💻 1부터 N까지의 합을 구하는 문제 - [boj/03/03.js](./workspace-ins/boj/03/03.js)
-  - 💻 영수증 - [boj/03/04.js](./workspace-ins/boj/03/04.js)
-  - 💻 코딩은 체육과목 입니다 - [boj/03/05.js](./workspace-ins/boj/03/05.js)
-
-##### 오후(3시간)
-* boj 문제 풀이
-  - 💻 빠르게 입력받고 출력하는 문제 - [boj/03/06.js](./workspace-ins/boj/03/06.js)
-  - 💻 A+B를 조금 더 아름답게 출력하는 문제 - [boj/03/07.js](./workspace-ins/boj/03/07.js)
-  - 💻 A+B를 바로 위 문제보다 아름답게 출력하는 문제 - [boj/03/08.js](./workspace-ins/boj/03/08.js)
-  - 💻 별 찍기 - 1 - [boj/03/09.js](./workspace-ins/boj/03/09.js)
-  - 💻 별 찍기 - 2 - [boj/03/10.js](./workspace-ins/boj/03/10.js)
-  - 💻 0 0이 들어올 때까지 A+B를 출력하는 문제 - [boj/03/11.js](./workspace-ins/boj/03/11.js)
-  - 💻 입력이 끝날 때까지 A+B를 출력하는 문제 - [boj/03/12.js](./workspace-ins/boj/03/12.js)
-
-##### 회고(2시간)
-* 9조
-  - Math.max(...[]), Math.max.apply(null, []) 설명
-* 박상희
-  - sample.js의 main()에서 뒤에 있는 getData() 호출이 가능한 이유?
-    - hoisting 설명해줌
-* 오서현
-  - 백준 04/01 문제 설명
-
-### 11일차(2025.04.11 금)
-#### 실제
-##### 오전(3시간)
-* boj 문제 풀이
-  - 💻 공 넣기 - [boj/04/05.js](./workspace-ins/boj/04/05.js)
-* 📜 2차원 배열
-  - 💻 ex01-29-02
-
-##### 오후(3시간)
-* 📜 참조타입의 특징
-  - 💻 ex01-37.js
-  - 💻 ex01-37-02.js
-* 📜 변수 스코프
-  - 💻 ex01-38.js
-
-##### 회고(2시간)
-* 오서현
-  - JSON.parse() 왜 했는지?
-    - 에러 발생했을 때 stack trace 보는법 알려주려고
-  - var, let 차이
-
-* 박상희
-  - stack, heap에 담기는 값이 무엇인지?
-    - stack은 함수의 지역변수, heap은 생성된 모든 객체 
-
-* 오서현
-  - heap의 객체를 참조하는 변수가 저장하는 주소는 객체의 주소인가 객체 내부 값의 주소인가?
-
-* 9조
-  - 김재현: 가비지 컬렉터가 원시형도 관리하나?
-    - 객체의 속성이 원시형이면 힙에 있어도 당연히 관리대상임
-  - 임지윤: 싱글스레드. 멀티스레드 차이
-
-* 이호정
-  - ex01-29-02.js에서 isInStudent 플래그를 따로 만들고 for문 밖에서 사용한 이유? for문에서 바로 처리하지 않고
-    - 배열 각 요소에 대해서 체크한 후 하나의 결과로 출력할 경우 for문 밖에서 처리해야 함
-
-## 4주차 - 4일, 2025.04.14(월) ~ 2025.04.17(목)
-### 12일차(2025.04.14 월)
-#### 실제
-##### 오전(3시간)
-* 설문 피드백
-* 📜 5장 클라이언트 사이드 자바스크립트
-* 📜 DOM
-* 📜 노드 찾기 1 - getElementById
-  - 💻 ex05-01.html
-  - 💻 ex05-01-02.js
-* 📜 노드 찾기 2 - getElementsByTagName
-  - 💻 ex05-01-02.js
-
-##### 오후(3시간)
-* 📜 노드 찾기 3 - 트리구조 이용
-  - 💻 ex05-01-03.js
-* 📜 노드 찾기 4 - getElementsByClassName
-  - 💻 ex05-01-03.js
-* 📜 노드 찾기 5 - querySelector
-  - 💻 ex05-01-04.js
-  - 💻 ex05-02.html
-
-##### 회고(2시간)
-* 9조
-  - 자식 객체를 부를 때 .nodeValue는 어떤..정의 값? 을 가져오는 걸까요? 
-테스트해보니 value속성이랑은 달라서요. 그냥 innerText랑 같은 값을 가져오는 걸까요?(임) 
-
-* 박선영
-  - stack에 값이 저장되는게 변수의 값이 맞나?
-
-* 오서현
-  - DOM 노드 객체에 대해서 이해가 안됨(왜 객체로 만들었는가? 객체가 뭔가?)
-
-
-
-### 13일차(2025.04.15 화)
-#### 실제
-##### 오전(3시간)
-* 📜 12일차 내용 복습
-* 📜 innerHTML, outerHTML, textContent, innerText
-  - 💻 ex05-03.html
-
-##### 오후(3시간)
-* 이벤트 등록 방식 3가지
-  - 💻 ex05-04.html
-* 📜 요소노드 생성, 추가, 삽입, 삭제, 복사
-  - 💻 ex05-03.html
-
-##### 회고(2시간)
-* 오서현
-  - 우유 추가 다시 설명
-  - 내일 하는 ex05-05.html의 getTodoItemElem 모르겠음
-* 박상희
-  - 우유 추가하는 코드를 한줄로 했는데 안됨(jquery를 사용해 봐서 궁금함)
-    - li.appendChild(txt)가 li가 아닌 txt를 반환해서 문제. 뒤에 .parentNode 추가
-  
-* 임한길
-  - load, DOMContentLoaded 배웠는데 script에 defer나 async, type="module"을 쓰면 load 이벤트는 안 써도 되나?
-    - module로 지정하면 defer처럼 동작
-    - 아무것도 없을때는 동기방식으로 js 다운로드 하고 실행 완료한 후에 파싱을 이어서 함
-    - defer는 파싱과 병렬로 js 다운로드하고 DOMContentLoaded 직전에 코드를 실행해서 DOM 생성후 이므로 DOMContentLoaded 이벤트 필요 없음
-    - async는 페이지와 상관없이 병렬로 js 다운로드하고 다운로드 완료하면 즉시 실행됨
-
-* 김태경
-  - ex05-05.html 미리 작업하는데 삭제할 때 번호를 넘기는데 length를 기반으로 했기 때문에 삭제 함수가 호출될때 마지막 length가 아니고 실제 번호가 넘어가는 상황이 이해안됨
-    - 클로저에서 자세히
-
-### 14일차(2025.04.16 수)
-#### 실제
-##### 오전(3시간)
-* 13일차 내용 복습
-- 💻 ex05-05.html - 아이템 추가
-
-##### 오후(3시간)
-- 💻 ex05-05.html - 삭제
-
-##### 회고(2시간)
-* 오서현, 홍예린, 박선영, 구성연, 권도연, 길인환, 김연호 등 여러명
-  - todolist의 전체 흐름을 모르겠다.
-  - 사람이 많이 와서 5시 20분까지 todolist 실습 설명 특강
-* 박상희
-  - toggleDone에서 let done = dataset.done; done = true; 로 하면 왜 안바뀌나?
-    - done은 dataset.done 복사했기 때문에 원본이 안바뀜
-    - dataset.done = true;로 해야함
-
-### 15일차(2025.04.17 목)
-#### 실제
-##### 오전(3시간)
-* 14일차 정리(ex05-05.html Todo List 등록, 삭제 다시 설명)
-* Todo List toggleDone 완성
-  - 💻 ex05-05.html - 완료/미완료 처리
-  - 💻 ex05-05-02.html - 다양한 방식의 toggleDone 구현
-
-##### 오후(3시간)
-* 📜 DOM으로 HTML 속성 접근
-  - 💻 ex05-06.html
-* 📜 style 다루기
-  - 💻 ex05-07.html
-* 📜 class 다루기
-  - 💻 ex05-08.html
-* 📜 이벤트 핸들러 등록 방법 1, 2, 3
-* 📜 Event 객체
-  - 💻 ex05-09.html
-* 📜 버블링과 갭처링
-  - 💻 ex05-10.html
-* 📜 이벤트 위임
-  - 💻 ex05-11.html
-
-## 5주차 - 5일, 2025.04.21(월) ~ 2025.04.25(금)
-### 16일차(2025.04.21 월)
-#### 실제
-##### 오전(3시간)
-* 2강 함수 시작
-* 📜 일급 객체
-  - 💻 ex02-01.js
-  - 💻 ex02-02.js
-  - 💻 ex02-03.js
-  - 💻 ex02-04.js
-* 📜 함수 생성 1 (선언문)
-  - 💻 ex02-05.js
-* 📜 함수 생성 2 (표현식)
-  - 💻 ex02-06.js
-  - 💻 ex02-07.js
-  - 💻 ex02-08.js
-##### 오후(3시간)
-* 📜 함수 생성 3 (생성자 함수)
-  - 💻 ex02-09.js
-* 📜 함수 생성 4 (화살표 함수)
-  - 💻 ex02-10.js
-  - 💻 ex02-09.js
-* 📜 호이스팅
-  - 💻 ex02-11.js
-  - 💻 ex02-12.js
-* 📜 매개변수와 인자의 수
-  - 💻 ex02-13.js
-* 📜 암묵적 매개변수
-  - 💻 ex02-13.js
-* 📜 함수 호출 방법 1 - 일반 함수
-  - 💻 ex02-14.js
-* 📜 함수 호출 방법 2 - 메서드
-  - 💻 ex02-15.js
-  - 💻 ex02-16.js
-* 📜 함수 호출 방법 3 - apply(), call()
-  - 💻 ex02-17.js
-  - 💻 ex02-18.js
-* 📜 함수 호출 방법 4 - 생성자 함수
-  - 💻 ex02-19.js
-  - 💻 ex02-20.js
-* 📜 익명 함수, 콜백 함수
-  - 💻 ex02-21.html
-* 📜 고차 함수
-  - 💻 ex02-22.js
-* 📜 메모이제이션
-  - 💻 ex02-23.js
-
-##### 회고(2시간)
-* 오서현
-  - 지난주 TodoList toggleDone 함수 문의
-* 회고3조
-  - 예제 1-38 호이스팅 예제
-* 이호정
-  - 예제 13-02에서 기본값 매개변수를 왜 사용하는가?
-  - 초기화를 시키지 않으면 NaN이 나와서
-
-### 17일차(2025.04.22 화)
-#### 오전(3시간)
-* 📜 함수 호출 방법 1 - 일반 함수
-  - ex02-14.js
-* 📜 함수 호출 방법 2 - 메서드
-  - ex02-15.js
-  - ex02-16.js
-* 📜 함수 호출 방법 3 - apply(), call()
-  - ex02-05.js
-  - ex02-15.js
-
-#### 오후(5시간)
-* 📜 함수 호출 방법 3 - apply(), call()
-  - ex02-17.js
-  - ex02-18.js
-* 📜 함수 호출 방법 4 - 생성자 함수
-  - ex02-19.js
-
-### 18일차(2025.04.23 수)
-#### 오전(3시간)
-* 📜 함수 호출 방법 4 - 생성자 함수
-  - ex02-20.js
-* 📜 익명 함수, 콜백 함수
-  - ex02-21.js
-
-#### 오후(3시간)
-* 📜 메모이제이션
-  - ex02-23.js
-* 3강 프로토타입, 상속과 클래스
-* 📜 프로토타입
-  - ex03-01.js
-  - ex03-02.js
-
-##### 회고(2시간)
-* 3조
-  - 프로토타입 체인 설명
-* 오서현
-  - Score 그림 설명
-
-### 19일차(2025.04.24 목)
-#### 오전(3시간)
-* 📜 프로토타입
-  - ex03-03.js
-* 📜 상속
-  - ex03-04.js
-  - ex03-05.js
-* 📜 클래스
-  - ex03-06.js
-
-#### 오후(3시간)
-* 4강 클로저
-* 📜 클로저란?
-  - ex04-01.js
-* 📜 클로저 용법 - 캡슐화
-  - ex04-02.js
-* 📜 클로저 용법 - 커링
-  - ex04-03.js
-* 📜 클로저 용법 - Partial application
-  - ex04-04.js
-* 📜 클로저 용법 - 메모이제이션
-  - ex04-05.js
-
-##### 회고(2시간)
-* 회고팀별 지난주 학습 이해상태 조사 피드백
-
-### 20일차(2025.04.25 금)
-#### 오전(3시간)
-* 📜 클로저 용법 - 메모이제이션
-  - ex04-06.js
-* 📜 즉시 실행 함수
-  - ex04-07.js
-
-#### 오후(3시간)
-* 📜 즉시 실행 함수
-  - ex04-08.html
-* 타입스크립트
-* 📜 개발 환경 구성
-  - ex06-01.ts
-* 📜 주요 타입
-  - ex06-02.ts
-
-#### 회고(2시간)
-* 회고팀별 지난주 학습 이해상태 조사 피드백
-
-#### 병아리반(1일차)
-* 프로그래머스 일일 도전 과제 day1
-  - 01.js
-  - 02.js
-  - 03.js
-
-
-## 6주차 - 3일, 2025.04.28(월) ~ 2025.04.30(수)
-### 21일차(2025.04.28 월)
-* ts-node 에러 확인
-  - 에러 안남
-* tsconfig.json 파일 workspace로 이동
-* gitignore에 추가
-  - workspace-ins/ch06/*.js
-* sample/06 다시 복사
-  - 기존의 06/ex06-03.ts 부터 전체 삭제 후 다시 복사
-  - index.html 삭제 후 복사
-
-#### 오전(3시간)
-* ex06-02.ts
-* ex06-03.ts
-* ex06-04.ts
-* ex06-05.ts
-* ex06-05-02.ts
-
-#### 오후(3시간)
-* ex06-06.ts
-* ex06-06-02.ts
-* ex06-07.ts
-* ex06-08.ts
-* ex06-09.ts
-* ex06-10.ts
-* ex06-11.ts
-* ex06-12.ts
-* ex06-13.ts
-
-#### 회고(1시간)
-* 오서현
-  - ex06-10.ts의 User 인터페이스
-  - 왜 함수에서 동일한걸 두번 선언하나
-    - 하나는 매개변수 타입이고 하나는 리턴타입
-* 박선영
-  - 인터페이스와 타입별칭 차이
-    - 객체는 인터페이스, 타입별칭은 나머지 전부
-* 황수곤
-  - 클래스는 인터페이스 지정할 때 implements를 쓰는데 그냥 상속받게 만들 수는 없는가?
-    - 인터페이스는 껍데기만 있고 구현된게 없음. 구현은 클래스에서 해야함
-
-#### 병아리 day2
-* day01/04.js
-* day01/05.js
-* day01/03.js 함수로 수정
-
-### 22일차(2025.04.29 화)
-#### 오전(3시간)
-
-#### 오후(3시간)
-
-
-### 23일차(2025.04.30 수)
-#### 오전(3시간)
-
-#### 오후(3시간)
-
-
-## 7주차 - 2일, 2025.05.07(수) ~ 2025.05.08(목)
-### 24일차(2025.05.07 수)
-* ch05 예제 js 파일을 따로 분리해서 push
-* ts-refactoring 폴더에 ts 파일로 변환해서 push
-
-#### 오전(3시간)
-* 8장 기타
-* 모듈 까지
-* ex08-05/ 까지
-
-#### 오후(3시간 + 1시간 반)
-* defer, async 설명
-* use strict 설명
-* 동기 함수 설명
-* ex08-06.ts ~ ex08-10.ts
-
-#### 회고(30분)
-* 승균: Promise를 반환하는 함수의 타입은 뭐로?
-  - 타입 추론에 맞기면 됨
-* 황유빈: 이해한 내용이 맞나?
-  async/await 를 쓰는 이유 ?
-  -> 비동기 Promise를 동기식처럼 보이게 쓰기 위해서
-  근데 왜 비동기를 동기처럼 보이게 만들지?
-  -> then() 헬 (비동기지옥)에 빠지게 되어 보기 힘들다.. 
-      이를 보기 편하도록(흐름) 동기식으로 처리한다.
-  async/await 를 사용하는 방법
-  -> 1. async을 함수 앞에 붙여주기
-  -> 2. export 시켜서 top 위치로 만들어주기
-
-* 오서현: try 블럭에서 에러가 발생한 후의 프로그램 흐름이 이해 안됨
-  - try 블럭의 남은 코드는 실행되지 않고 catch 블럭의 코드가 실행된 후 try 밖의 코드가 이어서 실행
-* 황수곤: 에러 핸들링부터 비동기까지 수업의 목적이 무엇인지 모르겠다?
-  - 비동기 함수를 다루는 방법. 내일 Ajax 할때 실 사용 사례를 알수 있음
-
-### 25일차(2025.05.08 목)
-#### 오전(3시간)
-* 어제 복습 1시간
-* HTTP, Ajax 설명
-* ex05-12.ts
-
-#### 오후(3시간)
-
-
-
-#### 남은 진도
-* ES6 - 1
-* BOM
-* Ajax - 2
-* Web APIs - 1
-* 에러, 테스트 - 1

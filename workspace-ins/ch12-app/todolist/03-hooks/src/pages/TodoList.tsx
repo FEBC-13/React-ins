@@ -7,6 +7,7 @@ interface TodoListProps {
 }
 
 function TodoList({ itemList, toggleDone, deleteItem }: TodoListProps){
+  console.log('\t\tTodoList 렌더링', itemList);
   const list = itemList.map((item) => {
     return <TodoItem key={ item._id } item={ item } toggleDone={ toggleDone } deleteItem={ deleteItem } />;
   });

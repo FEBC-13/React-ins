@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface TodoItem {
   _id: number;
   title: string;
@@ -11,7 +13,7 @@ interface TodoItemProps {
 }
 
 function TodoItem({ item, toggleDone, deleteItem }: TodoItemProps){
-  console.log(item._id, '리렌더링.');
+  console.log('\t\t\t\tTodoItem 렌더링', item);
   return (
     <li>
       <span>{ item._id }</span>
@@ -21,4 +23,4 @@ function TodoItem({ item, toggleDone, deleteItem }: TodoItemProps){
   );
 }
 
-export default TodoItem;
+export default React.memo(TodoItem);

@@ -1,36 +1,36 @@
 import type { TodoItem } from "@pages/TodoItem";
 import { produce } from "immer";
 
-interface TodoReducerAction {
-  type: 'ADD' | 'TOGGLE' | 'DELETE';
-  value: TodoItem | { _id: number };
-}
+type TodoAction = 
+  | { type: 'ADD'; value: TodoItem }
+  | { type: 'TOGGLE' | 'DELETE'; value: Pick<TodoItem, '_id'> };
 
-// state, action을 전달받고 새로운 state를 반환하는 순수 함수
-function TodoReducer(state: TodoItem[], action: TodoReducerAction){
-  const targetIndex = state.findIndex(item => item._id === action.value._id);
+function todoReducer(state: TodoItem[], action: TodoAction){
   let newState;
+
+  const targetIndex = state.findIndex(item => item._id === action.value._id);
 
   switch(action.type){
     case 'ADD':
-      newState = produce(state, (draft: TodoItem[]) => {
-        draft.push(action.value as TodoItem);
+      newState = produce(state, draft => {
+        draft.push(action.value);
       });
       break;
     case 'TOGGLE':
-      newState = produce(state, (draft: TodoItem[]) => {
+      newState = produce(state, draft => {
         draft[targetIndex].done = !draft[targetIndex].done;
       });
       break;
     case 'DELETE':
-      newState = produce(state, (draft: TodoItem[]) => {
+      newState = produce(state, draft => {
         draft.splice(targetIndex, 1);
       });
       break;
     default:
       newState = state;
   }
+
   return newState;
 }
 
-export default TodoReducer;
+export default todoReducer;
