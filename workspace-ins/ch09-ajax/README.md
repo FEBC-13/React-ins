@@ -177,9 +177,9 @@ HTTP(HyperText Transfer Protocol)는 웹 브라우저와 웹 서버 간 텍스�
 * 우측 상단의 "No Environment" 또는 "Todo List" 클릭 후 `Open Market` 선택
 
 ### 2.3.4 Open Market API Collection에 API 요청 추가(상품 목록 조회)
-* Collections > Open Market API 컬렉션 위에 마우스 올린 후 `···` 클릭해서 Add request 선택
+* Collections > Open Market API 컬렉션 위에 마우스 올린 후 `···` 클릭해서 `Add request` 선택
   - "New Request" -> `상품 목록 조회`로 수정
-  - "EEnter URL or describe the request to Postbot" 항목에 `{{url}}/products` 입력 후 Send
+  - "Enter URL or describe the request to Postbot" 항목에 `{{url}}/products` 입력 후 Send
   - 응답 결과 확인
   ```json
   {
@@ -242,7 +242,7 @@ HTTP(HyperText Transfer Protocol)는 웹 브라우저와 웹 서버 간 텍스�
 - Body > raw > "Text" -> "JSON"으로 변경. 데이터 입력 후 Send
 ```json
 {
-  "email": "u1@gmail.com",
+  "email": "u1@market.com",
   "password": "11111111"
 }
 ```
@@ -258,6 +258,7 @@ HTTP(HyperText Transfer Protocol)는 웹 브라우저와 웹 서버 간 텍스�
     pm.environment.set("refreshToken", refreshToken);
   }
   ```
+* Send
 * Environments > Open Market 환경 변수에 accessToken과 refreshToken 추가 되었는지 확인
 
 #### 회원 정보 수정 요청 헤더에 토큰 인증 정보 추가
@@ -272,6 +273,10 @@ HTTP(HyperText Transfer Protocol)는 웹 브라우저와 웹 서버 간 텍스�
   - Auth Type: Bearer Token
   - Token: `{{accessToken}}`
   - Ctrl + S 눌러서 저장
+  
+#### 회원 정보 수정 요청시 인증은 부모(컬렉션)에서 지정한 인증 방식으로 변경
+* Collections > Open Market API > 회원 정보 수정 > Authorization
+  - Auth Type: Inherit auth from parent
 
 # 3. Ajax
 
@@ -599,21 +604,24 @@ axios.interceptors.response.use((response) => {
   - 개발자 도구 사용 방법 참고: https://tanstack.com/query/latest/docs/framework/react/devtools
 
 ### 3.5.2 사용 설정
-* App.jsx에 추가
+* main.tsx에 추가
   ```tsx
-  ......
-  import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+  import { StrictMode } from 'react'
+  import { createRoot } from 'react-dom/client'
+  import App from './App.tsx'
+  import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
   import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
   const queryClient = new QueryClient();
 
-  function App() {
-    return (
-      <QueryClientProvider client={ queryClient }>    
-        ......
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <QueryClientProvider client={ queryClient }>
+        <App />
         <ReactQueryDevtools initialIsOpen={ false } />
       </QueryClientProvider>
-    );
-  }
+    </StrictMode>,
+  )
   ```
 
 ### 3.5.3 useQuery
@@ -683,8 +691,8 @@ useQuery(options)
 
 ### 3.5.4 useMutation
 * 서버의 데이터를 변경할 때 사용(POST, PUT, PATCH, DELETE)
-* useMutation은 React Hook이므로 컴포넌트 루트에서만 사용할 수 있고 대부분의 경우 서버의 데이터를 변경하는 작업은(등록, 수정, 삭제) 사용자의 액션에 의해서 실행 되기 때문에 mutationFn이 호출되는 위치는 이벤트 핸들러 내부이므로 컴포넌트 루트가 아님
-* useMutation은 쿼리를 바로 실행하지 않고 쿼리를 실행 할때 사용할 함수를 반환하므로 이벤트 핸들러 내에서 useMutation이 반환한 함수를 통해 쿼리 실행
+* useMutation은 React Custom Hook이므로 컴포넌트나 Custom Hook의 탑 레벨에서만 사용할 수 있고 대부분의 경우 서버의 데이터를 변경하는 작업은(등록, 수정, 삭제) 사용자의 액션에 의해서 실행 되기 때문에 mutationFn이 호출되는 위치는 이벤트 핸들러 내부이므로 컴포넌트의 탑 레벨이 아님
+* 그래서 useMutation은 쿼리를 바로 실행하지 않고 쿼리를 실행 할때 사용할 함수를 반환하므로 이벤트 핸들러 내에서 useMutation이 반환한 함수를 통해 쿼리 실행
 
 #### API
 * useMutation(options)
