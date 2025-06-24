@@ -594,7 +594,7 @@
 #### 오후(3시간)
 * 🔊 [9장 HTTP 통신과 Ajax](./workspace-ins/ch09-ajax#9장-http-통신과-ajax)
   * 🔊 [1. HTTP](./workspace-ins/ch09-ajax#1-http)
-  * 🔊 [2. API 테스트](./workspace-ins/ch09-ajax#2-api-테스트)
+  * 🔊 [2.2 Todo List API 테스트](./workspace-ins/ch09-ajax#22-todo-list-api-테스트)
     - 🧑‍💻 [06 API 서버 연동](./workspace-ins/ch12-app/todolist/06-api)
 
 #### 회고(1시간)
@@ -619,41 +619,65 @@
 * CSS Modules, styled-components, Tailwind CSS와 리액트 통합
 * fetch와 axios를 활용한 HTTP 요청, React Query로 데이터 캐싱과 상태 관리
 
+* 9장 HTTP 통신과 Ajax
+  * 🔊 [4. 데이터 패칭 패턴](./workspace-ins/ch09-ajax#4-데이터-패칭-패턴)
+    - 🧑‍💻 [04 Fetch-on-render와 Fetch-then-render](./workspace-ins/ch09-ajax/04-board-pattern)
+    - 🧑‍💻 [05 Render-as-you-fetch(Suspense)](./workspace-ins/ch09-ajax/05-board-suspense)
+    - 시간 없어서 생략
+
 * 5장 리액트 라우터
   * 🔊 [7. 레이지 로딩 (lazy loading)](./workspace-ins/ch05-router#7-레이지-로딩-lazy-loading)
   * 🔊 [8. React.Suspense 컴포넌트](./workspace-ins/ch05-router#8-reactsuspense-컴포넌트)
   * 🔊 [9. 라우터가 적용된 프로젝트 구조](./workspace-ins/ch05-router#9-라우터가-적용된-프로젝트-구조)
     - 🧑‍💻 [05 리액트 라우터 적용](./workspace-ins/ch12-app/todolist/05-router)
 
-* 9장 HTTP 통신과 Ajax
-  * 🔊 [3. Ajax](./workspace-ins/ch09-ajax#3-ajax)
-  * 🔊 [4. 데이터 패칭 패턴](./workspace-ins/ch09-ajax#4-데이터-패칭-패턴)
-
 ### 17일차(2025.06.23 월)
 #### 오전(3시간)
-* 
+* 9장 HTTP 통신과 Ajax
+  * 🔊 [2.3 Open Market API 테스트](./workspace-ins/ch09-ajax#23-open-market-api-테스트)
 
 #### 오후(3시간)
-* 
+* 9장 HTTP 통신과 Ajax
+  * 🔊 [3.3 fetch API](./workspace-ins/ch09-ajax#33-fetch-api)
+    - 🧑‍💻 [01 Fetch API](./workspace-ins/ch09-ajax/01-board-fetch)
 
 #### 회고(1시간)
 * 
 
 #### 병아리반(1시간)
-* 
+* 삭제 기능 구현
+  - TodoList
+    + deleteItem 작성
+    + TodoItem에 props로 전달
+  - TodoItem
+    + handleDelete 구현
+* 추가 기능 구현
+  - TodoInput
+    + handleAdd 추가
 
 ### 18일차(2025.06.24 화)
 #### 오전(3시간)
-* 
+* 9장 HTTP 통신과 Ajax
+  * 🔊 [3.4 axios 라이브러리](./workspace-ins/ch09-ajax#34-axios-라이브러리)
+    - 🧑‍💻 [02 Axios 라이브러리](./workspace-ins/ch09-ajax/01-board-axios)
 
 #### 오후(3시간)
-* 
+  * 🔊 [3.5 React Query(TanStack Query)](./workspace-ins/ch09-ajax#35-react-querytanstack-query)
+    - 🧑‍💻 [03 React Query 라이브러리](./workspace-ins/ch09-ajax/03-board-reactquery)
 
 #### 회고(1시간)
-* 
+* react-query의 queryFn 에러는 @types/axios 설치된 사람에게 발생
 
 #### 병아리반(1시간)
-* 
+* 추가 기능 구현
+  - TodoList
+    + addItem 작성
+    + TodoInput과 형제 이므로 props로 전달 불가
+  - Todo
+    + TodoList의 상태와 메서드 전부 Todo로 이동
+    + addItem -> TodoInput에 전달
+    + handleAdd에서 addItem 호출 해서추가 기능 완료
+    + 삭제 기능 deleteItem -> TodoList -> TodoItem
 
 ### 19일차(2025.06.25 수)
 #### 오전(3시간)
@@ -666,7 +690,13 @@
 * 
 
 #### 병아리반(1시간)
-* 
+* 토글 기능 구현
+  - Todo
+    + toggleDone 작성
+    + toggleDone -> TodoList -> TodoItem
+  - TodoItem
+    + handleToggle 작성
+    + toggleDon 호출해서 토글 기능 완료
 
 ### 20일차(2025.06.26 목)
 #### 오전(3시간)

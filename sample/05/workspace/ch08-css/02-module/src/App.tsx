@@ -3,7 +3,7 @@ import Login from "@pages/auth/Login";
 function App(){
   return (
     <>
-      <h1 className="bg-gray-text-blue">01 바닐라 CSS</h1>
+      <h1 className="bg-gray-text-blue">02 CSS Module</h1>
 
       <div className="container">
         <button type="button">그냥 버튼</button>
