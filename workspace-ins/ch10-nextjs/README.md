@@ -103,16 +103,16 @@ npx create-next-app@latest
 
 * Need to install the following packages:
   - create-next-app@15.3.4
-  - Ok to proceed? (y) __y__
+  - Ok to proceed? (y) __✅y__
 * What is your project named? ... 02-cna
-* Would you like to use TypeScript? ... No / __Yes__
-* Would you like to use ESLint? ... No / __Yes__
-* Would you like to use Tailwind CSS? ... No / __Yes__
-* Would you like your code inside a `src/` directory? ... No / __Yes__
-* Would you like to use App Router? (recommended) ... No / __Yes__
-* Would you like to use Turbopack for next dev? ... No / __Yes__
+* Would you like to use TypeScript? ... No / __✅Yes__
+* Would you like to use ESLint? ... No / __✅Yes__
+* Would you like to use Tailwind CSS? ... No / __✅Yes__
+* Would you like your code inside a `src/` directory? ... No / __✅Yes__
+* Would you like to use App Router? (recommended) ... No / __✅Yes__
+* Would you like to use Turbopack for next dev? ... No / __✅Yes__
   - Turbopack: 기존 Webpack 대신 사용하는 고성능 번들러
-* Would you like to customize the import alias (@/* by default)? __No__ / Yes
+* Would you like to customize the import alias (@/* by default)? __✅No__ / Yes
 
 ### 2.2.2 개발 서버 실행
 ```sh
