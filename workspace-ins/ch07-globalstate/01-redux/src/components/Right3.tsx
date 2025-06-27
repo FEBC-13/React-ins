@@ -26,7 +26,7 @@ function Right3() {
 
       {/* Redux Toolkit */}
       <button onClick={ () => dispatch(countDown(3)) }>-3</button>
-      <button onClick={ () => dispatch(countReset()) }>0</button>
+      <button onClick={ () => dispatch({type: 'test'}) }>0</button>
       <button onClick={ () => dispatch(countUp(3)) }>+3</button>
 
     </div>
