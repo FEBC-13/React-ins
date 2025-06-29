@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["../lion-board-02/src/*"],
+    }
+  },
+  "include": ["../lion-board-02/next-env.d.ts", "../lion-board-02/**/*.ts", "../lion-board-02/**/*.tsx", "../lion-board-02/.next/types/**/*.ts"],
+  "exclude": ["../lion-board-02/node_modules"]
+}

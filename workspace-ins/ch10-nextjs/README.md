@@ -2,16 +2,41 @@
 * 코드 실행(GitHub Page): <https://febc-13.github.io/React/workspace-ins/index.html#10>
 
 # 1 Next.js 개요
-* 참고: https://nextjs.org
+* 공식 홈페이지: https://nextjs.org
 * 한글 번역(비공식): https://nextjs-ko.org
 
-## 1.1 Next.js란?
+## 1.1 React의 단점과 Next.js의 장점
+* 웹 개발의 변천사: https://github.com/FEBC-13/React/tree/main/workspace-ins/ch01-buildup#1-%EC%9B%B9-%EA%B0%9C%EB%B0%9C%EC%9D%98-%EB%B3%80%EC%B2%9C%EC%82%AC
+
+### 1.1.1 React의 단점
+* 최초에 로딩할 자바스크립트 용량이 커서 초기 화면을 보여주기까지의 시간이 오래 걸림
+* 코드 분할과 성능 최적화를 수동으로 관리해야 함
+  - lazy loading 직접 구현
+* SEO(검색 엔진 최적화) 어려움
+  - 빈 HTML로 초기 응답하므로 검색엔진이 컨텐츠를 읽을 수 없음
+* 프론트엔드만 담당하므로 백엔드 API를 별도로 구축해야 함
+
+### 1.1.2 Next.js의 장점
+* 서버 사이드 렌더링(SSR)으로 초기 로딩 속도 개선
+  - 완성된 HTML을 먼저 응답하므로 즉시 화면 표시 가능
+* SEO 최적화
+  - 서버에서 완성된 HTML 생성으로 검색엔진이 컨텐츠를 바로 읽을 수 있음
+* 파일 시스템 기반 자동 라우팅
+  - pages나 app 폴더 구조만으로 라우팅 자동 생성
+* 자동 코드 분할 및 성능 최적화
+  - 페이지별 자동 번들 분할, 이미지/폰트 최적화 내장
+* 풀스택 개발 지원
+  - API Routes로 백엔드 기능까지 하나의 프로젝트에서 개발 가능
+* 다양한 렌더링 전략 지원
+  - SSR(서버 사이드 렌더링), SSG(정적 생성), ISR(증분 정적 재생성) 선택 가능
+
+## 1.2 Next.js란?
 - React 기반의 풀스택 웹 애플리케이션을 구축하기 위한 프레임워크
 - 프레임워크
   - 소프트웨어 개발에 필요한 공통 구조와 기능 제공
   - 개발 방식이나 프로젝트 구조를 강제하여 자유도가 낮지만, 제공되는 공통 기능을 활용하면 개발 생산성 향상
 
-## 1.2 주요 특징
+## 1.3 주요 특징
 - 라우팅: 파일 시스템 기반의 라우터 제공
   - 페이지 라우터 (pages): 기존 방식의 라우터
   - 앱 라우터 (app): 서버 컴포넌트, 스트리밍 등 최신 React 기능 지원. Next.js 13.4에서 정식 도입, 페이지 라우터 대신 사용 권장
@@ -57,6 +82,7 @@ npm install next@latest react@latest react-dom@latest
 ### 2.1.3 라우터 디렉토리 생성
 * app 디렉토리(권장): App 라우터 사용
 * pages 디렉토리: Pages 라우터 사용
+
   ```sh
   # MAC, Git Bash
   mkdir -p src/app
@@ -66,9 +92,10 @@ npm install next@latest react@latest react-dom@latest
 
 <img src="https://raw.githubusercontent.com/FEBC-13/React/refs/heads/main/images/nextjs/app-getting-started.png">
 
-### 2.1.4 app/layout.jsx 파일 생성
+### 2.1.4 app/layout.tsx 파일 생성
 * 루트 레이아웃
-  ```jsx
+
+  ```tsx
   export default function RootLayout({ children }) {
     return (
       <html lang="ko">
@@ -78,9 +105,10 @@ npm install next@latest react@latest react-dom@latest
   }
   ```
 
-### 2.1.5 app/page.jsx 파일 생성
+### 2.1.5 app/page.tsx 파일 생성
 * 루트 페이지
-  ```jsx
+
+  ```tsx
   export default function Page() {
     return <h1>Hello, Next.js!</h1>;
   }
@@ -134,7 +162,7 @@ npm run dev
   - npm install 시 자동 생성
   - 직접 수정할 필요 없음
 * `public/`: 정적 파일(이미지, 폰트, favicon 등)을 넣는 폴더  
-  - 이 폴더 안의 파일들은 / 경로로 바로 접근할 수 있음
+  - 이 폴더 안의 파일들은 `/` 경로로 바로 접근할 수 있음
 * `src/`: 소스 폴더를 따로 관리할 때 사용
   - `app/`: 앱 라우터
   - `pages/`: 페이지 라우터
@@ -159,15 +187,15 @@ npm run dev
 * `app` 폴더 하위에 존재하는 파일이나 폴더 규칙
 
 ### 3.3.1 라우팅용 특수 파일
-* `layout.js`: 동일 폴더와 하위 폴더 페이지의 레이아웃을 정의
-* `page.js`: 페이지 UI
-* `loading.js`: 페이지 로딩 중에 표시되는 UI
-* `not-found.js`: 404 오류 페이지
-* `error.js`: 일반 오류를 보여주는 페이지
-* `global-error.js`: 전역 오류를 보여주는 페이지
-* `route.js`: API 엔드포인트 정의
-* `template.js`: 페이지 템플릿을 정의
-* `default.js`: 대체 UI
+* `layout.tsx`: 동일 폴더와 하위 폴더 페이지의 레이아웃을 정의
+* `page.tsx`: 페이지 UI
+* `loading.tsx`: 페이지 로딩 중에 표시되는 UI
+* `not-found.tsx`: 404 오류 페이지
+* `error.tsx`: Page의 오류를 처리
+* `global-error.tsx`: Root Layout에서 발생하는 오류를 처리
+* `route.ts`: API 엔드포인트 정의
+* `template.tsx`: 페이지 템플릿을 정의
+* `default.tsx`: 대체 UI
 
 ### 3.3.2 폴더기반 라우팅
 * 폴더명이 라우트 경로가 됨
@@ -191,18 +219,19 @@ npm run dev
 * `(...)folder`
 
 # 4 라우팅
-## 4.1 용어
-<img src="https://raw.githubusercontent.com/FEBC-13/React/refs/heads/main/images/nextjs/terminology-component-tree.png">
 
+## 4.1 용어
 * 트리(Tree): 계층 구조를 시각화하기 위한 용어. 부모와 자식 컴포넌트로 이루어진 컴포넌트 트리
 * 서브트리(Subtree): 새로운 루트에서 리프까지 트리의 일부
 * 루트(Root): 트리나 서브트리에서 첫 번째 노드. 루트 레이아웃, 루트 페이지
-* 리프(Leaf): 트리의 마지막 노드로 자식이 없음. URL 경로의 마지막 세그먼트
+* 리프(Leaf): 트리의 마지막 노드이며 자식이 없는 노드. URL 경로의 마지막 세그먼트
 
-<img src="https://raw.githubusercontent.com/FEBC-13/React/refs/heads/main/images/nextjs/terminology-url-anatomy.png">
+<img src="https://raw.githubusercontent.com/FEBC-13/React/refs/heads/main/images/nextjs/terminology-component-tree.png">
 
 * URL 경로(Path): 도메인 이후의 URL 부분
 * URL 세그먼트(Segment): 슬래시로 구분된 URL 경로의 일부
+
+<img src="https://raw.githubusercontent.com/FEBC-13/React/refs/heads/main/images/nextjs/terminology-url-anatomy.png">
 
 ## 4.2 app 라우터
 * 파일 시스템 기반 라우터
@@ -214,8 +243,8 @@ npm run dev
 
 <img src="https://raw.githubusercontent.com/FEBC-13/React/refs/heads/main/images/nextjs/route-segments-to-path-segments.png">
 
-* 생성한 폴더 하위에 라우팅 규칙과 관련된 특수 파일, CSS, 이미지 등의 파일 작성
-  - page.js: 해당 경로로 접근했을 때 보여줄 페이지 정의
+* 생성한 폴더 하위에 라우팅 규칙과 관련된 특수 파일, CSS, 이미지 등의 파일 생성
+  - page.tsx: 해당 경로로 접근했을 때 보여줄 페이지 정의
   - page 파일이 없는 폴더는 라우팅 되지 않음
 
 <img src="https://raw.githubusercontent.com/FEBC-13/React/refs/heads/main/images/nextjs/defining-routes.png">
@@ -228,54 +257,118 @@ npm run dev
 
 <img src="https://raw.githubusercontent.com/FEBC-13/React/refs/heads/main/images/nextjs/page-special-file.png">
 
+#### 메인 페이지
 * app/page.tsx
+
   ```tsx
-  export default function Page() {
-    return <h1>Home</h1>
+  export default function RootPage() {
+    return (
+      <h1>Home</h1>
+    );
   }
   ```
 
+#### About 페이지
+* app/about/page.tsx
+
+  ```tsx
+  export default function AboutPage() {
+    return (
+      <h1>About</h1>
+    );
+  }
+  ```
+
+#### 게시물 목록 조회 페이지
 * app/posts/page.tsx
+
   ```tsx
-  export default function Page() {
-    return <h1>목록 조회</h1>
+  export default function ListPage() {
+    return (
+      <h1>목록 조회</h1>
+    );
   }
   ```
 
-* app/posts/[id]/page.tsx
+#### 로그인 페이지
+* app/user/login/page.tsx
+
   ```tsx
-  export default function Page() {
-    return <h1>상세 조회</h1>
+  export default function LoginPage() {
+    return (
+      <h1>로그인</h1>
+    );
   }
   ```
 
+#### 회원 가입 페이지
+* app/user/signup/page.tsx
+
+  ```tsx
+  export default function SignupPage() {
+    return (
+      <h1>회원 가입</h1>
+    );
+  }
+  ```
+
+#### 게시물 상세 조회 페이지
+* app/posts/1/page.tsx
+
+  ```tsx
+  export default function InfoPage() {
+    return (
+      <h1>상세 조회 - 1번 게시물</h1>
+    );
+  }
+  ```
+
+#### 게시글 등록 페이지
 * app/posts/new/page.tsx
+
   ```tsx
-  export default function Page() {
-    return <h1>글쓰기</h1>
+  export default function NewPage() {
+    return (
+      <h1>게시글 등록</h1>
+    );
   }
   ```
 
 ### 4.4.2 레이아웃
 * 레이아웃 파일이 있는 경로와 하위 경로의 page를 보여줄때 사용하는 공통의 UI 정의
-  - page 파일을 래핑
+  - `<html>` `<body>` 태그 필수로 작성
+  - page 파일을 `{ children }` 으로 래핑
+* 루트 레이아웃(`app/layout.tsx`) 필수
 * 하위 폴더의 layout과 중첩됨
-* 생략 가능
 * `layout.js`, `layout.jsx`, `layout.ts`, `layout.tsx`로 작성
+
+#### 루트 레이아웃
+* app 폴더 하위에 만들어야 하는 필수 layout 파일
+* 모든 경로에 적용할 공통 UI 작성
+* 루트 레이아웃에만 html, body 태그 포함 가능
+* page 컴포넌트를 children prop으로 받음
+
 * `app/layout.tsx`
+
   ```tsx
   import './globals.css';
 
-  export default function RootLayout({ children }) {
+  export default function RootLayout({
+    children,
+  }: {
+    children: React.ReactNode
+  }) {
     return (
       <html lang="ko">
         <body className="flex flex-col h-screen">
           <header className="bg-blue-500 text-white p-4">
             <nav>
               <ul className="flex space-x-4">
-                <li><a href="/" className="hover:underline">Home</a></li>
-                <li><a href="/about" className="hover:underline">About</a></li>
-                <li><a href="/posts" className="hover:underline">게시판</a></li>
+                <li><a href="/" className={`hover:underline`}>Home</a></li>
+                <li><a href="/about" className={`hover:underline`}>About</a></li>
+                <li><a href="/posts" className={`hover:underline`}>게시판</a></li>
+                <li><a href="/user/login" className={`hover:underline`}>로그인</a></li>
+                <li><a href="/user/signup" className={`hover:underline`}>회원가입</a></li>
               </ul>
             </nav>
           </header>
@@ -287,11 +380,18 @@ npm run dev
     );
   }
   ```
+
   - `children`은 현재 폴더부터 URL 경로와 일치하는 폴더까지 내려가면서 찾은 layout이 중첩되고 마지막엔 URL 경로에 존재하는 page가 된다.
 
+#### 게시판 레이아웃
 * app/posts/layout.tsx
+
   ```tsx
-  export default function PostLayout({ children }) {
+  export default function RootLayout({
+    children,
+  }: {
+    children: React.ReactNode
+  }) {
     return (
       <div className="flex flex-1 overflow-hidden">
         <aside className="w-48 bg-gray-800 text-white p-4 lg:w-64">
@@ -308,36 +408,53 @@ npm run dev
   }
   ```
 
-#### 루트 레이아웃
-* app 폴더 하위에 만들어야 하는 필수 layout 파일
-* 모든 경로에 적용할 공통 UI 작성
-* 루트 레이아웃에만 html, body 태그 포함 가능
-
 ### 4.4.3 메타데이터
 * layout, page에서 metadata 변수나 generateMetadata 함수를 내보내기 하면 메타데이터 정의 가능
+  - metadata: 정적인 메타데이터 출력
+  - generatrMetadata: 동적이 메타데이터 출력
+
 * app/page.tsx에 추가
+
   ```tsx
-  export const metadata = {
+  import { Metadata } from "next";
+
+  export const metadata: Metadata = {
     title: 'Home',
     description: 'Home 페이지입니다.'
   }
   ```
 
-* app/posts/page.tsx에 추가
+* app/about/page.tsx에 추가
+
   ```tsx
-  export const metadata = {
+  import { Metadata } from "next";
+
+  export const metadata: Metadata = {
+    title: 'About',
+    description: 'About 페이지입니다.'
+  }
+  ```
+
+* app/posts/page.tsx에 추가
+
+  ```tsx
+  import { Metadata } from "next";
+
+  export const metadata: Metadata = {
     title: '게시물 목록 조회',
     description: '게시물 목록 조회 페이지입니다.'
   }
   ```
 
-* app/posts/[id]/page.tsx에 추가
+* app/posts/1/page.tsx에 추가
+
   ```tsx
-  export async function generateMetadata({ params }) {
-    const id = params.id;
+  import { Metadata } from "next";
+
+  export async function generateMetadata(): Promise<Metadata> {
     const data = {
-      title: `${id} 안녕하세요.`,
-      content: '가입인사 합니다.'
+      title: `1번 게시물`,
+      content: '게시판 이용 수칙입니다.'
     };
 
     return {
@@ -347,29 +464,70 @@ npm run dev
   }
   ```
 
+* app/posts/new/page.tsx에 추가
+
+  ```tsx
+  import { Metadata } from "next";
+
+  export const metadata: Metadata = {
+    title: '게시글 등록',
+    description: '게시글 등록 페이지입니다.'
+  }
+  ```
+  
+* app/user/login/page.tsx에 추가
+
+  ```tsx
+  import { Metadata } from "next";
+
+  export const metadata: Metadata = {
+    title: '로그인',
+    description: '로그인 페이지입니다.'
+  }
+  ```
+  
+* app/user/signup/page.tsx에 추가
+
+  ```tsx
+  import { Metadata } from "next";
+
+  export const metadata: Metadata = {
+    title: '회원 가입',
+    description: '회원 가입 페이지입니다.'
+  }
+  ```
+
 ## 4.5 페이지 이동
 ### 4.5.1 Link 컴포넌트
+
+* `next/link` 패키지에 있는 컴포넌트
+  - `import Link from "next/link"`
+
+* Next.js의 App 라우터의 라우팅 기능을 구현한 컴포넌트
+
 * a 태그 대신 사용
   - Link 컴포넌트는 렌더링 되면 a 태그로 바뀜
 
-* app/layout.tsx 수정
-  ```tsx
-  import Link from "next/link";
-  ...
-  <li><Link href="/" className="hover:underline">Home</Link></li>
-  <li><Link href="/about" lassName="hover:underline">About</Link></li>
-  <li><Link href="/posts" className="hover:underline">게시판</Link></li>
-  ...
-  ```
+#### app/layout.tsx 수정
+```tsx
+import Link from "next/link";
+...
+<li><Link href="/" className={`hover:underline`}>Home</Link></li>
+<li><Link href="/about" className={`hover:underline`}>About</Link></li>
+<li><Link href="/posts" className={`hover:underline`}>게시판</Link></li>
+<li><Link href="/user/login" className={`hover:underline`}>로그인</Link></li>
+<li><Link href="/user/signup" className={`hover:underline`}>회원가입</Link></li>
+...
+```
 
-* app/posts/layout.tsx 수정
-  ```tsx
-  import Link from "next/link";
-  ...
-  <li><Link href="/posts" className="block hover:bg-gray-700 p-2 rounded">목록 조회</Link></li>
-  <li><Link href="/posts/new" className="block hover:bg-gray-700 p-2 rounded">글쓰기</Link></li>
-  ...
-  ```
+#### app/posts/layout.tsx 수정
+```tsx
+import Link from "next/link";
+...
+<li><Link href="/posts" className="block hover:bg-gray-700 p-2 rounded">목록 조회</Link></li>
+<li><Link href="/posts/new" className="block hover:bg-gray-700 p-2 rounded">글쓰기</Link></li>
+...
+```
 
 #### 활성 링크 체크
 * `usePathname()` 훅을 이용해서 url 확인 후 href와 비교
@@ -377,9 +535,10 @@ npm run dev
 * app/globals.css 작성
   ```css
   ...
+  /* Tailwind CSS의 커스텀 컴포넌트 클래스 정의 */
   @layer components {
     .cs-active {
-      @apply font-bold;
+      @apply text-orange-500;
     }
   }
   ```
@@ -388,13 +547,19 @@ npm run dev
   ```tsx
   'use client';
 
-  import { usePathname } from "next/navigation";
-  import "./globals.css";
-  import Link from "next/link";
+  import './globals.css';
+  import Link from 'next/link';
+  import { usePathname } from 'next/navigation';
 
-  export default function RootLayout({ children }) {
+  export default function RootLayout({
+    children,
+  }: {
+    children: React.ReactNode
+  }) {
+
     const pathname = usePathname();
-    const isActive = (path) => pathname === path ? 'cs-active' : '';
+    console.log(pathname);
+    const isActive = (path: string) => pathname === path ? 'cs-active' : '';
 
     return (
       <html lang="ko">
@@ -402,9 +567,11 @@ npm run dev
           <header className="bg-blue-500 text-white p-4">
             <nav>
               <ul className="flex space-x-4">
-                <li><Link href="/" className={`hover:underline ${ isActive('/') }`}>Home</Link></li>
-                <li><Link href="/about" className={`hover:underline ${ isActive('/about') }`}>About</Link></li>
-                <li><Link href="/posts" className={`hover:underline  ${ isActive('/posts') }`}>게시판</Link></li>
+                <li><Link href="/" className={`hover:underline ${isActive('/')}`}>Home</Link></li>
+                <li><Link href="/about" className={`hover:underline ${isActive('/about')}`}>About</Link></li>
+                <li><Link href="/posts" className={`hover:underline ${isActive('/posts')}`}>게시판</Link></li>
+                <li><Link href="/user/login" className={`hover:underline ${isActive('/user/login')}`}>로그인</Link></li>
+                <li><Link href="/user/signup" className={`hover:underline ${isActive('/user/signup')}`}>회원가입</Link></li>
               </ul>
             </nav>
           </header>
@@ -422,42 +589,11 @@ npm run dev
 * 프로그래밍 방식으로 페이지 이동 가능
 * 꼭 필요한 경우가 아니라면 Link 컴포넌트 사용 권장
 
-* app/posts/new/page.tsx 수정
-  ```tsx
-  'use client';
-  import { useRouter } from "next/navigation";
-  export default function Page(){
-    const router = useRouter();
-    return (
-      <>
-        <h1>글쓰기</h1>
-        <button type="button" onClick={ () => router.push('/login') }>로그인</button>
-      </>
-    )
-  }
-  ```
-
 ### 4.5.3 redirect
 * 서버 컴포넌트에서 사용
 * 클라이언트 컴포넌트에서 렌더링 중에는 사용 가능하지만 이벤트 핸들러에서는 사용 불가
 * 기본적으로 307(Temporary Redirect, 원래 요청 방식과 본문으로 새로운 페이지 요청, 다음번 요청에도 이전 URI 사용) 응답 상태코드
-  - 서버 액션일 경우(POST 요청의 성공 페이지로 이동할 때) 303(See Other, 새로운 페이지로 GET 요청) 응답 상태코드
-
-* app/posts/new/page.tsx
-  ```tsx
-  'use client';
-  import { useRouter, redirect } from "next/navigation"
-  export default function Page(){
-    const router = useRouter();
-    redirect('/login');
-    return (
-      <>
-        <h1>글쓰기</h1>
-        <button type="button" onClick={ () => router.push('/posts') }>완료</button>
-      </>
-    )
-  }
-  ```
+  - 서버 함수일 경우(POST 요청의 성공 페이지로 이동할 때) 303(See Other, 새로운 페이지로 GET 요청) 응답 상태코드
 
 ### 4.5.4 permanentRedirect
 * 응답 상태코드가 308(Permanent Redirect, 원래 요청 방식과 본문으로 새로운 페이지 요청, 다음부터는 새로운 URI 사용)인 점만 다르고 redirect와 동일
@@ -469,28 +605,28 @@ npm run dev
 * usePathname(), useSearchParams() 훅으로 URL과 파라미터 추출해서 low-level로 URL 변경 가능
 * useRouter() 훅을 사용하는게 페이지 전환 시 SSR, SSG, 데이터 fetching, 페이지 전환 효과 등 Next.js 기능을 활용할 수 있으므로 useRouter() 권장
 
-### 4.5.6 next.config.js의 redirects
+### 4.5.6 next.config.ts의 redirects
 * 선언적 redirect
 
-  ```js
-  /** @type {import('next').NextConfig} */
-  const nextConfig = {
+  ```ts
+  import type { NextConfig } from "next";
+
+  const nextConfig: NextConfig = {
+    /* config options here */
     async redirects() {
       return [
-        // Basic redirect
         {
-          source: '/about',
+          source: '/home',
           destination: '/',
           permanent: true,
         },
-        // Wildcard path matching
         {
           source: '/community/:slug',
           destination: '/posts/:slug',
           permanent: true,
         },
       ]
-    }
+    },
   };
 
   export default nextConfig;
@@ -499,7 +635,8 @@ npm run dev
 ### 4.5.7 NextResponse.redirect
 * 미들웨어에서 사용
 * 사용사례: 로그인되지 않은 사용자를 로그인 페이지로 이동
-  ```js
+
+  ```ts
   import { NextResponse } from 'next/server';
   import { authenticate } from 'auth-provider';
   
@@ -524,6 +661,7 @@ npm run dev
 
 ### 4.6.1 코드 분할
 * 서버 컴포넌트를 사용하면 경로별로 코드를 작은 번들로 분할해서 브라우저가 다운로드하고 실행할 수 있으므로 데이터의 양과 응답시간이 줄어들어 성능 향상
+* 빌드 후 `.next/server/app` 폴더에서 확인
 
 ### 4.6.2 Prefetching
 * 다음의 두 경우 링크를 누르기 전에 페이지를 미리 로드
@@ -533,24 +671,21 @@ npm run dev
 * 링크가 사용자의 화면에 표시되면 자동으로 페이지를 미리 가져옴
 
 ##### prefetch 속성에 따른 동작
-* false: 동작 안함
-* true:
+* false: prefetch 동작 안함
+* true
   - 정적 라우트와 동적 라우트 모두 다 전체 페이지를 미리 가져옴(5분 동안 캐시됨)
   - 링크가 화면에 보이지 않더라도 프리패칭 시작
-* null(기본값):
+* null(기본값)
   - 정적 라우트일 경우 전체 페이지가 프리패치되어 캐시됨
-  - 동적 라우트일 경우 렌더링된 컴포넌트 트리에서 첫번째 loading.js 파일이 나타날 때까지만 데이터를 미리 가져옴(30초 동안 캐시됨)
+  - 동적 라우트일 경우 렌더링된 컴포넌트 트리에서 첫번째 loading.tsx 파일이 나타날 때까지만 데이터를 미리 가져옴(30초 동안 캐시됨)
     + 실제 페이지를 요청할 때 로딩 상태를 즉시 보여 주고 이후의 내용을 가져옴
 * 프리패칭된 데이터와 레이아웃은 30초 동안 라우터 캐시에 저장됨
   - 라우터 캐시는 비활성화 시킬 수 없음
   - router.refresh() 호출 시 라우터 캐시 삭제
 
-#### router.prefetch() 메서드를 사용하는 경우
-* useRouter 훅을 사용하여 프로그래밍 방식으로 링크를 미리 가져올 수 있음
-
 ### 4.6.3 부분 렌더링
 * 페이지 이동시 공유 레이아웃은 유지한 채로 변경된 페이지만 렌더링
-* /posts/3 -> /posts/2로 이동시 app/layout.js, app/posts/layout.js는 다시 렌더링 하지 않음
+* /posts/3 -> /posts/2로 이동시 app/layout.tsx, app/posts/layout.tsx는 다시 렌더링 하지 않음
 
 <img src="https://nextjs.org/_next/image?url=https%3A%2F%2Fh8DxKfmAPhn8O0p3.public.blob.vercel-storage.com%2Fdocs%2Flight%2Fpartial-rendering.png&w=1920&q=75">
 
@@ -558,17 +693,20 @@ npm run dev
 * 스크롤을 유지하고 라우터 캐시를 재사용
 
 ## 4.7 로딩중 페이지와 스트리밍
-### 4.7.1 loading.js
+### 4.7.1 loading.tsx
 * 내부적으로 React Suspense를 사용하여 컨텐츠가 로드되는 동안 대체할 컴포넌트로 사용됨
+  - Page 컴포넌트를 async 함수로 만들면 반환되는 Promise를 이용해서 로딩중인지(pending) 완료되었는지(fulfilled, rejected) 상태를 추적
 * 렌더링이 완료되면 완료된 컴포넌트로 자동 교체
 * 로딩중 상태에서도 공유 레이아웃 사용 가능
 
-* app/posts/loading.tsx 작성
-  ```tsx
-  export default function Loading() {
-    return <div>로딩중...</div>
-  }
-  ```
+#### app/posts/loading.tsx 작성
+```tsx
+export default function Loading() {
+  return (
+    <div>로딩중...</div>
+  )
+}
+```
 
 * loading 파일과 같은 폴더에 있는 layout 파일에 page를 `<Suspense>`로 감싼 것처럼 동작
   ```tsx
@@ -579,9 +717,11 @@ npm run dev
 
 * app/posts/page.tsx 수정
   ```tsx
-  export default async function Page(){
-    await new Promise(resolve => setTimeout(resolve, 1000*3));
-    return ( ... );
+  export default async function ListPage() {
+    await new Promise((resolve) => setTimeout(resolve, 1000*3));
+    return (
+      <h1>목록 조회</h1>
+    );
   }
   ```
 
@@ -591,19 +731,21 @@ npm run dev
 * SSR을 사용하면 서버에서 페이지에 필요한 모든 데이터를 생성한 후 완성된 HTML을 전송하는데 까지 시간이 오래걸림
 * `<Suspense>`를 통해 스트리밍을 활성화하면 서버에서 레이아웃이나 중요 데이터를 먼저 전송할 수 있으며 클라이언트는 페이지의 일부를 더 빨리 표시할 수 있음
   - 하나의 response로 나머지 데이터도 이어서 받음
+* 시간이 오래 걸리는 작업은 컨포넌트를 분리하고 `<Suspense>`로 감싸서 처리
 
 ### 4.7.3 SEO
-* generateMetadata 함수는 페이지의 메타데이터를 생성하는 데 사용됨
+* layout, page에서 metadata 변수나 generateMetadata 함수를 내보내기 하면 메타데이터 정의 가능
 * 메타데이터는 주로 `<head>` 태그 내에 포함되는 title, description, keyword 등의 정보
 * 메타데이터는 SEO(검색 엔진 최적화)에 중요한 역할을 하며, 소셜 미디어 공유 시에도 사용됨
-* generateMetadata 함수 내에서 데이터를 fetching하는 경우, Next.js는 이 데이터 fetching이 완료될 때까지 기다림
+* generateMetadata 함수 내에서 데이터를 fetching하는 경우, Next.js는 이 데이터 fetching이 완료될 때까지 응답을 보내지 않음
 * 데이터 fetching이 완료된 후 메타데이터를 최종적으로 생성하고, 이 메타데이터를 포함한 `<head>` 태그를 클라이언트로 스트리밍하기 시작
 * 클라이언트는 서버로부터 받은 초기 컨텐츠가 `<head>`를 포함하고 있기 때문에 검색엔진이 자바스크립트를 실행하지 않아도 완전한 메타데이터 확인 가능
 
 ## 4.8 오류 처리
-* 오류가 발생할 경우 error.js 파일에서 오류 처리
+* 오류가 발생할 경우 error.tsx 파일에서 오류 처리
   - 클라이언트 컴포넌트여야 함
 * error 파일과 같은 폴더에 있는 layout 파일에 page를 `<ErrorBoundary>`로 감싼 것처럼 동작
+
   ```tsx
   <ErrorBoundary fallback={<Error />}>
     { children }
@@ -622,33 +764,33 @@ npm run dev
 * page에서 에러가 발생할 경우 같은 폴더의 error에서 처리되고 layout에서 에러가 발생할 경우 상위 폴더의 error에서 처리됨
 
 * 루트 레이이웃에서 에러가 발생할 경우 상위 폴더가 없으므로 에러 처리가 안됨
-  - 대신 app/global-error.js 파일에서 에러 처리
+  - 대신 app/global-error.tsx 파일에서 에러 처리
   - 루트 레이아웃에는 `<html>`, `<body>` 태그가 있으므로 에러가 발생할 경우 대신 사용되는 global-error에 `<html>`, `<body>` 태그가 있어야 함
-  - global-error.js는 프로덕션 환경에서만 동작
+  - global-error.tsx는 프로덕션 환경에서만 동작
 
 * 서버 컴포넌트에서 발생한 에러는 프로덕션 환경일 때 error 객체의 민감한 오류 정보는 제거되고 클라이언트에 전달됨
 
 ## 4.9 라우트 그룹
 * app 라우터는 app 하위 폴더가 URL 경로에 매핑됨
 * 폴더가 URL 경로에 포함되지 않게 하고 싶을때 라우트 그룹을 생성
-* (폴더명) 처럼 폴더명에 ()를 붙여서 작성
+* `(폴더명)` 처럼 폴더명에 `()`를 붙여서 작성
 * URL에 영향을 주지 않고 여러 페이지를 하나의 폴더에 묶어서 관리
 
 <img src="https://nextjs.org/_next/image?url=https%3A%2F%2Fh8DxKfmAPhn8O0p3.public.blob.vercel-storage.com%2Fdocs%2Flight%2Froute-group-organisation.png&w=1920&q=75">
 
 ### 4.9.1 폴더가 라우트 경로에 포함
-* login, signin 폴더를 user 폴더 하위로 그룹화 해서 관리
+* login, signup 폴더를 user 폴더 하위로 그룹화 해서 관리
   ```
   project-root/
   ├── app/
   │   ├── user/
   │   │   ├── login/
-  │   │   │   └── page.js
-  │   │   ├── signin/
-  │   │   │   └── page.js
+  │   │   │   └── page.tsx
+  │   │   ├── signup/
+  │   │   │   └── page.tsx
   ```
-  - /user/login -> app/user/login/page.js
-  - /user/signin -> app/user/signin/page.js
+  - /user/login -> app/user/login/page.tsx
+  - /user/signup -> app/user/signup/page.tsx
 
 ### 4.9.2 라우트 경로에서 제외하기 위해 폴더를 제거
 * 라우트 경로에서 user를 제거하기 위해서 user 폴더를 제거
@@ -656,12 +798,12 @@ npm run dev
   project-root/
   ├── app/
   │   ├── login/
-  │   │   └── page.js
-  │   ├── signin/
-  │   │   └── page.js
+  │   │   └── page.tsx
+  │   ├── signup/
+  │   │   └── page.tsx
   ```
-  - /login -> app/login/page.js
-  - /signin -> app/signin/page.js
+  - /login -> app/login/page.tsx
+  - /signup -> app/signup/page.tsx
 
 ### 4.9.3 폴더를 제거하지 않고 라우트 경로를 제거
 * 라우트 그룹으로 관리
@@ -670,12 +812,12 @@ npm run dev
   ├── app/
   │   ├──(user)/
   │   │   ├── login/
-  │   │   │   └── page.js
-  │   │   ├── signin/
-  │   │   │   └── page.js
+  │   │   │   └── page.tsx
+  │   │   ├── signup/
+  │   │   │   └── page.tsx
   ```
-  - /login -> app/(user)/login/page.js
-  - /signin -> app/(user)/signin/page.js
+  - /login -> app/(user)/login/page.tsx
+  - /signup -> app/(user)/signup/page.tsx
 
 * 라우트 그룹 하위에 layout 작성시 라우트 그룹 내부 페이지에만 적용
   - 동일한 URL depth에 있는 페이지에 다른 layout을 적용하고 싶을 때
@@ -719,18 +861,18 @@ npm run dev
   │
   ├── src/
   │   ├── app/
-  │   │   ├── layout.js
-  │   │   └── page.js
+  │   │   ├── layout.tsx
+  │   │   └── page.tsx
   │   │
   │   └── 라우터 이외의 소스 코드
   │
   ├── package.json
   │
-  └── next.config.js
+  └── next.config.ts
   ```
 
 ### 4.10.3 별칭
-* tsconfig.json, jsconfig.json 파일에 별칭 지정
+* tsconfig.json 파일에 별칭 지정
   - create-next-app을 이용하면 기본으로 추가되고 추가 별칭도 선택적으로 지정 가능
     ```json
     "paths": {
@@ -772,23 +914,23 @@ import { Button } from '@/components/button'
 * 실제 요청한 URL의 동적 경로 값은 layout, page, route, generateMetadata 함수에 params prop으로 전달됨
 * 요청한 URL이 /posts/3일 경우 3을 꺼내는 방법
   ```tsx
-  export default function Page({ params: { id } }) {
+  export default function Page({ params }) {
     return <h1>{ params.id }번 게시물 상세 조회</h1>
   }
   ```
-* app/posts/[id]/page.js 파일이 있을때 매칭되는 URL과 params 값
+* app/posts/[id]/page.tsx 파일이 있을때 매칭되는 URL과 params 값
   - /posts/1 -> { id: '1' }
   - /posts/2 -> { id: '2' }
   - /posts/3 -> { id: '3' }
 
 * 동적 경로를 사용해서 특정 게시글에 달린 좋아요 목록, 관심글로 등록한 목록과 좋아요 상세정보, 관심글 상세 정보를 보여줄 때 만들어야 할 파일
-  - app/posts/[pid]/[slug]/page.js
-    + /posts/1/likes -> { pid: '1', slug: ['likes'] }
-    + /posts/2/likes -> { pid: '2', slug: ['likes'] }
-    + /posts/2/favorites -> { pid: '1', slug: ['favorites'] }
-  - app/posts/[pid]/[slug]/[sid]/page.js
-    + /posts/3/likes/4 -> { pid: '3', slug: ['likes'], sid: '4' }
-    + /posts/3/favorites/4 -> { pid: '3', slug: ['favorites'], sid: '4' }
+  - app/posts/[pid]/[slug]/page.tsx
+    + /posts/1/likes -> { pid: '1', slug: 'likes' }
+    + /posts/2/likes -> { pid: '2', slug: 'likes' }
+    + /posts/2/favorites -> { pid: '1', slug: 'favorites' }
+  - app/posts/[pid]/[slug]/[sid]/page.tsx
+    + /posts/3/likes/4 -> { pid: '3', slug: 'likes', sid: '4' }
+    + /posts/3/favorites/4 -> { pid: '3', slug: 'favorites', sid: '4' }
 
 ### 4.11.1 generateStaticParams() 함수
 * 동적 경로로 구성된 페이지의 params를 미리 지정해서 빌드시 해당 파라미터를 가지는 페이지를 정적으로 생성
@@ -819,12 +961,16 @@ import { Button } from '@/components/button'
   ```
   1. 빌드시 generateStaticParams() 함수 호출 후 반환 받은 배열의 각 요소를 params로 구성해서 Page 컴포넌트 호출
   2. Page 컴포넌트에서 반환 받은 HTML을 빌드 결과로 저장(posts/1.html, 2.html, 3.html)
+  3. 이후 브라우저의 posts/1 요청이 오면 빌드시 만들어둔 정적 라우팅 테이블에서 매칭되는 url이 있는지 확인 후 posts/[id]/page.tsx 파일을 실행하지 않고 posts/1.html을 응답
+  4. 브라우저가 posts/4 요청을 보내는 경우 정적 라우팅 테이블에 매칭되는 url이 없으므로 posts/[id]/page.tsx 파일을 실행하여 응답
 
 ### 4.11.2 Catch-all 세그먼트
-* 대괄호 안에 줄임표(...)를 추가하면 하위 경로에 대해서도 매핑됨
+* 대괄호 안에 줄임표 `...`를 추가하면 하위 경로가 더 있어도 매칭됨
+* 매칭된 값은 전체 하위 경로를 포함해서 params에 배열로 저장됨
 
-* Catch-all 세그먼트를 이용해서 특정 게시글에 달린 좋아요 목록, 관심글로 등록한 목록과 좋아요 상세정보, 관심글 상세 정보를 보여줄 때 만들어야 할 파일
-  - app/posts/[id]/[...slug]/page.js
+* Catch-all 세그먼트를 이용해서 특정 게시글에 달린 좋아요 목록, 관심글로 등록한 목록과 좋아요 상세정보, 관심글 상세 정보를 보여줄 때 만들어야 할 파일과 params 값
+  - app/posts/[id]/[...slug]/page.tsx
+    + /posts/1 -> 매칭되지 않음
     + /posts/1/likes -> { id: '1', slug: ['likes'] }
     + /posts/2/likes -> { id: '2', slug: ['likes'] }
     + /posts/2/favorites -> { id: '2', slug: ['favorites']}
@@ -834,7 +980,7 @@ import { Button } from '@/components/button'
 ### 4.11.3 Optional Catch-all 세그먼트
 * 폴더명을 이중 대괄호로 묶어서 작성하면 Catch-all 세그먼트를 선택사항으로 지정
 
-* 특정 게시글과 댓글 목록, 댓글 상세 정보를 하나의 page로 처리할 경우
+* 특정 게시글과 댓글 목록, 댓글 상세 정보를 하나의 page로 처리할 경우 params 값
   - app/posts/[id]/[[...slug]]/page.tsx
     + /posts/1 -> { id: '1' }
     + /posts/2 -> { id: '2' }
@@ -844,60 +990,86 @@ import { Button } from '@/components/button'
 ## 4.12 라우트 핸들러
 * API 엔드포인트 생성
 * 서버에서 실행되고 데이터를 클라이언트에 반환
-  - 서버 컴포넌트에서는 직접 데이터를 가져오면 되므로 라우트 핸들러를 호출할 필요 없음
+  - 서버 컴포넌트에서는 직접 백엔드로부터 데이터를 가져오면 되므로 라우트 핸들러를 호출할 필요 없음
 * 외부 API를 호출할 때 라우트 핸들러를 통해 호출하면 API 토큰 같은 민감한 정보를 클라이언트에 노출하지 않음
 * GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS 메서드 지원
   - 지원되지 않은 메서드 호출 시 405 Method Not Allowed 에러 응답
-* page 파일 대신 route.js 나 route.ts 파일로 작성
-```js
-export async function GET(request) {
-  const res = await fetch('https://api.fesp.shop/posts');
-  const data = await res.json();
+* route.ts 파일 작성
 
-  return Response.json({ data });
-}
-```
+  ```ts
+  export async function GET(request) {
+    const res = await fetch('https://api.fesp.shop/posts');
+    const data = await res.json();
 
-### 4.12.1 캐싱
-* GET 요청시 Response가 기본적으로 캐시됨(기본값은 30초, Next 15(2024.10.22)에서는 기본으로 캐시되지 않게 수정됨)
-* 캐시 안되게 하려면
-  - Request 객체를 사용
-  - 다른 HTTP 메서드를 사용
-  - cookies 및 headers와 같은 동적 함수를 사용
-  - 라우트 세그먼트 설정 옵션을 통해 ```dynamic``` 모드를 ```force-dynamic```으로 지정
-    + ```export const dynamic = 'force-dynamic';```
-* 캐시 설정
-  - fetch 옵션의 next.revalidate 속성으로 지정
-    + 숫자: 초단위의 캐시 시간 지정
-      ```js
-      const res = await fetch('http://localhost/posts', {
-        next: { revalidate: 60 }, // Revalidate every 60 seconds
-      })
-      ```
-  - 라우트 세그먼트 설정 옵션의 revalidate 설정
-    ```js
-    export const revalidate = 60;
-    ```
+    return Response.json({ data });
+  }
+  ```
 
 ### 4.12.2 NextRequest, NextResponse
 * Fetch API의 Request, Response를 확장하여 추가적인 편의 메서드 제공
 
-```js
-export function GET(request) {
-  const searchParams = request.nextUrl.searchParams;
-  const query = searchParams.get('query');
-  // query is "hello" for /api/search?query=hello
-  ...
-  return NextResponse.json({ data });
+#### NextRequest 주요 기능
+```ts
+export function GET(request: NextRequest) {
+  // URL과 검색 매개변수
+  const { nextUrl } = request;
+  const searchParams = nextUrl.searchParams;
+  const query = searchParams.get('query'); // /api/search?query=hello → "hello"
+  
+  // 쿠키 접근
+  const token = request.cookies.get('token')?.value;
+  
+  // 헤더 접근
+  const userAgent = request.headers.get('user-agent');
+  const authorization = request.headers.get('authorization');
+  
+  // IP 주소 (Edge 런타임에서 사용 가능)
+  const ip = request.ip || request.headers.get('x-forwarded-for');
+  
+  // 지리적 정보 (Edge 런타임에서 사용 가능)
+  const country = request.geo?.country;
+  const city = request.geo?.city;
+  
+  return NextResponse.json({ query, token, userAgent, ip, country });
+}
+```
+
+#### NextResponse 주요 기능
+```ts
+import { NextResponse } from 'next/server';
+
+export function POST(request: NextRequest) {
+  // 1. JSON 응답
+  return NextResponse.json({ message: 'Success' }, { status: 201 });
+  
+  // 2. 리다이렉트
+  return NextResponse.redirect(new URL('/login', request.url));
+  
+  // 3. 헤더 설정
+  const response = NextResponse.json({ data: 'example' });
+  response.headers.set('X-Custom-Header', 'MyValue');
+  response.headers.set('Cache-Control', 'max-age=3600');
+  
+  // 4. 쿠키 설정
+  response.cookies.set('session', 'abc123', {
+    httpOnly: true,
+    secure: true,
+    maxAge: 60 * 60 * 24 * 7, // 1주일
+  });
+  
+  // 5. 쿠키 삭제
+  response.cookies.delete('old-session');
+  
+  return response;
 }
 ```
 
 # 5 Data Fetching
-* 데이터 가져오는 방법
+* 데이터를 가져오는 방법
   - 서버에서 fetch 함수 사용
-  - 서버에서 외부 라이브러리 사용
+  - 서버에서 axios 같은 외부 라이브러리 사용
+  - 클라이언트에서 fetch, axios 같은 함수 사용
   - 클라이언트에서 라우트 핸들러 호출
-  - 클라이언트에서 외부 라이브러리 사용
 
 ## 5.1 Next.js의 fetch 함수
 * fetch API를 확장
@@ -906,77 +1078,241 @@ export function GET(request) {
     + generateMetadata, generateStaticParams, Layout, Page, Server Component에만 적용되고 라우트 핸들러는 컴포넌트 트리의 일부가 아니므로 적용 안됨
     + 메모이제이션된 데이터는 컴포넌트 트리가 렌더링을 완료할 때까지 지속됨
   - 서버 컴포넌트, 라우트 핸들러, 서버 액션에서 async/await와 함께 사용 가능
-  - 서버 액션에서는 캐시되지 않음(cache: no-store가 기본값)
 
-## 5.2 서버 액션
-### 5.2.1 서버 액션이란?
-* 클라이언트의 요청에 의해 서버에서 실행되는 함수
-  - 서버사이드 로직을 클라이언트에서 호출 가능
-* 주로 폼 데이터 처리에 사용
-* Next.js의 캐싱과 재검증 아키텍처와 통합
-  - 액션이 호출되면 한번의 요청으로 업데이트된 UI와 새 데이터를 모두 받을 수 있음
-* 서버 액션이 호출되면 내부적으로 POST 방식으로 호출
+
+## 5.2 서버 액션과 서버 함수
+* 서버 컴포넌트 뿐만 아니라 클라이언트 컴포넌트에서도 호출할 수 있는 서버 컴포넌트의 함수
+* 'use server' 지시어 사용해서 정의
+
+### 5.2.1 서버 함수
+* 서버에서 실
+* GET 방식까지 포함되는 
+
+### 5.2.2 서버 액션
+* GET 방식을 제외한 POST, PUT/PATCH, DELETE 작업에 사용(서버의 데이터 변경)
+  - form의 submit 이벤트로 호출되는 서버 함수
+
+
+
+
+
+
+### 
+
+## 5.2 서버 액션과 서버 함수
+
+### 5.2.1 서버 함수(Server Functions)
+* `use server` 지시어로 정의되는 모든 함수
+* 클라이언트 컴포넌트가 서버에서 실행되는 비동기 함수를 호출할 수 있게 해줌
+* 프레임워크가 자동으로 서버 함수에 대한 참조를 생성하고 클라이언트에 전달
+* 클라이언트에서 호출 시 React가 서버에 요청을 보내고 결과를 반환
+
+### 5.2.2 서버 액션(Server Actions)
+* 서버 함수 중에서 action prop으로 전달되거나 action 내부에서 호출되는 함수
+  - form의 submit 이벤트로 호출되는 서버 함수
+* GET 방식을 제외한 POST, PUT/PATCH, DELETE 작업에 사용(서버의 데이터 변경에 사용)
+* React에서 2024.9월에 기존 서버 액션 대신 서버 함수라는 용어를 새로 만들고 서버 액션은 form에서 사용하는 서버의 데이터 변경 목적의 서버 함수를 지칭
+
+### 5.2.3 용어 정리
+```
+서버에서 실행되는 모든 함수
+├── 일반 함수 ('use server' 없음)
+│   └── 서버 컴포넌트 내부에서만 사용
+└── 서버 함수 ('use server' 있음)
+    ├── 서버 액션 (action prop으로 사용)
+    │   ├── 폼 액션: <form action={serverFn}>
+    │   ├── useActionState와 함께 사용
+    │   └── useTransition과 함께 사용
+    └── 기타 서버 함수 (직접 호출)
+        ├── 클라이언트에서 직접 호출
+        └── 서버에서 직접 호출
+```
+
+### 5.2.4 사용 예시
+```tsx
+// actions.ts - 서버 함수 파일
+'use server'
+
+export async function fetchPosts() {
+  const posts = await db.posts.findMany();
+  return posts;
+}
+
+export async function createPost(formData: FormData) {
+  const title = formData.get('title') as string;
+  await db.posts.create({ data: { title } });
+  revalidatePath('/posts');
+}
+```
+
+```tsx
+// PostsPage.tsx - 서버 컴포넌트
+import { fetchPosts, createPost } from './actions';
+import RefreshButton from './RefreshButton';
+
+export default async function PostsPage() {
+  const posts = await fetchPosts();
+  
+  return (
+    <div>
+      {/* 서버 액션: form action으로 사용 */}
+      <form action={createPost}>
+        <input name="title" placeholder="제목 입력" />
+        <button type="submit">게시글 작성</button>
+      </form>
+      
+      {/* 클라이언트 컴포넌트 - import로 직접 사용 */}
+      <RefreshButton />
+      
+      {posts.map(post => (
+        <div key={post.id}>{post.title}</div>
+      ))}
+    </div>
+  );
+}
+```
+
+```tsx
+// RefreshButton.tsx - 클라이언트 컴포넌트
+'use client'
+import { fetchPosts } from './actions'; // 직접 import
+
+export default function RefreshButton() {
+  return (
+    <button onClick={async () => {
+      const freshPosts = await fetchPosts();
+      console.log('새로운 데이터:', freshPosts);
+    }}>
+      새로고침
+    </button>
+  );
+}
+```
+
+### 5.2.5 서버 함수 주요 특징
 * 매개변수와 반환값은 직렬화 가능해야 함
   - string, number, bigint, boolean, undefined, null, symbol(Symbol.for로 등록된 global Symbol)
   - String, Array, Map, Set, TypedArray, ArrayBuffer
   - Date
   - FormData
   - Object
-  - 서버 액션 함수
+  - 서버 함수 참조
   - Promise
-* 반드시 async 함수로 만들어야 한다
-* 원리
-  - 빌드시 서버 액션 함수는 클라이언트 측에 전송됨
-  - 서버 액션 요청의 payload에 $ACTION_ID를 자동으로 전달
-  - .next/server/app/... 하위에 빌드된 파일 확인
-    + "const actions"으로 검색하면 action 아이디를 확인할 수 있고 mod["$$ACTION_0"]를 사용해서 호출함을 확인
-    + "function $$ACTION_0"으로 검색하면 서버 액션 함수를 찾을 수 있음
+  
+* 대부분 async 함수로 작성
+  - 데이터베이스 작업, API 호출 등 비동기 작업이 일반적
+  - 네트워크를 통한 호출이므로 비동기 처리가 자연스러움
 
-### 5.2.2 서버 액션 정의
-* 인라인 수준: 서버 액션 함수의 첫줄에 'use server' 지시어 추가
-  - 서버 컴포넌트에서만 사용 가능
+* 작동 원리
+  - 서버 함수에 대한 참조(reference) 또는 식별자가 클라이언트로 전송
+  - 클라이언트에서 호출 시 이 식별자를 통해 서버로 네트워크 요청을 보냄
+  - 서버에서 해당 식별자에 매핑된 실제 서버 함수를 실행
+  - 빌드 결과에서 확인
+    + `.next/server/app/...`에서 액션 매핑 테이블 확인 가능
+    + 실제 함수 코드는 서버에만 존재
+
+### 5.2.6 서버 함수 정의
+
+#### 인라인 수준 정의
+* 서버 컴포넌트 내부에서 함수별로 'use server' 지시어 추가
+* props로 클라이언트 컴포넌트에 전달 가능
+
   ```tsx
-  // Server Component
-  export default function Page() {
-    // Server Action
-    async function create() {
+  // ServerComponent.tsx
+  export default function ServerComponent() {
+    // 인라인 서버 함수
+    async function createPost() {
       'use server'
-  
-      // ...
+      await db.posts.create({ title: 'New Post' });
     }
-  
+
     return (
-      // ...
-    )
+      <div>
+        {/* 서버 컴포넌트에서 직접 사용 */}
+        <form action={createPost}>
+          <button type="submit">Create</button>
+        </form>
+        
+        {/* 클라이언트 컴포넌트에 props로 전달 */}
+        <ClientComponent createPost={createPost} />
+      </div>
+    );
   }
   ```
-  
-* 모듈 수준: 서버 액션만 정의하기 위해 별도로 분리한 파일의 첫줄에 'use server' 지시어로 모든 export 함수를 서버 액션으로 정의
-  - 서버 컴포넌트와 클라이언트 컴포넌트 모두 사용 가능
+
+```tsx
+// ClientComponent.tsx
+'use client'
+
+export default function ClientComponent({ createPost }) {
+  return (
+    <button onClick={() => createPost()}>
+      Create Post
+    </button>
+  );
+}
+```
+
+#### 모듈 수준 정의  
+* 파일 첫줄에 'use server' 지시어로 모든 export 함수를 서버 함수로 정의
+* props로 클라이언트 컴포넌트에 전달하거나 클라이언트 컴포넌트에서 import 해서 사용
+
   ```tsx
+  // actions.ts
   'use server'
-  
-  export async function create() {
-    // ...
+
+  export async function createPost() {
+    await db.posts.create({ title: 'New Post' });
   }
-  export async function update() {
-    // ...
+
+  export async function updatePost(id, data) {
+    await db.posts.update({ where: { id }, data });
   }
   ```
 
-* 서버 컴포넌트를 props로 클라이언트 컴포넌트에 전달
   ```tsx
-  <ClientComponent create={create} />
+  // ServerComponent.tsx
+  import { createPost } from './actions';
+
+  export default function ServerComponent() {
+    return (
+      <form action={createPost}> {/* import로 직접 사용 */}
+        <button type="submit">Create</button>
+      </form>
+    );
+  }
   ```
 
-### 5.2.3 서버 액션 호출
+  ```tsx
+  // ClientComponent.tsx
+  'use client' // 클라이언트 컴포넌트
+  import { createPost, updatePost } from './actions';
+
+  export default function ClientComponent() {
+    return (
+      <div>
+        <button onClick={() => createPost()}>Create</button>
+        <button onClick={() => updatePost(1, { title: 'Updated' })}>Update</button>
+      </div>
+    );
+  }
+  ```
+
+#### 권장사항
+* 모듈 수준 정의를 권장
+  - 재사용성이 높음
+  - import로 어디서든 사용 가능  
+  - props 드릴링 방지
+  - 코드 구조가 깔끔함
+
+### 5.2.7 서버 함수 호출
 #### form 요소의 action 속성으로 호출
 * React는 HTML form 요소를 확장해서 action 속성에 서버 액션 지정 가능
   ```tsx
   'use client'
   
   export default function ClientComponent({ create }) {
-    return <form action={create}>{/* ... */}</form>
+    return <form action={ create }>{/* ... */}</form>
   }
   ```
   - 서버 액션이 호출되면 Form 내부의 입력 요소들 값이 저장된 FormData 객체가 자동으로 전달됨
@@ -994,18 +1330,16 @@ export function GET(request) {
         amount: formData.get('amount'),
         status: formData.get('status'),
       }
-  
-      // mutate data
-      // revalidate cache
     }
   
-    return <form action={createInvoice}>...</form>
+    return <form action={ createInvoice }>...</form>
   }
   ```
 
 * form 데이터에 추가 인자값 전달
-  - Function.prototype.bind()를 사용해서 인자값 미리 전달(클라이언트, 서버 컴포넌트 모두 사용 가능)
-  - hidden 타입을 이용(인코딩 되지 않은 값이 HTML에 그대로 삽입됨)
+  - Function.prototype.bind()를 사용해서 인자값 미리 전달
+  - hidden input을 이용
+
   ```tsx
   'use client'
   
@@ -1018,11 +1352,12 @@ export function GET(request) {
       <form action={updateUserWithId}>
         <input type="hidden" name="userId" value={userId} /> // hidden
         <input type="text" name="name" />
-        <button type="submit">Update User Name</button>
+        <button type="submit">이름 수정</button>
       </form>
     )
   }
   ```
+
   ```tsx
   'use server'
   
@@ -1031,25 +1366,15 @@ export function GET(request) {
   }
   ```
 
-* pending 상태를 표시하려면 리액트의 useFormStatus 훅 사용
+* pending 상태를 표시하려면 리액트의 useActionStatus 훅 사용
   - `<form>` 요소의 자식으로 정의
   - 리액트 훅이므로 클라이언트 컴포넌트에서만 사용 가능
-  ```tsx
-  'use client'  
-  import { useFormStatus } from 'react-dom'; 
-  export function SubmitButton() {
-    const { pending } = useFormStatus();
-    return (
-      <button type="submit" disabled={pending}>추가</button>
-    )
-  }
-  ```
 
   ```tsx
   import { SubmitButton } from '@/app/submit-button';
   import { createItem } from '@/app/actions';
   
-  // Server Component
+  // 서버 컴포넌트
   export default async function Home() {
     return (
       <form action={createItem}>
@@ -1060,7 +1385,19 @@ export function GET(request) {
   }
   ```
 
-#### form 요소 내부 요소의 formAction 속성으로 호출
+  ```tsx
+  // 클라이언트 컴포넌트
+  'use client'  
+  import { useActionStatus } from 'react-dom'; 
+  export function SubmitButton() {
+    const { pending } = useActionStatus();
+    return (
+      <button type="submit" disabled={pending}>추가</button>
+    )
+  }
+  ```
+
+#### form 요소 내부의 formAction 속성으로 호출
 * button 같은 폼 내부 요소의 formAction 속성이나 이벤트 핸들러 
   - `<button formAction={}>`
   - `<input type="submit" formAction={}>`
@@ -1141,11 +1478,12 @@ export default function LikeButton({ initialLikes }) {
     }
     ```
 
-### 5.2.4 유효성 검사
+### 5.2.8 유효성 검사
 * 클라이언트측 유효성 검사
   - required, pattern, type="email" 등 HTML의 기본 유효성 검사 사용
 * 서버측 유효성 검사
   - zod 같은 라이브러리 사용
+
   ```tsx
   'use server'
   
@@ -1162,18 +1500,16 @@ export default function LikeButton({ initialLikes }) {
       email: formData.get('email'),
     })
   
-    // Return early if the form data is invalid
     if (!validatedFields.success) {
       return {
         errors: validatedFields.error.flatten().fieldErrors,
       }
     }
   
-    // Mutate data
   }
   ```
 
-* 서버에서 필드를 검증한 후 클라이언트 컴포넌트에서 리액트의 useFormState 훅을 이용해서 사용자에게 메세지를 표시할 수 있음
+* 서버에서 필드를 검증한 후 클라이언트 컴포넌트에서 리액트의 useActionState 훅을 이용해서 사용자에게 메세지를 표시할 수 있음
   ```tsx
   'use server'
   
@@ -1211,24 +1547,26 @@ export default function LikeButton({ initialLikes }) {
   }
   ```
 
-### 5.2.5 에러 처리
-* 에러가 발생하면 가까운 error.js나 `<Suspense>` 에서 처리됨
+### 5.2.9 에러 처리
+* 에러가 발생하면 가까운 error.tsx나 `<Suspense>` 에서 처리됨
 * try/catch로 에러 처리를 권장
   ```tsx
   'use server'
   
   export async function createTodo(prevState, formData) {
     try {
-      // Mutate data
+      // 서버 액션 호출
+
     } catch (e) {
-      throw new Error('Failed to create task')
+      throw new Error('할일 추가에 실패했습니다.')
     }
   }
   ```
 
-### 5.2.6 데이터 재검증
+### 5.2.10 데이터 재검증
 * 서버 액션 작업이 완료되면 기존 캐시된 GET 요청의 결과를 revalidate 해야 갱신된 데이터로 다시 조회 가능
   - revalidatePath(), revalidateTag()
+
   ```tsx
   'use server'
   
@@ -1246,8 +1584,9 @@ export default function LikeButton({ initialLikes }) {
   }
   ```
 
-### 5.2.7 리디렉션
+### 5.2.11 리디렉션
 * 서버 액션 완료 후 다른 페이지로 이동 시 redirect 사용
+
   ```tsx
   'use server'
   
@@ -1266,7 +1605,7 @@ export default function LikeButton({ initialLikes }) {
   }
   ```
 
-### 5.2.8 쿠키 관리
+### 5.2.12 쿠키 관리
 * 서버 액션 내부에서 cookies API의 get, set, delete 사용
   ```tsx
   'use server'
@@ -1285,7 +1624,7 @@ export default function LikeButton({ initialLikes }) {
   }
   ```
 
-### 5.2.9 클로저와 암호화
+### 5.2.13 클로저와 암호화
 * 컴포넌트 내부에 서버 액션을 정의하면 클로저 생성
 * 클로저는 컴포넌트 내부의 변수 접근 가능
 * 서버 액션이 호출 될 때마다 컴포넌트 내부 변수를 계속 사용해야 하므로 이 변수는 클라이어트와 서버간의 상태와 컨텍스트 유지를 위해 클라이언트로 전송되었다가 서버 액션이 호출되면 다시 서버로 전송되는데 이때 클라이언트에 민감한 값을 노출하지 않도록 자체 암호화되어 관리됨
@@ -1295,11 +1634,11 @@ export default function LikeButton({ initialLikes }) {
 * 가능한 서버 컴포넌트를 사용해서 데이터 가져오기
   - 백엔드 데이터 리소스(DB 등)에 직접 액세스 가능
   - API 키나 액세스 토큰 같은 민감한 정보가 클라이언트에 노출되지 않음
-  - 데이터 처리와 렌더링이 서버에서 발생하고 클라이언트는 HTML을 받기 때문에 렌더링 과정 없이 응답받은 HTML을 화면에 보여주기만 하면 되므로 메인 스레드 작업이 줄어듬
+  - 데이터 처리와 렌더링이 서버에서 발생하고 클라이언트는 HTML을 받기 때문에 렌더링 과정 없이 응답받은 HTML을 화면에 보여주기만 하면 되므로 브라우저의 작업 처리가 줄어듬
   - 클라이언트에서 여러번 요청할 작업을 한번의 요청으로 모든 데이터를 가져올 수 있음
     + 폭포수 현상을 줄임
     + Next.js 서버와 데이터 리소스(DB 등)가 보통 지리적으로 가까운 곳에 있기 때문에 네트워크 지연시간을 줄임
-  - fetch API는 자동으로 서버측에 캐싱이되므로 여러 클라이언트의 동일한 요청에 대해 데이터 리소스를 다시 가져올 필요 없이 캐시된 컨텐츠를 제공해서 빠름
+  - fetch API 호출 결과를 서버측에 캐싱하면 여러 클라이언트의 동일한 요청에 대해 데이터 리소스를 다시 가져올 필요 없이 캐시된 컨텐츠를 제공해서 빠름
 
 ### 5.3.2 컴포넌트 트리간 동일한 데이터 전달하지 않기
 * 트리의 여러 컴포넌트가 동일한 데이터를 사용할 경우 하나의 컴포넌트에서 데이터를 가져온 후 props로 전달할 필요 없이 각 컴포넌트가 필요한 데이터를 직접 가져오도록 구성
@@ -1310,14 +1649,15 @@ export default function LikeButton({ initialLikes }) {
 
 <img src="https://nextjs.org/_next/image?url=https%3A%2F%2Fh8DxKfmAPhn8O0p3.public.blob.vercel-storage.com%2Fdocs%2Flight%2Fserver-rendering-with-streaming.png&w=1920&q=75">
 
-### 병렬 및 순차 fetch
+### 5.3.4 병렬 및 순차 fetch
 
 <img src="https://nextjs.org/_next/image?url=https%3A%2F%2Fh8DxKfmAPhn8O0p3.public.blob.vercel-storage.com%2Fdocs%2Flight%2Fsequential-parallel-data-fetching.png&w=1920&q=75">
 
-### 5.3.4 순차적 fetch
+#### 순차적 fetch
 * 이전 fetch 작업 후 다음 fetch 작업을 하기 때문에 폭포수 현상 발생
 * 다음 데이터를 가져올 때 이전 데이터가 필요한 경우 사용(성능 저하)
-* loading 페이지나 `<Suspense>`를 사용해서 데이터 스트리밍 중에 로딩중 상태를 보여주면 전체가 블로킹 되는 문제를 막을 수 있음
+* loading.tsx 페이지나 `<Suspense>`를 사용해서 데이터 스트리밍 중에 로딩중 상태를 보여주면 전체가 블로킹 되는 문제를 막을 수 있음
+
   - 사용자는 이미 로딩된 컨텐츠에 대해서는 인터렉션이 가능
   ```tsx
   // ...
@@ -1338,7 +1678,7 @@ export default function LikeButton({ initialLikes }) {
   export default async function Page({
     params: { username },
   }) {
-    // Wait for the artist
+    // 아티스트 정보 조회
     const artist = await getArtist(username)
   
     return (
@@ -1352,7 +1692,7 @@ export default function LikeButton({ initialLikes }) {
   }
   ```
 
-### 5.3.5 병렬 fetch
+#### 병렬 fetch
 * 데이터 가져오기 작업을 동시에 호출
 * 데이터간 종속성이 없을 경우 사용(성능 향상)
 
@@ -1372,11 +1712,11 @@ async function getArtistAlbums(username) {
 export default async function Page({
   params: { username },
 }) {
-  // Initiate both requests in parallel
+  // 데이터 요청을 동시에 수행
   const artistData = getArtist(username)
   const albumsData = getArtistAlbums(username)
  
-  // Wait for the promises to resolve
+  // 모든 Promise가 fulfilled 되기를 기다림
   const [artist, albums] = await Promise.all([artistData, albumsData])
  
   return (
@@ -1389,97 +1729,99 @@ export default async function Page({
 ```
 
 # 6 서버 컴포넌트와 클라이언트 컴포넌트
-* 렌더링: 리액트 컴포넌트(JS + JSX)를 호출해서 HTML 코드를 만드는 작업
 
 ## 6.1 클라이언트와 서버
-### 6.1.1 렌더링 환경
+
+### 6.1.1 렌더링
+* 리액트 컴포넌트를 호출해서 HTML 코드를 만드는 작업
+
+### 6.1.2 렌더링 환경
 * 클라이언트: 웹 브라우저
 * 서버: 클라이언트의 요청을 받아서 응답을 보내는 컴퓨터
 * 클라이언트 사이드 렌더링(Client Side Rendering, CSR): 렌더링의 주체가 클라이언트
 * 서버 사이드 렌더링(Server Side Rendering, SSR): 렌더링의 주체가 서버
 
-### 6.1.2 요청-응답 수명주기
+### 6.1.3 요청-응답 수명주기
 1. 사용자
   - 주소창에 주소 입력, 링크나 submit 버튼을 클릭하는 액션을 발생시킴
 2. 클라이언트
-  - 클라이언트가 요청 헤더와 바디를 만들어 서버에 HTTP 요청을 보냄
+  - 웹 브라우저가 요청 헤더와 바디를 만들어 서버에 HTTP 요청을 보냄
 3. 서버
   - 클라이언트의 요청 헤더와 바디를 꺼내고 분석해서 요청을 처리한 결과를 응답헤더와 바디에 포함해서 클라이언트에 보냄 
 4. 클라이언트
-  - 서버로부터 받은 응답 데이터를 꺼내서 사용자에게 적절한 UI로 보여줌
+  - 웹 브라우저는 서버로부터 받은 응답 데이터를 사용자에게 적절한 UI로 보여줌
 5. 사용자
   - 페이지와 상호 작용할 수 있는 상태
 
-### 6.1.3 네트워크 경계
-* 클라이언트(웹 브라우저), 서버(Next.js), API 서버, DB 등 서로 다른 환경을 구분하는 개념
+### 6.1.4 네트워크 경계
+* 클라이언트(웹 브라우저), 웹서버, 애플리케이션 서버(Next.js 서버), API 서버, DB 등 서로 다른 환경을 구분하는 개념
 * React는 클라이언트 사이드 렌더링으로 동작
 * Next.js는 클라이언트, 서버 사이드 렌더링으로 동작
 
 ## 6.2 웹 개발의 변천사
-### 6.2.1 전통적인 웹 애플리케이션
-* JSP, Servlet, ASP, PHP 등으로 개발
-* 브라우저는 페이지 단위로 요청을 보내며 웹서버는 완성된 페이지를(HTML) 응답
-* 화면(View, UI)을 만드는 역할은 백엔드의 웹서버와 애플리케이션 서버가 전담
-* 브라우저 화면의 일부만 갱신이 필요한 경우에도 페이지 전체를 서버에 요청해서 받아오므로 매번 리플래시가 발생해서 UX에 부정적
+* 참고: https://github.com/FEBC-13/React/tree/main/workspace-ins/ch01-buildup#1-%EC%9B%B9-%EA%B0%9C%EB%B0%9C%EC%9D%98-%EB%B3%80%EC%B2%9C%EC%82%AC
 
-### 6.2.2 멀티 페이지 애플리케이션
-* Ajax, jQuery 등 클라이언트 자바스크립트 API 사용
-* 서버에 페이지 단위로 요청하지만 같은 페이지 내에서의 화면 갱신은 Ajax를 이용해서 서버와 통신한후 DOM API로 리플래시 없이 화면 갱신
-* 전체 화면 리플래시가 줄어들어서 사용자 UX에 긍정적
-
-### 6.2.3 단일 페이지 애플리케이션(SPA, Single Page Application)
-* 하나의 HTML 페이지에서 애플리케이션의 모든 화면과 기능 제공
-* 브라우저가 최초로 접속했을 때 어플리케이션에 필요한 모든 자바스크립트 코드를 다운로드 받고 페이지 이동시 history API를 이용해서 리플래시 없어 모든 화면을 서비스
-* 화면(View, UI)를 만드는 역할을 웹 브라우저의 자바스크립트가 담당
-* 단점
-  - 모든 기능을 한 페이지에서 다 구현하다 보니 상태(데이터) 관리가 어려움
-  - 자바스크립트에서 HTML 코드를 생성해야 하므로 개발 생산성 저하
-  - 브라우저의 DOM을 자주 갱신하다보면 성능 저하 발생
-* React의 특징
-  - 컴포넌트 별로 상태 관리가 가능하고 글로벌 상태 관리를 지원하는 서드파티 라이브러리가 많음
-  - JSX를 이용해서 HTML 생산성이 높음
-  - 가상 DOM을 이용해서 성능 저하 최소
 * React의 단점
   - 최초에 로딩할 자바스크립트 용량이 커서 초기 화면을 보여주기까지의 시간이 오래 걸림
+  - 코드 분할과 성능 최적화를 수동으로 관리해야 함
+    + lazy loading 직접 구현
+  - SEO(검색 엔진 최적화) 어려움
+    + 빈 HTML로 초기 응답하므로 검색엔진이 컨텐츠를 읽을 수 없음
+  - 프론트엔드만 담당하므로 백엔드 API를 별도로 구축해야 함
+
+* Next.js의 장점
+  - 서버 사이드 렌더링(SSR)으로 초기 로딩 속도 개선
+    + 완성된 HTML을 먼저 응답하므로 즉시 화면 표시 가능
+  - SEO 최적화
+    + 서버에서 완성된 HTML 생성으로 검색엔진이 컨텐츠를 바로 읽을 수 있음
+  - 파일 시스템 기반 자동 라우팅
+    + pages나 app 폴더 구조만으로 라우팅 자동 생성
+  - 자동 코드 분할 및 성능 최적화
+    + 페이지별 자동 번들 분할, 이미지/폰트 최적화 내장
+  - 풀스택 개발 지원
+    + API Routes로 백엔드 기능까지 하나의 프로젝트에서 개발 가능
+  - 다양한 렌더링 전략 지원
+    + SSR(서버 사이드 렌더링), SSG(정적 생성), ISR(증분 정적 재생성) 선택 가능
 
 ## 6.3 서버 컴포넌트
 ### 6.3.1 CSR vs. SSR
 #### 6.3.1.1 CSR(Client Side Rendering)
 * 리액트의 동작 방식
 * 클라이언트가 최초로 접속하면 head에 css, js 파일이 정의되어 있고 body가 비어있는 HTML 응답
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + JS</title>
-    <script type="module" crossorigin src="/assets/index-BzyLkkVx.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-UJILNUew.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
-</html>
-```
+* index.html
+  ```html
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Vite + React + JS</title>
+      <script type="module" crossorigin src="/assets/index-BzyLkkVx.js"></script>
+      <link rel="stylesheet" crossorigin href="/assets/index-UJILNUew.css">
+    </head>
+    <body>
+      <div id="root"></div>
+    </body>
+  </html>
+  ```
 
 * 클라이언트가 HTML을 파싱하면서 css, js 파일을 서버에 추가로 요청하고 다운로드가 완료되면 js 파일을 이용해서 HTML 생성
-* 이후 페이지 이동 시 처음에 다운로드 받은 js 파일에서 모든 HTML 생성하고 동적으로 화면을 바꾸므로 SPA로 동작
+* 이후 페이지 이동 시 처음에 다운로드 받은 js에 정의된 컴포넌트에서 모든 HTML을 생성하고 동적으로 화면을 바꾸므로 SPA로 동작
   - 초기 js 로딩에 시간이 걸림
-  - SEO 안됨
+  - SEO(Search Engine Optimization) 안됨
 
 #### 6.3.1.2 SSR(Server Side Rendering)
-* 초기 페이지 로딩 시간과 SEO(Search Engine Optimization)를 개선하기 위해 서버에서 HTML을 생성하고 클라이언트에 전송
+* 초기 페이지 로딩 시간과 SEO를 개선하기 위해 서버에서 HTML을 생성하고 클라이언트에 전송
 1. 초기 페이지 로드
   - 사용자가 웹사이트를 처음 접속할 때 서버는 해당 페이지의 HTML을 생성하고(렌더링) 브라우저에 응답(SSR)
 2. 자바스크립트 다운로드
-  - 브라우저는 서버로부터 받은 HTML을 파싱하면서 현재 페이지의 동작에 필요한 자바스크립트를 다운로드 후 실행
+  - 브라우저는 서버로부터 받은 HTML을 파싱하면서 현재 페이지의 동작에 필요한 자바스크립트를(클라이언트 컴포넌트) 다운로드 후 실행
 3. 정적인 페이지 뷰
-  - 자바스크립트 다운로드 중에 HTML 파싱이 완료되면 즉, DOM 생성 후 화면에 출력하면 정적인 상태의 화면을 사용자가 볼 수 있음
+  - 자바스크립트 다운로드 중이라도 HTML 파싱이 완료되면 즉, DOM 생성 후 화면이 출력되면 정적인 상태의 화면을 사용자가 볼 수 있음
   - 전체 내용이 로드되기 전이라도 사용자가 링크를 클릭해서 다른 페이지로 이동을 할 수 있음
 4. 하이드레이션
-  - 다운로드 받은 자바스크립트를 이용해서 가상 DOM을 만들고 실제 DOM과 동기화 시키고 이벤트 추가 등의 작업이 끝나면 사용자와 상호작용 가능한 상태가 됨
+  - 다운로드 받은 자바스크립트를 이용해서 가상 DOM을 만들고 브라우저 DOM과 동기화 시키고 이벤트 추가 등의 작업이 끝나면 사용자와 상호작용 가능한 상태가 됨
 5. 리액트 앱으로 동작
   - 하이드레이션이 끝나면 일반적인 리액트 앱으로 동작(CSR)
 
@@ -1492,11 +1834,11 @@ export default async function Page({
 * 효율적인 SEO 가능
   - 정적으로 응답한 HTML에 검색엔진에 필요한 정보를 포함시키기 때문에 검색엔진이 자바스크립트를 실행하지 않더라도 필요한 정보를 바로 확인 가능
 
-### 6.3.2 SSR vs. RSC(React Server Component, React18)
+### 6.3.2 SSR vs. RSC(React Server Component)
 * SSR은 페이지 단위, RSC는 컴포넌트 단위
 * Next.js의 page 라우터가 SSR 방식, app 라우터가 RSC 방식
 * SSR은 page 단위에서만 서버 관련 함수 사용
-  - getServerSideProps 내에서 데이터 받아오고 데이터를 렌더링할 컴포넌트에는 props로 전달
+  - getServerSideProps 내에서 데이터를 받아오고 데이터를 렌더링할 컴포넌트에는 props로 전달
 * RSC는 데이터를 렌더링할 컴포넌트에서 직접 서버 관련 함수 사용
   - 관심사 분리: page 컴포넌트는 UI, 데이터는 하위 컴포넌트에서 직접 생성
   - props 드릴링 없음
@@ -1515,11 +1857,13 @@ export default async function Page({
   - 폭포수 현상을 줄임
   - Next.js 서버와 데이터 리소스(DB 등)가 보통 지리적으로 가까운 곳에 있기 때문에 네트워크 지연시간을 줄임
 * API 키나 액세스 토큰 같은 민감한 정보가 클라이언트에 노출되지 않음
-* fetch API는 자동으로 서버측에 캐싱이되므로 여러 클라이언트의 동일한 요청에 대해 데이터 리소스를 다시 가져올 필요 없이 캐시된 컨텐츠를 제공해서 빠르고 서버 자원 낭비가 줄어듬
+* Next.js에서 기능을 추가한 fetch API의 캐싱을 이용하면 여러 클라이언트의 동일한 요청에 대해 데이터 리소스에서 다시 가져올 필요 없이 캐시된 컨텐츠를 제공해서 빠르고 서버 자원 낭비가 줄어듬
 * 클라이언트로 번들링되어 전송되는 자바스크립트 크기가 줄어듬
-  - 서버에서만 실행되기 때문에 클라이언트로 코드를 전송할 필요 없음(로직, 라이브러리)
+  - 서버에서만 실행되기 때문에 클라이언트로 JS 코드를 전송할 필요 없음(로직, 라이브러리)
 * FCP(First Contentful Paint)가 단축됨
+  - FCP: 페이지 로딩이 시작된 후 첫 번째 콘텐츠가 화면에 그려지는 시점을 측정하는 지표
   - HTML을 서버에서 만들어 주기때문에 인터렉션에 필요한 자바스크립트를 실행하기 전이라도 화면에 보여줄 수 있음
+  - 구글 등 검색엔진의 페이지 순위 결정 요소 중 하나
 * SEO에 유리
 * 렌더링 작업을 청크로 분할해서 스트리밍하면 클라이언트는 전체 HTML을 다 받기전에도 페이지의 일부를 보여줄 수 있음
 * 코드 자동 분할
@@ -1533,53 +1877,62 @@ export default async function Page({
 1. 라우트 세그먼트를 기준으로 각 세그먼트의 렌더링 작업 시작
   - /posts/3일 경우 /posts, /3 두개의 세그먼트로 나뉨
 2. 각 라우트 세그먼트의 대상 컴포넌트는 렌더링에 필요한 데이터를 만들고(fetch) RSC Payload 생성
-  - loading 파일이 있거나 Suspense가 있다면 해당 위치에 fallback UI를 렌더링
+  - loading.tsx 파일이 있거나 `<Suspense>`가 있다면 해당 위치에 fallback UI를 렌더링
     + 이후 데이터 fetching이 완료되면 추가 데이터를 스트리밍 방식으로 전송
   - RSC Payload: 서버에서 렌더링된 컴포넌트 트리 구조(클라이언트 컴포넌트가 들어갈 자리 표시), 클라이언트에서 사용할 자바스크립트 파일 경로, 서버 컴포넌트에서 클라이언트 컴포넌트에 전달하는 props 데이터를 표현한 특수한 포맷의 데이터
 3. RSC Payload를 기반으로 HTML 생성
+  - 초기 접속이나 새로고침 등으로 페이지가 로드될 때 HTML 생성 및 전송
+  - 이후 페이지 이동시에는 RSC Payload만 생성해서 전송
 4. HTML과 RSC Payload를 클라이언트에 전송
   - HTML은 브라우저 자체의 렌더링으로 빠르게 화면 표시
   - HTML만 가지고 화면을 보여줬기 때문에 사용자와의 인터렉션이 되지 않는 상태
 5. 인터렉션을 위한 하이드레이션 시작
   - 클라이언트 컴포넌트 다운로드
-  - 리엑트 앱으로 동작시키기 위해 RSC Payload 정보를 이용해서 Virtual DOM을 생성, Real DOM과 동기화 시키고 이벤트 핸들러를 등록해서 사용자와 인터렉션이 가능한 상태로 만듬
+  - 리엑트 앱으로 동작시키기 위해 RSC Payload 정보를 이용해서 Virtual DOM을 생성, 브라우저 DOM과 동기화 시키고 이벤트 핸들러를 등록해서 사용자와 인터렉션이 가능한 상태로 만듬
 
 #### 6.3.3.2 클라이언트 컴포넌트
 * 서버와 클라이언트에서 실행되는 컴포넌트
 * 파일의 첫줄에 'use client' 지시어 추가
-* 클라이언트에서도 실행되는 컴포넌트로 브라우저에서만 할 수 있는 작업이 필요한 경우 클라이언트 컴포넌트로 만들어야 함
-  - 이벤트 리스너, DOM 직접 핸들링
+* 서버에서 먼저 실행된 후 결과와(HTML) 컴포넌트 자체를(JS) 클라이언트로 전송
+* 이후 클라이언트에서도 실행되는 컴포넌트로, 브라우저에서만 할 수 있는 작업이 필요한 경우 클라이언트 컴포넌트로 만들어야 함
+  - 이벤트 처리, DOM 직접 핸들링
   - useState, useEffect 등 상태와 라이프사이클 관련 기능
   - 브라우저 API(window, document, localStorage, geolocation 등) 사용
 * 클라이언트 컴포넌트가 import해서 사용하는 모든 자식 컴포넌트는 암묵적으로 클라이언트 컴포넌트가 되고 자바스크립트 번들에 포함되어 클라이언트로 전송됨
-* 클라이언트 컴포넌트가 서버 컴포넌트를 import 할 수 없지만 children으로 포함하는건 가능
+* 클라이언트 컴포넌트가 서버 컴포넌트를 직접 import 할 수는 없지만 children으로 포함하는건 가능
+  - 서버 컴포넌트는 서버에서 실행되어야 하기 때문에 브라우저에서 실행되는 클라이언트 컴포넌트에서 직접 import 해서 호출하는건 불가능
+  - 서버 컴포넌트를 자식 컴포넌트로 포함하면 서버에서 먼저 실행된 후 결과가 자식 컴포넌트에 추가되므로 가능
 
 ##### 클라이언트 컴포넌트의 렌더링
 * 페이지 로드일 경우
   - 초기 접속이나 새로고침 등으로 페이지가 로드될 때
   - 서버는 서버 컴포넌트와 클라이언트 컴포넌트 모두 렌더링해서 HTML 생성 후 응답
+  - 접속한 페이지에서 필요한 클라이언트 컴포넌트는 페이지별로 분할 되어서 제공되고 필요한 컴포넌트만 JS 번들로 다운로드
+* 페이지 이동시
+  - 이동한 페이지에서 필요한 클라이언트 컴포넌트 번들만 추가로 다운로드
+  - 이전에 다운받았다면 브라우저 캐시에서 재사용
 * 페이지는 변경되지 않고 리렌더링 되는 경우
   - 새로고침 없이 클라이언트에서 렌더링
 
 ### 6.3.4 Next.js의 RSC(React Server Component) 렌더링 방식
+
 #### 6.3.4.1 정적 렌더링(Static Rendering)
 * SSG(Static Site Generation)
 * 빌드 시점에 서버측에서 HTML을 생성하고 클라이언트 요청시 미리 생성된 HTML을 바로 응답하므로 빠름
 * 데이터가 바뀌지 않는 정적인 페이지에 사용
+
 #### 6.3.4.2 동적 렌더링(Dynamic Rendering)
 * 클라이언트 요청시 매번 HTML을 생성해서 응답하므로 느림
 * 최신 데이터를 반영해야 하거나 사용자 맞춤형 데이터가 있는 동적인 페이지에 사용
+
 #### 6.3.4.3 스트리밍(Streaming)
 * 서버의 작업이 완료되지 않더라도 응답이 여러 청크로 분할되어 클라이언트로 스트리밍 됨
 * 클라이언트는 전체 렌더링이 완료되기 전에 페이지의 일부를 즉시 볼 수 있음
 * 앱 라우터를 사용하면 기본으로 동작
+
 #### 6.3.4.4 ISR(Imcremental Static Regeneration)
 * 정적으로 렌더링 된 이후에 일정 시간이 지나면 다시 서버에서 렌더링 됨
   - revalidate 옵션 사용
-
-<img src="https://nextjs.org/_next/image?url=https%3A%2F%2Fh8DxKfmAPhn8O0p3.public.blob.vercel-storage.com%2Fdocs%2Flight%2Fsequential-parallel-data-fetching.png&w=1920&q=75">
-
-<img src="https://nextjs.org/_next/image?url=https%3A%2F%2Fh8DxKfmAPhn8O0p3.public.blob.vercel-storage.com%2Fdocs%2Flight%2Fserver-rendering-with-streaming.png&w=1920&q=75">
 
 ## 6.4 Edge와 Node.js 런타임
 * Edge는 Node.js의 경량화 버전으로 빠르지만 Node.js의 fs 모듈이나 모든 npm 패키지를 지원하지 않음
@@ -1591,23 +1944,143 @@ export default async function Page({
   ```
 
 # 7 캐싱
+* Next.js는 성능 최적화를 위해 4가지 주요 캐싱 메커니즘을 제공
+
+##### 1. Data Cache
+* 위치: 서버측 (파일 시스템, CDN 등)
+* 대상: fetch 요청, 외부 API 호출 결과를 개별 데이터 단위로 캐시
+* 목적: 동일한 데이터 요청을 여러 클라이언트가 보낼 때 빠른 응답
+* 지속 시간: 명시적으로 무효화하기 전까지 유지
+* 방법: fetch 호출 시 cache 옵션 설정, next.tags로 태그 지정, revalidateTag()로 재검증
+```tsx
+// 캐시됨 (Next.js 14)
+const res = await fetch('https://api.example.com/posts');
+
+// Next.js 15에서는 명시적 설정 필요
+const res = await fetch('https://api.example.com/posts', { cache: 'force-cache' });
+```
+
+##### 2. Full Route Cache
+* 위치: 서버측
+* 대상: 렌더링된 페이지(SSG), Route Handler 결과(API 응답 전체)
+* 목적: 정적으로 생성된 페이지의 빠른 제공(SSG), 빠른 API 응답 제공
+* 지속 시간: 재배포 또는 재검증까지 유지
+* 방법: generateStaticParams() 함수 작성, export const dynamic 설정, revalidatePath()로 재검증
+```tsx
+// 정적 페이지 생성 (SSG)
+export async function generateStaticParams() {
+  return [{ id: '1' }, { id: '2' }, { id: '3' }];
+}
+
+export default async function Page({ params }) {
+  // 빌드 타임에 HTML 생성 후 캐시됨
+  return <div>Post {params.id}</div>;
+}
+```
+
+```tsx
+// Route Handler 정적 캐시
+export const dynamic = 'force-static';
+
+export async function GET() {
+  // 이 응답이 빌드 타임에 생성되어 캐시됨
+  return Response.json({ message: 'Static response' });
+}
+```
+
+##### 3. Router Cache
+* 위치: 클라이언트측 (브라우저 메모리)
+* 대상: 방문한 페이지의 RSC Payload
+* 목적: 페이지 간 이동 시 빠른 탐색
+* 지속 시간: 세션 동안 또는 설정된 시간까지
+* 방법: next.config.ts에서 staleTimes 설정, Link 컴포넌트의 prefetch 속성 조정, router.refresh() 호출
+```tsx
+// next.config.ts - 라우터 캐시 설정
+module.exports = {
+  experimental: {
+    staleTimes: {
+      dynamic: 30,  // 동적 페이지 30초 캐시
+      static: 300,  // 정적 페이지 5분 캐시
+    },
+  },
+};
+```
+
+##### 4. Request Memoization
+* 위치: 서버측 (렌더링 중)
+* 대상: 동일한 렌더링 사이클 내의 중복 fetch 요청
+* 목적: 컴포넌트 트리에서 중복 요청 방지
+* 지속 시간: 하나의 렌더링 완료까지만
+* 방법: 특별한 설정 불필요, 동일한 URL과 옵션으로 fetch 호출하면 자동으로 메모이제이션
+
+  ```tsx
+  // 같은 렌더링 사이클에서 동일 요청은 메모이제이션됨
+  function ComponentA() {
+    const data = await fetch('https://api.example.com/user'); // 실제 요청
+  }
+
+  function ComponentB() {
+    const data = await fetch('https://api.example.com/user'); // 메모이제이션된 결과 사용
+  }
+  ```
+
+##### Next.js 15의 주요 변경사항
+* 기본값 변경
+* Data Cache: 기본적으로 `no-store` (캐시 안됨)
+* Route Handler Cache: 기본적으로 캐시 안됨
+* Router Cache: Page 컴포넌트 기본 `staleTime`이 0초
+
+* Next.js 14 vs 15 비교
+```tsx
+// Next.js 14: 자동으로 캐시됨
+const res = await fetch('https://api.example.com/posts');
+
+// Next.js 15: 캐시 안됨 (명시적 설정 필요)
+const res = await fetch('https://api.example.com/posts'); // cache: 'no-store' 기본값
+
+// Next.js 15에서 캐시하려면 명시적 설정 필요
+const res = await fetch('https://api.example.com/posts', { cache: 'force-cache' });
+```
+
+* 캐시를 명시적으로 설정해도 여전히 캐시가 안되는 경우
+  * 미들웨어에서는 캐시 안됨
+  * Request 객체를 사용하는 경우
+  * GET 이외의 HTTP 메서드 사용 (POST, PUT, DELETE 등)
+  * cookies() 또는 headers() 함수 사용
+    - header나 cookie를 꺼내는 작업은 동적으로 실행되어야 하므로 해당 컴포넌트는 동적 렌더링이 됨
+  * 라우트 세그먼트에서 `dynamic = 'force-dynamic'` 설정
+  * 서버 액션 내부의 fetch 요청
+
+```tsx
+// 이런 경우들은 cache: 'force-cache'를 설정해도 캐시 안됨
+export default async function Page() {
+  const cookieStore = cookies(); // 동적 함수 사용
+  const res = await fetch('https://api.example.com/posts', { 
+    cache: 'force-cache' // 설정해도 캐시 안됨!
+  });
+}
+
+export const dynamic = 'force-dynamic'; // 이 설정이 있으면 모든 fetch가 캐시 안됨
+```
+
+
+
+
+
+
+
+
+
 
 ## 7.1 데이터 캐싱
 ### 7.1.1 Next.js의 fetch API
-* fetch의 반환값을 서버의 데이터 캐시에 자동으로 캐시(Next 15에서는 기본으로 캐시되지 않게 수정되었는지 확인 필요)
+* fetch의 반환값을 서버의 데이터 캐시에 자동으로 캐시하도록 구성할 수 있음
   - 빌드시, 요청시 데이터를 캐시하고 재사용
-    ```js
-    // 'force-cache'는 기본값이므로 생략 가능
-    fetch('https://api.fesp.shop/posts', { cache: 'force-cache' });
-    ```
-  - 캐시되지 않는 예외 사항
-    + 서버 액션
-    + GET 방식 이외의 라우트 핸들러
 
-* 캐시 미적용
-  - fetch의 cache: 'no-store' 속성 사용
-    ```tsx
-    fetch(`https://api.fesp.shop/posts`, { cache: 'no-store' });
+    ```ts
+    // Next.js 14 기본값: 'force-cache'
+    // Next.js 15 기본값: 'no-store'
+    fetch('https://api.fesp.shop/posts', { cache: 'force-cache' });
     ```
 
   - layout, page의 라우트 세그먼트 설정 옵션을 사용하면 layout이나 page 내의 모든 요청에 적용됨
@@ -1617,35 +2090,7 @@ export default async function Page({
 
 <img src="https://nextjs.org/_next/image?url=https%3A%2F%2Fh8DxKfmAPhn8O0p3.public.blob.vercel-storage.com%2Fdocs%2Flight%2Fdata-cache.png&w=1920&q=75">
 
-### 7.1.2 캐시 미적용 옵션
-```tsx
-// fetch의 { cache: 'no-store' } 옵션
-fetch(`https://api.fesp.shop/posts`, { cache: 'no-store' });
-
-// fetch의 { next: { revalidate: 0 } } 옵션
-fetch('https://api.fesp.shop/posts', { next: { revalidate: 0 } });
-
-// POST 라우터 핸들러 내부의 fecth 요청 
-export async function POST(request) {
-  fetch('https://api.fesp.shop/posts');
-}
-
-// header나 cookies 속성을 사용
-// header나 cookie를 꺼내는 작업은 동적 함수이므로 해당 컴포넌트는 동적 렌더링이 됨
-const cookieStore = cookies();
-const headersList = headers();
-
-// 라우트 세그먼트 설정 옵션의 dynamic 속성으로 force-dynamic 사용
-export const dynamic = 'force-dynamic';
-
-// 라우트 세그먼트 설정 옵션의 fetchCache 속성으로 *-no-store 사용
-export const fetchCache = 'force-no-store'; // 캐시 무시하고 항상 새로운 데이터 가져옴
-export const fetchCache = 'only-no-store'; // 캐시가 없을 경우에만 새로운 데이터 가져옴
-export const fetchCache = 'default-no-store'; // 기본적으로 캐시를 사용안함. 다른 옵션으로 활성화 가능
-```
-
-* 미들웨어에서는 캐시 안됨
-* 데이터 캐시와 fetch 메모이제이션의 차이점
+### 7.1.2 데이터 캐시와 fetch 메모이제이션의 차이점
   - 둘다 프로덕션에서만 동작
   - 데이터 캐시는 여러 요청에서 재사용 됨
   - 메모이제이션은 컴포넌트 트리가 렌더링 되는 동안에만 재사용 됨
@@ -1708,23 +2153,18 @@ revalidatePath('/posts'); // /posts URL의 캐시 삭제
 * 유연성
   - 원격 서버의 이미지를 요청에 따라 크기 조정
 
-* 외부 이미지 로딩시 next.config.mjs 설정 추가
-```js
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+* 외부 이미지 로딩시 next.config.ts 설정 추가
+```ts
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '',
-        pathname: '/files/**',
-      },
-      {
         protocol: 'https',
-        hostname: 'api.fesp.shop',
+        hostname: 'fesp-api.koyeb.app',
         port: '',
-        pathname: '/files/**',
+        pathname: '/market/files/**',
       },
     ],
   },
@@ -1799,7 +2239,7 @@ export default function Page() {
 ```
 
 * 인증 공급자의 API 호출
-```js
+```ts
 'use server'
  
 import { signIn } from '@/auth'
@@ -1867,7 +2307,7 @@ function LoginButton() {
 
 ### 9.2.1 미들웨어 구현 방법
 #### 미들웨어 설정
-* 루트 디렉토리에 middleware.js 파일 생성
+* 루트 디렉토리에 middleware.tsx 파일 생성
 * 토큰 확인 등을 통해 사용자 엑세스를 승인하는 로직 작성
 
 #### 보호된 경로 정의
@@ -1987,8 +2427,8 @@ npx auth secret
 ```
 
 ### 9.3.3 Auth.js 구성 파일 생성
-* src/auth.js
-```js
+* src/auth.ts
+```ts
 import NextAuth from "next-auth";
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -2048,8 +2488,8 @@ GOOGLE_CLIENT_ID=abc123
 GOOGLE_CLIENT_SECRET=123ddd
 ```
 
-* src/auth.js에 추가
-```js
+* src/auth.ts에 추가
+```ts
 import google from "next-auth/providers/google";
 ...
 providers: [ 
@@ -2061,8 +2501,8 @@ providers: [
 ]
 ```
 
-* src/data/actions/authAction.js에 추가
-```js
+* src/data/actions/authAction.ts에 추가
+```ts
 export async function signInWithGoogle(){
   await signIn('google', { redirectTo: '/' });
 }
@@ -2076,8 +2516,8 @@ import { signInWithCredentials, signInWithGoogle } from "@/data/actions/authActi
 <Submit formAction={signInWithGoogle}>구글</Submit>
 ```
 
-* next.config.mjs에 추가
-```js
+* next.config.ts에 추가
+```ts
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -2113,8 +2553,8 @@ GITHUB_CLIENT_ID=aaabb12
 GITHUB_CLIENT_SECRET=033a8ef1eadf
 ```
 
-* src/auth.js에 추가
-```js
+* src/auth.ts에 추가
+```ts
 import github from "next-auth/providers/github";
 ...
 providers: [ 
@@ -2126,8 +2566,8 @@ providers: [
 ]
 ```
 
-* src/data/actions/authAction.js에 추가
-```js
+* src/data/actions/authAction.ts에 추가
+```ts
 export async function signInWithGithub(){
   await signIn('github', { redirectTo: '/' });
 }
@@ -2141,8 +2581,8 @@ import { signInWithCredentials, signInWithGithub } from "@/data/actions/authActi
 <Submit formAction={signInWithGithub}>깃허브</Submit>
 ```
 
-* next.config.mjs에 추가
-```js
+* next.config.ts에 추가
+```ts
 const nextConfig = {
   images: {
     remotePatterns: [
