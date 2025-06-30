@@ -676,8 +676,14 @@
   - Todo
     + TodoList의 상태와 메서드 전부 Todo로 이동
     + addItem -> TodoInput에 전달
-    + handleAdd에서 addItem 호출 해서추가 기능 완료
-    + 삭제 기능 deleteItem -> TodoList -> TodoItem
+    + handleAdd에서 addItem 호출 해서 추가 기능 완료
+* 삭제 기능 구현
+  - Todo
+    + deleteItem -> TodoList에 전달
+  - TodoList
+    + deleteItem -> TodoItem에 전달
+  - TodoItem
+    + 삭제 기능 완료
 
 ### 19일차(2025.06.25 수)
 #### 오전(3시간)
@@ -694,30 +700,18 @@
 #### 회고(1시간)
 * 이호정: 컨텍스트 API 03번 예제에서 left3를 두개로 만든 이유
 
-
-#### 병아리반(1시간)
-* 토글 기능 구현
-  - Todo
-    + toggleDone 작성
-    + toggleDone -> TodoList -> TodoItem
-  - TodoItem
-    + handleToggle 작성
-    + toggleDon 호출해서 토글 기능 완료
-
 ### 20일차(2025.06.26 목)
 #### 오전(3시간)
 * jotai
 * zustand 개발중
 
-#### 오후(3시간)
+#### 오후(4시간)
 * zustand 완료
 * 8장 css
 
 #### 회고(1시간)
 * 
 
-#### 병아리반(1시간)
-* 
 
 ## 6주차 (2025.06.30 월 ~ 2025.07.03 목, 4일)
 ### 공식 시간표
@@ -728,16 +722,51 @@
 
 ### 21일차(2025.06.30 월)
 #### 오전(3시간)
-* 
+* [10장 Next.js](./workspace-ins/ch10-nextjs#10장-nextjs)
+  * [1 Next.js 개요](./workspace-ins/ch10-nextjs#1-nextjs-개요)
+* [7. 레이지 로딩 (lazy loading)](./workspace-ins/ch05-router#7-레이지-로딩-lazy-loading)
+  - 🧑‍💻 [05 리액트 라우터 적용](./workspace-ins/ch12-app/todolist/05-router)
+* [8. React.Suspense 컴포넌트](./workspace-ins/ch05-router#8-reactsuspense-컴포넌트)
+  - [04 React Query(TanStack Query) + Suspense](./workspace-ins/ch09-ajax/04-board-suspense)
+* [10장 Next.js](./workspace-ins/ch10-nextjs#10장-nextjs)
+  * [2 개발환경 구성](./workspace-ins/ch10-nextjs#2-개발환경-구성)
+    - 🧑‍💻 01-manual 예제
+    - 🧑‍💻 02-cna 실습
 
 #### 오후(3시간)
-* 
+  * [3 프로젝트 구조](./workspace-ins/ch10-nextjs#3-프로젝트-구조)
+  * [4 라우팅](./workspace-ins/ch10-nextjs#4-라우팅)
+    * [4.5.1 Link 컴포넌트](./workspace-ins/ch10-nextjs#451-link-컴포넌트)
+      - 02-cna 예제에 라우팅 실습 추가
 
 #### 회고(1시간)
-* 
+* 조현수
 
 #### 병아리반(1시간)
-* 
+* 토글 기능 구현
+  - Todo
+    + toggleDone 작성
+    + toggleDone -> TodoList -> TodoItem
+  - TodoItem
+    + handleToggle 작성
+    + toggleDon 호출해서 토글 기능 완료
+* 추가때 엔터 이벤트 처리, 추가후 focus 지정
+  - TodoInput
+    + handleAddKeydown() 이벤트 처리
+    + useRef 훅으로 포커스 추가
+
+* chick/todo 복사해서 todo-api 생성
+* 할일 목록 API 서버 호출
+  - hooks/useAxiosInstance 작성
+  - TodoList에 fetchTodoList() 작성
+* 할일 등록 API 서버 호출
+  - TodoList의 fetchTodoList -> TodoInput에 전달
+  - TodoInput handleAdd()에서 서버 호출로 수정 후 fetchTodoList() 호출 
+* 할일 삭제 API 서버 호출
+  - TodoList의 fetchTodoList -> TodoItem에 전달
+  - TodoInput handleDelete()에서 서버 호출로 수정 후 fetchTodoList() 호출 
+* 할일 수정 API 서버 호출
+  - TodoList의 toggleDone()에서 서버 호출로 수정 후 fetchTodoList() 호출
 
 ### 22일차(2025.07.01 화)
 #### 오전(3시간)

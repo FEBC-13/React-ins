@@ -15,6 +15,9 @@ export default async function ListPage() {
     await new Promise(resolve => setTimeout(resolve, 1000*2));
   }
   return (
-    <h1>목록 조회</h1>
+    <>
+      <h1>목록 조회</h1>
+      <p>실제 목록을 가져오는 컴포넌트</p>
+    </>
   );
 }

@@ -5,7 +5,8 @@ export const metadata: Metadata = {
   description: 'Home 페이지입니다.'
 }
 
-export default function RootPage() {
+export default async function RootPage() {
+  await new Promise(resolve => setTimeout(resolve, 1000*2));
   return (
     <h1>Home</h1>
   );

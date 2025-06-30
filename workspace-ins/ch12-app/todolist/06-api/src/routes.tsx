@@ -1,4 +1,5 @@
 import { Navigate, createBrowserRouter } from "react-router";
+import { Suspense } from "react";
 
 import About from '@pages/About';
 import Home from '@pages/Home';
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
       { path: 'list', element: <TodoList /> },
       { 
         path: 'list/:_id', 
-        element: <TodoInfo />,
+        element: (
+          <Suspense fallback={<div>할일 상세 정보 로딩 중...</div>}>
+            <TodoInfo />
+          </Suspense>
+        ),
         children: [
           { path: 'edit', element: <TodoEdit /> }
         ]

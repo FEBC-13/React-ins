@@ -742,9 +742,10 @@ export default function Loading() {
 * 클라이언트는 서버로부터 받은 초기 컨텐츠가 `<head>`를 포함하고 있기 때문에 검색엔진이 자바스크립트를 실행하지 않아도 완전한 메타데이터 확인 가능
 
 ## 4.8 오류 처리
-* 오류가 발생할 경우 error.tsx 파일에서 오류 처리
+* 컴포넌트 렌더링시 에러가 발생할 경우 error.tsx 파일에서 에러 처리 및 에러 UI 보여줌
   - 클라이언트 컴포넌트여야 함
 * error 파일과 같은 폴더에 있는 layout 파일에 page를 `<ErrorBoundary>`로 감싼 것처럼 동작
+  - React에서는 클래스형 컴포넌트로 ErrorBoundary를 직접 정의하고 componentDidCatch와 getDerivedStateFromError 생명주기 메서드를 오버라이드 해서 에러 처리를 구현해야 함
 
   ```tsx
   <ErrorBoundary fallback={<Error />}>
@@ -759,7 +760,7 @@ export default function Loading() {
 * 매개변수
   - error: 에러 객체
   - reset: 에러가 발생한 컴포넌트를 다시 렌더링 하는 함수
-    + 에러는 일시적인 요인으로 발생하는 경우가 많으므로 reset() 함수를 호출해서 리플래시 없이 해당 컴포넌트를 다시 렌더링 시도할 수 있음
+    + 네트워크 같은 에러는 일시적인 요인으로 발생하는 경우가 많으므로 reset() 함수를 호출해서 리플래시 없이 해당 컴포넌트를 다시 렌더링 시도할 수 있음
 
 * page에서 에러가 발생할 경우 같은 폴더의 error에서 처리되고 layout에서 에러가 발생할 경우 상위 폴더의 error에서 처리됨
 

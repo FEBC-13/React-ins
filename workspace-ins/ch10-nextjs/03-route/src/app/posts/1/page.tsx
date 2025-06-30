@@ -13,7 +13,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function InfoPage() {
+export default async function InfoPage() {
+  await new Promise(resolve => setTimeout(resolve, 1000*2));
   return (
     <h1>상세 조회 - 1번 게시물</h1>
   );
