@@ -586,11 +586,14 @@ export default async function InfoPage() {
   - `라이언 보드 v.01` -> `라이언 보드 v.02`
 
 ## 3.1 동적 라우트 정의
+* 폴더명 수정이 되지 않을 경우 개발 서버를 중지한 후 수정
+* 테스트시 수정사항이 반영되지 않을 경우 개발 서버 재시작
+
 ### 3.1.1 게시물 상세 보기 페이지
 * app/info/1 폴더명을 app/info/[_id]로 수정
 * app/info/2 폴더 삭제
 
-### 게시판 종류별 페이지
+### 3.1.2 게시물 목록 페이지
 * app/info 폴더명을 app/[type]으로 수정
 * app/free 폴더 삭제
 
@@ -603,43 +606,131 @@ export default async function InfoPage() {
   <li className="hover:text-amber-500 hover:font-semibold"><Link href="/qna">질문게시판</Link></li>
   ```
 
-#### 게시물 목록 조회 페이지에 제목 적용
-* app/[type]/page.tsx 수정
+#### 게시물 목록 조회 페이지에 게시판 타입별 제목 적용
+* app/[boardType]/page.tsx 수정
+  - 게시판 타입별 제목 적용
+  - ListItem에 게시판 타입을 props로 전달
 
-```tsx
-...
-interface ListPageProps {
-  params: Promise<{
-    type: string;
-  }>;
-}
-
-export default async function ListPage({ params }: ListPageProps) {
-  const { type } = await params;
-  let boardTitle = '';
-  switch (type) {
-    case 'info':
-      boardTitle = '정보 공유';
-      break;
-    case 'free':
-      boardTitle = '자유 게시판';
-      break;
-    case 'qna':
-      boardTitle = '질문 게시판';
-      break;
-  }
-
-  return (
+    ```tsx
     ...
-  );
-}
-```
+    export interface ListPageProps {
+      params: Promise<{
+        boardType: string;
+      }>;
+    }
 
-### 3.1.2 게시물 목록 
+    export default async function ListPage({ params }: ListPageProps) {
+      const { boardType } = await params;
+      let boardTitle = '';
+      switch (boardType) {
+        case 'info':
+          boardTitle = '정보 공유';
+          break;
+        case 'free':
+          boardTitle = '자유 게시판';
+          break;
+        case 'qna':
+          boardTitle = '질문 게시판';
+          break;
+      }
+
+      return (
+        ...
+        <h2 className="pb-4 text-2xl font-bold text-gray-700 dark:text-gray-200">{ boardTitle }</h2>
+        ...
+        <ListItem boardType={ boardType } />
+        <ListItem boardType={ boardType } />
+        ...
+      );
+    }
+    ```
+
+* 테스트
+  - 정보공유, 자유게시판, 질문게시판에 접속했을때 각각의 제목을 잘 표시하는지 확인
+
+### 3.1.3 게시물 관련 링크 수정
+#### 하드 코딩된 `info` 대신 `boardType` param 값으로 변경
+* 게시물 목록 조회
+  - app/[boardType]/page.tsx 수정
+    + `href="/info/new"` -> ```href={`/${boardType}/new`}```
+    + `href="/info?page=1"` -> ```href={`/${boardType}?page=1`}```
+    + `href="/info?page=2"` -> ```href={`/${boardType}?page=2`}```
+
+  - app/[boardType]/ListItem.tsx 수정
+
+    ```tsx
+    export default async function ListItem({ boardType }: { boardType: string }) {      
+      return (
+        ...
+        <Link href={`/${boardType}/1`} className="hover:text-orange-500 hover:underline">React란?</Link>
+        ...
+      );
+    }
+    ```
+
+* 게시물 상세 조회
+  - app/[boardType]/[_id]/page.tsx 수정
+
+    ```tsx
+    interface InfoPageProps {
+      params: Promise<{
+        boardType: string;
+        _id: string;
+      }>;
+    }
+
+    export default async function InfoPage ({ params }: InfoPageProps) {
+      const { boardType, _id } = await params;
+      ...
+    }
+    ```
+
+    + `action="/info"` -> ```action={`/${boardType}`}```
+    + `href="/info"` -> ```href={`/${boardType}`}```
+    + `href="/info/1/edit"` -> ```href={`/${boardType}/${_id}/edit`}```
+
+* 게시물 수정
+  - app/[boardType]/[_id]/edit/page.tsx 수정
+
+    ```tsx
+    interface EditPageProps {
+      params: Promise<{
+        boardType: string;
+        _id: string;
+      }>;
+    }
+
+    export default async function EditPage({ params }: EditPageProps) {
+      const { boardType, _id } = await params;
+    }
+    ```
+
+    + `action="/info/1"` -> ```action={`/${boardType}/${_id}`}```
+    + `href="/info/1"` -> ```href={`/${boardType}/${_id}`}```
+
+### 3.1.4 테스트
+* `자유게시판`에 접속한 후 여러 버튼을 누르면서 페이지를 이동하고 다시 돌아 왔을 때 `자유게시판` 제목이 유지 되는지 확인(또는 주소창에 localhost:3000/free 가 유지 되는지 확인)
+  - 자유게시판 > 글작성 > 등록
+  - 자유게시판 > 글작성 > 취소
+  - 자유게시판 > React란? > 목록
+  - 자유게시판 > React란? > 삭제
+  - 자유게시판 > React란? > 수정 > 수정 > 목록
+  - 자유게시판 > React란? > 수정 > 취소 > 목록
 
 
 ## 3.2 라우트 그룹 정의
 
+#### 3.2.1 로그인과 회원가입 페이지 라우트 그룹으로 지정
+* app/user 폴더명을 app/(user)로 수정
+
+#### 3.2.2 로그인, 회원가입 링크 수정
+* components/common/Header.tsx 수정
+  - `href="/user/login"` -> `href="/login"`
+  - `href="/user/signup"` -> `href="/signup"`
+
+* app/(user)/login/page.tsx 수정
+  - `href="/user/signup"` -> `href="/signup"`
+* 로그인, 회원가입 링크 테스트 
 
 ## 3.3 메타 데이터 추가
 ### 
@@ -689,7 +780,6 @@ export default async function ListPage({ params }: ListPageProps) {
 * app/user/signup/SignupForm.tsx
 * app/user/signup/page.tsx
 
-## 공통 컴포넌트 작성
 
 
 
@@ -706,19 +796,8 @@ export default async function ListPage({ params }: ListPageProps) {
 
 
 
-## 프로젝트 설정
-### 추가 패키지 설치
-```sh
-cd lion-board-01
-npm i axios @tanstack/react-query @tanstack/react-query-devtools react-hook-form zod zustand react-spinners react-toastify
-```
 
-### alias 추가
-* 참고: https://github.com/FEBC-13/React/tree/main/workspace-ins/ch02-start#vscode%EC%97%90%EC%84%9C-alias-%EC%9D%B8%EC%8B%9D
-* tsconfig.json
-```
 
-```
 
 
 ### 에러 페이지
@@ -776,7 +855,7 @@ npm i axios @tanstack/react-query @tanstack/react-query-devtools react-hook-form
   ```tsx
   export const metadata: Metadata = {
     // url 관련 metadata 설정시 사용될 기본 경로 지정
-    metadataBase: new URL('https://next.fesp.shop'),
+    metadataBase: new URL('"https://lion-board.vercel.app'),
   };
   ```
 
