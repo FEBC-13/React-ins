@@ -1,5 +1,5 @@
 import Link from "next/link";
-import CommentList from "@/app/info/1/CommentList";
+import CommentList from "@/app/[type]/[_id]/CommentList";
 
 export default async function InfoPage() {
   return (

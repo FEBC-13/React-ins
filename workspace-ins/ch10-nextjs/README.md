@@ -802,7 +802,7 @@ export async function createPost(formData) {
     );
   }
   ```
-  
+
 * 빌드 할 때 동작 순서
   1. 빌드시 generateStaticParams() 함수 호출 후 반환 받은 배열의 각 요소를 params로 구성해서 Page 컴포넌트 호출
   2. Page 컴포넌트에서 반환 받은 HTML을 빌드 결과로 저장(posts/1.html, 2.html, 3.html)
@@ -1040,7 +1040,7 @@ export default function Loading() {
 * 사용자에게 친절한 안내 메시지, 홈으로 이동 버튼 등 커스텀 404 화면을 제공하도록 작성
 * 일반적으로 글로벌 404 처리를 위해 루트(app) 폴더에 not-found 파일을 둠
 
-## 5.4 라우트 핸들러
+## 5.4 route handler
 * 서버에서 실행되고 데이터를 클라이언트에 반환하는 API 엔드포인트 생성
   - 서버 컴포넌트에서는 직접 백엔드로부터 데이터를 가져오면 되므로 라우트 핸들러를 호출할 필요 없음
 * 외부 API를 호출할 때 라우트 핸들러를 통해 호출하면 API 토큰 같은 민감한 정보를 클라이언트에 노출하지 않음

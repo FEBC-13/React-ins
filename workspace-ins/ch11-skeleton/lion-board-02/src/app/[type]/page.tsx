@@ -1,11 +1,34 @@
-import ListItem from "@/app/info/ListItem";
+import ListItem from "@/app/[type]/ListItem";
 import Link from "next/link";
 
-export default async function ListPage() {
+interface ListPageProps {
+  params: Promise<{
+    type: string;
+  }>;
+}
+
+export default async function ListPage({ params }: ListPageProps) {
+  const { type } = await params;
+
+  console.log(type);
+
+  let boardTitle = '';
+  switch (type) {
+    case 'info':
+      boardTitle = '정보 공유';
+      break;
+    case 'free':
+      boardTitle = '자유 게시판';
+      break;
+    case 'qna':
+      boardTitle = '질문 게시판';
+      break;
+  }
+
   return (
     <main className="flex-1 min-w-80 p-10">
       <div className="text-center py-4">
-        <h2 className="pb-4 text-2xl font-bold text-gray-700 dark:text-gray-200">정보 공유</h2>
+        <h2 className="pb-4 text-2xl font-bold text-gray-700 dark:text-gray-200">{boardTitle}</h2>
       </div>
       <div className="flex justify-end mr-4">
         

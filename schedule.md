@@ -687,27 +687,43 @@
 
 ### 19일차(2025.06.25 수)
 #### 오전(3시간)
-* axios 인터셉터 설명
-  - 02.axios에 추가
-* 01.프롭드릴링
-  * context api 설명
-  * 02.useContext
+* 🔊 [3.3.5 인터셉터](./workspace-ins/ch09-ajax#335-인터셉터)
+  - 🧑‍💻 [02 Axios 라이브러리](./workspace-ins/ch09-ajax/01-board-axios)
+
+* 🔊 [6장 Context API](./workspace-ins/ch06-contextapi)
+  * 🔊 [1. Context API란?](./workspace-ins/ch06-contextapi#1-context-api란)
+    - 🧑‍💻 [01 Prop Drilling](./workspace-ins/ch06-contextapi/01-prop-drilling)
+  * 🔊 [2. 사용 방법](./workspace-ins/ch06-contextapi#2-사용-방법)
+    - 🧑‍💻 [02 Context API - useContext 훅](./workspace-ins/ch06-contextapi/02-useContext)
 
 #### 오후(4시간 20분)
-* 03.use
-* redux
+  * 🔊 [2.3.2 use 훅 사용 (React 19 신규 기능)](./workspace-ins/ch06-contextapi#232-use-훅-사용-react-19-신규-기능)
+    - 🧑‍💻 [03 Context API - use 훅](./workspace-ins/ch06-contextapi/03-use)
+
+* 🔊 [7장 전역 상태 관리](./workspace-ins/ch07-globalstate#7장-전역-상태-관리)
+  * 🔊 [2. Redux](./workspace-ins/ch07-globalstate#2-redux)
+    - 🧑‍💻 [01 Redux](./workspace-ins/ch07-globalstate/01-redux)
 
 #### 회고(1시간)
 * 이호정: 컨텍스트 API 03번 예제에서 left3를 두개로 만든 이유
 
 ### 20일차(2025.06.26 목)
 #### 오전(3시간)
-* jotai
-* zustand 개발중
+  * 🔊 [3. Jotai](./workspace-ins/ch07-globalstate#3-jotai)
+    - 🧑‍💻 [02 Jotai](./workspace-ins/ch07-globalstate/02-jotai)
+  * 🔊 [4. Zustand](./workspace-ins/ch07-globalstate#4-zustand)
+    - 🧑‍💻 [03 Zustand](./workspace-ins/ch07-globalstate/03-zustand)
 
 #### 오후(4시간)
-* zustand 완료
-* 8장 css
+* 🔊 [8장 리액트에서 CSS 사용](./workspace-ins/ch08-css#8장-리액트에서-css-사용)
+  * 🔊 [1 기본 CSS 적용 방법](./workspace-ins/ch08-css#1-기본-css-적용-방법)
+    - 🧑‍💻 [01 바닐라 CSS](./workspace-ins/ch08-css/01-css)
+  * 🔊 [2 CSS 모듈](./workspace-ins/ch08-css#2-css-모듈)
+    - 🧑‍💻 [02 CSS Module](./workspace-ins/ch08-css/02-module)
+  * 🔊 [3 CSS-in-JS](./workspace-ins/ch08-css#3-css-in-js)
+    - 🧑‍💻 [03 Styled Components](./workspace-ins/ch08-css/03-styled)
+  * 🔊 [4 Tailwind CSS](./workspace-ins/ch08-css#4-tailwind-css)
+    - 🧑‍💻 [04 Tailwind CSS](./workspace-ins/ch08-css/04-twilwind)
 
 #### 회고(1시간)
 * 
@@ -722,22 +738,23 @@
 
 ### 21일차(2025.06.30 월)
 #### 오전(3시간)
-* [10장 Next.js](./workspace-ins/ch10-nextjs#10장-nextjs)
-  * [1 Next.js 개요](./workspace-ins/ch10-nextjs#1-nextjs-개요)
-* [7. 레이지 로딩 (lazy loading)](./workspace-ins/ch05-router#7-레이지-로딩-lazy-loading)
-  - 🧑‍💻 [05 리액트 라우터 적용](./workspace-ins/ch12-app/todolist/05-router)
-* [8. React.Suspense 컴포넌트](./workspace-ins/ch05-router#8-reactsuspense-컴포넌트)
-  - [04 React Query(TanStack Query) + Suspense](./workspace-ins/ch09-ajax/04-board-suspense)
-* [10장 Next.js](./workspace-ins/ch10-nextjs#10장-nextjs)
-  * [2 개발환경 구성](./workspace-ins/ch10-nextjs#2-개발환경-구성)
-    - 🧑‍💻 01-manual 예제
-    - 🧑‍💻 02-cna 실습
+* 🔊 [10장 Next.js](./workspace-ins/ch10-nextjs#10장-nextjs)
+  * 🔊 [1 Next.js 개요](./workspace-ins/ch10-nextjs#1-nextjs-개요)
+* 5장 리액트 라우터
+  * 🔊 [7. 레이지 로딩 (lazy loading)](./workspace-ins/ch05-router#7-레이지-로딩-lazy-loading)
+    - 🧑‍💻 [05 리액트 라우터 적용](./workspace-ins/ch12-app/todolist/05-router)
+  * 🔊 [8. React.Suspense 컴포넌트](./workspace-ins/ch05-router#8-reactsuspense-컴포넌트)
+    - 🧑‍💻 [04 React Query(TanStack Query) + Suspense](./workspace-ins/ch09-ajax/04-board-suspense)
+* 10장 Next.js
+  * 🔊 [2 개발환경 구성](./workspace-ins/ch10-nextjs#2-개발환경-구성)
+    - 🧑‍💻 [01 개발환경 수동 구성](./workspace-ins/ch10-nextjs/01-manual)
+    - 🧑‍💻 [02 개발환경 자동 구성 - catete-next-app](./workspace-ins/ch10-nextjs/01-cra)
 
 #### 오후(3시간)
   * [3 프로젝트 구조](./workspace-ins/ch10-nextjs#3-프로젝트-구조)
   * [4 라우팅](./workspace-ins/ch10-nextjs#4-라우팅)
     * [4.5.1 Link 컴포넌트](./workspace-ins/ch10-nextjs#451-link-컴포넌트)
-      - 02-cna 예제에 라우팅 실습 추가
+      - 🧑‍💻 [02 개발환경 자동 구성 - catete-next-app](./workspace-ins/ch10-nextjs/01-cra)
 
 #### 회고(1시간)
 * 조현수
@@ -755,6 +772,42 @@
     + handleAddKeydown() 이벤트 처리
     + useRef 훅으로 포커스 추가
 
+### 야간
+* 20:50 김태우
+  - 지난주 목요일 수업을 빠졌는데 깃허브에 정리된 내용 없음
+    + 정리해서 올릴예정
+  - 과제 어떻게 해야 할지 모르겠음
+    + 문서 보고 그대로 따라 하면 됨 
+
+* 오서현
+  - 과제 서버 실행 안됨
+    + 프로젝트 생성 안함
+  - metadata 모르겠음
+    + title, description 같은 정보를 제공하는 태그를 지정
+
+* 구성연
+  - 고양이 이미지 불러오기 만들고 있는데 잘 모르겠음
+    + 불필요한 코드 정리해줌
+
+* 최승균
+  - next.config 설정하는 방법이 공식 문서에서 cjs 방식이라서 우리의 mjs와 다름
+    + 그냥 똑같이 설정 복사해서 우리 파일에 작성하면 됨
+  - useOptimistic 문의
+
+### 22일차(2025.07.01 화)
+#### 오전(3시간)
+* 
+
+#### 오후(3시간)
+* 
+
+* 게시물 목록에서 새로고침 한 후 뒤로가기 누르면 RootLayout에 콘솔이 여러번 찍힘
+* 프로덕션에서 Link의 prefetch=true일때 전체를 미리 가져오지 않음
+
+#### 회고(1시간)
+* 과제 2일차 정리
+
+#### 병아리반(1시간)
 * chick/todo 복사해서 todo-api 생성
 * 할일 목록 API 서버 호출
   - hooks/useAxiosInstance 작성
@@ -768,18 +821,6 @@
 * 할일 수정 API 서버 호출
   - TodoList의 toggleDone()에서 서버 호출로 수정 후 fetchTodoList() 호출
 
-### 22일차(2025.07.01 화)
-#### 오전(3시간)
-* 
-
-#### 오후(3시간)
-* 
-
-#### 회고(1시간)
-* 
-
-#### 병아리반(1시간)
-* 
 
 ### 23일차(2025.07.02 수)
 #### 오전(3시간)
