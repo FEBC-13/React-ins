@@ -1,19 +1,17 @@
-import ListItem from "@/app/[type]/ListItem";
+import ListItem from "@/app/[boardType]/ListItem";
 import Link from "next/link";
 
-interface ListPageProps {
+export interface ListPageProps {
   params: Promise<{
-    type: string;
+    boardType: string;
   }>;
 }
 
 export default async function ListPage({ params }: ListPageProps) {
-  const { type } = await params;
-
-  console.log(type);
+  const { boardType } = await params;
 
   let boardTitle = '';
-  switch (type) {
+  switch (boardType) {
     case 'info':
       boardTitle = '정보 공유';
       break;
@@ -41,7 +39,7 @@ export default async function ListPage({ params }: ListPageProps) {
           <button type="submit" className="bg-orange-500 py-1 px-4 text-base text-white font-semibold ml-2 hover:bg-amber-400 rounded">검색</button>
         </form>
 
-        <Link href="/info/new" className="bg-orange-500 py-1 px-4 text-base text-white font-semibold ml-2 hover:bg-amber-400 rounded">글작성</Link>
+        <Link href={`/${boardType}/new`} className="bg-orange-500 py-1 px-4 text-base text-white font-semibold ml-2 hover:bg-amber-400 rounded">글작성</Link>
       </div>
       <section className="pt-10">
         <table className="border-collapse w-full table-fixed">
@@ -64,8 +62,8 @@ export default async function ListPage({ params }: ListPageProps) {
             </tr>
           </thead>
           <tbody>
-            <ListItem />
-            <ListItem />
+            <ListItem boardType={boardType} />
+            <ListItem boardType={boardType} />
           </tbody>
         </table>
         <hr />
@@ -73,10 +71,10 @@ export default async function ListPage({ params }: ListPageProps) {
         <div>
           <ul className="flex justify-center gap-3 m-4">
             <li className="font-bold text-blue-700">
-              <Link href="/info?page=1">1</Link>
+              <Link href={`/${boardType}?page=1`}>1</Link>
             </li>
             <li>
-              <Link href="/info?page=2">2</Link>
+              <Link href={`/${boardType}?page=2`}>2</Link>
             </li>
           </ul>
         </div>

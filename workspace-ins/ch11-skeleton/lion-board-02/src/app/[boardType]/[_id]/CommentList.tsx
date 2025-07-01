@@ -1,5 +1,5 @@
-import CommentItem from "@/app/[type]/[_id]/CommentItem";
-import CommentNew from "@/app/[type]/[_id]/CommentNew";
+import CommentItem from "@/app/[boardType]/[_id]/CommentItem";
+import CommentNew from "@/app/[boardType]/[_id]/CommentNew";
 
 export default function CommentList() {
   return (
