@@ -733,7 +733,206 @@ export default async function InfoPage() {
 * 로그인, 회원가입 링크 테스트 
 
 ## 3.3 메타 데이터 추가
-### 
+### 3.3.1 Root Layout
+* app/layout.tsx 수정
+
+  ```tsx
+  ...
+  import { Metadata } from 'next';
+
+  export const metadata: Metadata = {
+    // url 관련 metadata 설정시 사용될 기본 경로 지정
+    metadataBase: new URL('https://lion-board.vercel.app'),
+  };
+  ...
+  ```
+
+### 3.3.2 게시물 목록 조회 페이지
+* app/[boardType]/page.tsx에 추가
+
+  ```tsx
+  ...
+  import { Metadata } from "next";
+
+  export async function generateMetadata({ params }: ListPageProps): Promise<Metadata>{
+    const { boardType } = await params;
+    return {
+      title: `${boardType} - Lion Board`,
+      description: `${boardType} 게시판입니다.`,
+      openGraph: {
+        title: `${boardType} - Lion Board`,
+        description: `${boardType} 게시판입니다.`,
+        url: `/${boardType}`,
+        images: {
+          url: '/images/front-end.png'
+        }
+      }
+    };
+  }
+  ...
+  ```
+
+### 3.3.3 게시물 상세 조회 페이지
+* app/[boardType]/[_id]/page.tsx에 추가
+
+  ```tsx
+  ...
+  import { Metadata } from "next";
+
+  export async function generateMetadata({ params }: InfoPageProps): Promise<Metadata>{
+    const { boardType, _id } = await params;
+    return {
+      title: `${boardType} - React란?`,
+      description: `${boardType} - React는 UI를 구성하기 위한 JavaScript 라이브러리로... `,
+      openGraph: {
+        title: `${boardType} - React란?`,
+        description: `${boardType} - React는 UI를 구성하기 위한 JavaScript 라이브러리로... `,
+        url: `/${boardType}/${_id}`,
+        images: {
+          url: '/images/front-end.png'
+        }
+      }
+    };
+  }
+  ...
+  ```
+
+### 3.3.4 게시물 등록 페이지
+* app/[boardType]/new/page.tsx에 추가
+
+  ```tsx
+  ...
+  import { Metadata } from "next";
+
+  interface NewPageProps {
+    params: Promise<{
+      boardType: string;
+    }>;
+  }
+
+  export async function generateMetadata({ params }: NewPageProps): Promise<Metadata>{
+    const { boardType } = await params;
+    return {
+      title: `${boardType} - 게시글 등록`,
+      description: `${boardType} - 게시글을 등록하세요.`,
+      openGraph: {
+        title: `${boardType} - 게시글 등록`,
+        description: `${boardType} - 게시글을 등록하세요.`,
+        url: `/${boardType}/new`,
+        images: {
+          url: '/images/front-end.png'
+        }
+      }
+    };
+  }
+  ...
+  ```
+
+### 3.3.5 게시물 수정 페이지
+* app/[boardType]/[_id]/edit/page.tsx에 추가
+
+  ```tsx
+  ...
+  import { Metadata } from "next";
+
+  export async function generateMetadata({ params }: EditPageProps): Promise<Metadata>{
+    const { boardType, _id } = await params;
+    return {
+      title: `${boardType} - 게시글 수정`,
+      description: `${boardType} - 게시글을 수정하세요.`,
+      openGraph: {
+        title: `${boardType} - 게시글 수정`,
+        description: `${boardType} - 게시글을 수정하세요.`,
+        url: `/${boardType}/${_id}/edit`,
+        images: {
+          url: '/images/front-end.png'
+        }
+      }
+    };
+  }
+  ...
+  ```
+
+### 3.3.6 회원가입 페이지
+* app/(user)/signup/page.tsx에 추가
+
+  ```tsx
+  import { Metadata } from "next";
+
+  export async function generateMetadata(): Promise<Metadata>{
+    return {
+      title: `회원가입 - Lion Board`,
+      description: `무료 회원 가입후 라이언 보드의 모든 서비스를 이용하세요.`,
+      openGraph: {
+        title: `회원가입 - Lion Board`,
+        description: `무료 회원 가입후 라이언 보드의 모든 서비스를 이용하세요.`,
+        url: `/signup`,
+        images: {
+          url: '/images/front-end.png'
+        }
+      }
+    };
+  }
+  ...
+  ```
+
+### 3.3.7 로그인 페이지
+* app/(user)/login/page.tsx에 추가
+
+  ```tsx
+  import { Metadata } from "next";
+  export const metadata: Metadata = {
+    title: '로그인 - 멋사컴',
+    openGraph: {
+      title: '로그인 - 멋사컴',
+      description: '로그인 페이지',
+      url: '/user/login'
+    }
+  }
+  ...
+  ```
+
+### 3.3.8 테스트
+* 각 페이지에 접속해서 브라우저 탭에 title 잘 나오는지 확인
+
+## 3.4 src 폴더 전체 구조
+```
+src/
+├── app/
+│   ├── (user)/
+│   │   │── login/
+│   │   │   └── page.tsx
+│   │   └── signup/
+│   │       └── page.tsx
+│   │── [boardType]/
+│   │   │── [_id]/
+│   │   │   │── edit/
+│   │   │   │   └── page.tsx
+│   │   │   ├── CommentItem.tsx
+│   │   │   ├── CommentList.tsx
+│   │   │   ├── CommentNew.tsx
+│   │   │   └── page.tsx
+│   │   ├── new/
+│   │   │   └── page.tsx
+│   │   ├── ListItem.tsx
+│   │   └── page.tsx
+│   │── error.html
+│   │── globals.css
+│   │── layout.tsx
+│   └── page.tsx
+│
+└── components/
+    └── common/
+        ├── Footer.tsx
+        └── Header.tsx
+```
+
+
+
+
+
+
+
 
 ## 라우팅용 특수 파일 작성
 
@@ -848,131 +1047,15 @@ export default async function InfoPage() {
 ## page 개발
 
 
-## page에 메타데이터 추가
-### Root Layout
-* app/layout.tsx 수정
 
-  ```tsx
-  export const metadata: Metadata = {
-    // url 관련 metadata 설정시 사용될 기본 경로 지정
-    metadataBase: new URL('"https://lion-board.vercel.app'),
-  };
-  ```
 
-### 게시물 목록 조회 페이지
-* src/app/[type]/index.html 참고해서 src/app/[type]/page.tsx에 추가
-  ```tsx
-  import { Metadata } from "next";
 
-  export function generateMetadata({ params }: { params: { type: string } }): Metadata{
-    const boardName = params.type;
-    return {
-      title: `${boardName} - 멋사컴`,
-      description: `${boardName} 게시판입니다.`,
-      openGraph: {
-        title: `${boardName} - 멋사컴`,
-        description: `${boardName} 게시판입니다.`,
-        url: `/${params.type}`,
-        images: {
-          url: '/images/fesp.webp'
-        }
-      }
-    };
-  }
-  ...
-  ```
 
-### 게시물 상세 조회 페이지
-* src/app/[type]/[id]/index.html 참고해서 src/app/[type]/[id]/page.tsx에 추가
-  ```tsx
-  import { Metadata } from "next";
-  export function generateMetadata({ params }: { params: { type: string, id: string } }): Metadata {
-    const boardName = params.type;
-    return {
-      title: `${boardName} - 좋은 소식이 있습니다.`,
-      description: `${boardName} - 좋은 소식을 가지고 왔습니다. 오늘 드디어...`,
-      openGraph: {
-        title: `${boardName} - 좋은 소식이 있습니다.`,
-        description: `${boardName} - 좋은 소식을 가지고 왔습니다. 오늘 드디어...`,
-        url: `/${params.type}/${params.id}`
-      }
-    };
-  }
-  ...
-  ```
 
-### 게시물 등록 페이지
-* src/app/[type]/new/index.html 참고해서 src/app/[type]/new/page.tsx에 추가
-  ```tsx
-  import { Metadata } from "next";
-  export function generateMetadata({ params }: { params: { type: string } }): Metadata {
-    const boardName = params.type;
-    return {
-      title: `${boardName} - 게시글 등록`,
-      description: `${boardName} - 게시글을 등록하세요.`,
-      openGraph: {
-        title: `${boardName} - 게시글 등록`,
-        description: `${boardName} - 게시글을 등록하세요.`,
-        url: `/${params.type}/new`
-      }
-    };
-  }
-  ...
-  ```
 
-### 게시물 수정 페이지
-* src/app/[type]/[id]/edit/index.html 참고해서 src/app/[type]/[id]/edit/page.tsx에 추가
-  ```tsx
-  import { Metadata } from "next";
-  export function generateMetadata({ params }: { params: { type: string, id: string } }): Metadata {
-    const boardName = params.type;
-    return {
-      title: `${boardName} - 게시글 수정`,
-      description: `${boardName} - 게시글을 수정하세요.`,
-      openGraph: {
-        title: `${boardName} - 게시글 수정`,
-        description: `${boardName} - 게시글을 수정하세요.`,
-        url: `/${params.type}/${params.id}/edit`
-      }
-    };
-  }
-  ...
-  ```
 
-### 회원가입 페이지
-* src/app/user/signup/index.html 참고해서 src/app/user/signup/page.tsx에 추가
-  ```tsx
-  import { Metadata } from "next";
-  export const metadata: Metadata = {
-    title: '회원 가입 - 멋사컴',
-    openGraph: {
-      title: '회원 가입 - 멋사컴',
-      description: '무료 회원 가입후 멋사컴의 모든 서비스를 이용하세요.',
-      url: '/user/signup'
-    }
-  }
-  ...
-  ```
 
-### 로그인 페이지
-* src/app/user/login/index.html 참고해서 src/app/user/login/page.tsx에 추가
-  ```tsx
-  import { Metadata } from "next";
-  export const metadata: Metadata = {
-    title: '로그인 - 멋사컴',
-    openGraph: {
-      title: '로그인 - 멋사컴',
-      description: '로그인 페이지',
-      url: '/user/login'
-    }
-  }
-  ...
-  ```
 
-## 파일 정리
-* app 하위의 모든 index.html 삭제
-
-## 컴포넌트 분리
 ### 전체 구조
 ```
 src/

@@ -5,7 +5,14 @@
   .cs-active {
     @apply text-orange-500;
   }
-  .cs-btn {
-    @apply px-4 py-2 m-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition;
-  }
+}
+
+/* 기본 버튼 스타일 */
+button {
+  @apply px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer;
+}
+
+/* 기본 input 스타일 */
+input {
+  @apply px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500;
 }

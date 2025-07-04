@@ -1,4 +1,20 @@
 import Link from "next/link";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata>{
+  return {
+    title: `로그인 - Lion Board`,
+    description: `로그인 후 라이언 보드의 모든 서비스를 이용하세요.`,
+    openGraph: {
+      title: `로그인 - Lion Board`,
+      description: `로그인 후 라이언 보드의 모든 서비스를 이용하세요.`,
+      url: `/login`,
+      images: {
+        url: '/images/front-end.png'
+      }
+    }
+  };
+}
 
 export default async function LoginPage() {
   return (

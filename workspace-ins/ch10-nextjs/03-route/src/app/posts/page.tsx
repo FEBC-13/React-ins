@@ -1,23 +1,27 @@
+import { fetchPosts } from "@/data/functions/boardFetch";
 import { Metadata } from "next";
+import Link from "next/link";
 
-// 정적인 메타데이터
 export const metadata: Metadata = {
   title: '게시물 목록 조회',
   description: '게시물 목록 조회 페이지입니다.'
 }
 
+// ISR 설정: 60초마다 재생성
+export const revalidate = 60;
+
 export default async function ListPage() {
-  const random = Math.random();
-  console.log('ListPage', random);
-  // if(random > 0.5) {
-  //   await new Promise((resolve, reject) => setTimeout(() => { reject(new Error('일부러 발생시킨 에러')) }, 1000*2));
-  // }else{
-  //   await new Promise(resolve => setTimeout(resolve, 1000*2));
-  // }
+  const data = await fetchPosts();
+  const posts = data.map(post => <li key={ post._id }><Link prefetch={false} href={`/posts/${post._id}`}>{ post._id } - { post.title }</Link></li>);
   return (
     <>
       <h1>목록 조회</h1>
-      <p>실제 목록을 가져오는 컴포넌트</p>
+      <div className="text-sm text-gray-500 mb-4">
+        마지막 업데이트: {new Date().toLocaleString('ko-KR')}
+      </div>
+      <ul>
+        { posts }
+      </ul>
     </>
   );
 }

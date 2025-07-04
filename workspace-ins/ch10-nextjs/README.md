@@ -633,12 +633,12 @@ import Link from "next/link";
 
 ### 4.5.3 redirect
 * 서버측에서 페이지 이동(리디렉션) 시 사용하는 함수
-  - 서버 컴포넌트, 서버 함수, 라우트 핸들러 등에서 사용
+  - 서버 컴포넌트, `서버 함수`, route handler 등에서 사용
 * 클라이언트 컴포넌트의 렌더링 중에는 사용 가능하지만, 이벤트 핸들러에서는 사용 불가
   - 클라이언트의 이벤트 핸들러에서는 useRouter의 push/replace 사용
 * 기본적으로 307 상태 코드로 응답
   - 307 응답 상태코드: Temporary Redirect, 원래 요청 방식과 본문으로 새로운 페이지 요청, 다음번 요청에도 이전 URL 사용
-* 서버 함수일 경우(POST 요청의 성공 페이지로 이동할 때) 303 응답 상태 코드로 응답
+* `서버 함수`일 경우(POST 요청의 성공 페이지로 이동할 때) 303 응답 상태 코드로 응답
   - 303 응답 상태코드: See Other, 새로운 페이지로 GET 요청
   
   ```tsx
@@ -731,7 +731,6 @@ export async function createPost(formData) {
   ```tsx
   export default async function InfoPage({ params }: { params: { id: string } }) {
     const { id } = await params; // Next.js 15 부터 params는 비동기 처리 필요
-    await new Promise(resolve => setTimeout(resolve, 1000*2));
     return (
       <h1>상세 조회 - { id }번 게시물</h1>
     );
@@ -913,15 +912,11 @@ export async function createPost(formData) {
 
 * null(기본값)
   - 정적 라우트일 경우 링크가 화면에 보일 때(뷰포트에 들어올 때) 전체 페이지가 프리패치되어 캐시됨
-  - 동적 라우트일 경우 링크가 화면에 보일 때 렌더링된 컴포넌트 트리에서 첫번째 loading.tsx 파일이 나타날 때까지만 데이터를 미리 가져옴(30초 동안 캐시됨)
+  - 동적 라우트일 경우 링크가 화면에 보일 때 렌더링된 컴포넌트 트리에서 첫번째 loading.tsx 파일이 나타날 때까지만 데이터를 미리 가져옴
     + 실제 페이지를 요청할 때(클릭 할 때) 로딩 상태를 즉시 보여 주고 이후의 내용을 가져옴
 
 * true
-  - 링크가 화면에 보이지 않아도(DOM에 존재하기만 하면) 정적 라우트와 동적 라우트 모두 다 전체 페이지를 미리 가져옴(5분 동안 캐시됨)
-
-* 프리패칭된 데이터와 레이아웃은 30초 동안 라우터 캐시에 저장됨
-  - 라우터 캐시는 비활성화 시킬 수 없음
-  - router.refresh() 호출 시 라우터 캐시 삭제
+  - 정적 경로와 동적 경로 모두에 대해 전체 경로를 미리 가져옴
 
 ### 4.8.3 부분 렌더링
 * 페이지 이동시 공유 레이아웃은 유지한 채로 변경된 페이지만 렌더링
@@ -1005,13 +1000,14 @@ export default function Loading() {
 * 시간이 오래 걸리는 작업은 컨포넌트를 분리하고 `<Suspense>`로 감싸서 처리
 
 ## 5.2 error
+* 정상적인 애플리케이션 흐름 중에 발생해서는 안 되는 버그나 문제를 처리하기 위해 사용
 * 컴포넌트 렌더링시 에러가 발생할 경우 error 파일에서 에러 처리 및 에러 UI 보여줌
   - 클라이언트 컴포넌트여야 함
 * error 파일과 같은 폴더에 있는 layout 파일에 page를 `<ErrorBoundary>`로 감싼 것처럼 동작
-  - React에서는 클래스형 컴포넌트로 ErrorBoundary를 직접 정의하고 componentDidCatch와 getDerivedStateFromError 생명주기 메서드를 오버라이드 해서 에러 처리를 구현해야 함
+  - React에서는 클래스형 컴포넌트로 ErrorBoundary를 정의하고 componentDidCatch와 getDerivedStateFromError 생명주기 메서드를 오버라이드 해서 에러 처리를 구현해야 함
 
   ```tsx
-  <ErrorBoundary fallback={<Error />}>
+  <ErrorBoundary fallback={<ErrorComponent />}>
     { children }
   </ErrorBoundary>
   ```
@@ -1022,8 +1018,7 @@ export default function Loading() {
 
 * 매개변수
   - error: 에러 객체
-  - reset: 에러가 발생한 컴포넌트를 다시 렌더링 하는 함수
-    + 네트워크 같은 에러는 일시적인 요인으로 발생하는 경우가 많으므로 reset() 함수를 호출해서 리플래시 없이 해당 컴포넌트를 다시 렌더링 시도할 수 있음
+  - reset: 에러가 발생한 컴포넌트를 다시 렌더링 하는 함수(작업 재시도)
 
 * page에서 에러가 발생할 경우 같은 폴더의 error에서 처리되고 layout에서 에러가 발생할 경우 상위 폴더의 error에서 처리됨
 
@@ -1036,28 +1031,36 @@ export default function Loading() {
 
 ## 5.3 not-found
 * 해당 경로에서 404(페이지를 찾을 수 없음) 오류가 발생했을 때 보여줄 사용자 정의 404 페이지를 구현할 때 사용
-* 이 파일이 존재하는 폴더 및 하위 경로에서 라우팅이 실패하거나, 서버 컴포넌트/서버 함수에서 notFound() 함수를 호출하면 자동으로 not-found에 정의된 UI가 렌더링됨
+* 이 파일이 존재하는 폴더 및 하위 경로에서 라우팅이 실패하거나, 서버 컴포넌트/`서버 함수`에서 notFound() 함수를 호출하면 자동으로 not-found에 정의된 UI가 렌더링됨
 * 사용자에게 친절한 안내 메시지, 홈으로 이동 버튼 등 커스텀 404 화면을 제공하도록 작성
 * 일반적으로 글로벌 404 처리를 위해 루트(app) 폴더에 not-found 파일을 둠
 
 ## 5.4 route handler
 * 서버에서 실행되고 데이터를 클라이언트에 반환하는 API 엔드포인트 생성
-  - 서버 컴포넌트에서는 직접 백엔드로부터 데이터를 가져오면 되므로 라우트 핸들러를 호출할 필요 없음
-* 외부 API를 호출할 때 라우트 핸들러를 통해 호출하면 API 토큰 같은 민감한 정보를 클라이언트에 노출하지 않음
+  - 서버 컴포넌트에서는 직접 백엔드로부터 데이터를 가져오면 되므로 route handler를 호출할 필요 없음
+* 외부 API를 호출할 때 route handler를 통해 호출하면 API 토큰 같은 민감한 정보를 클라이언트에 노출하지 않음
 * GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS 메서드 지원
   - 지원되지 않은 메서드 호출 시 405 Method Not Allowed 에러 응답
-* route.ts 파일 작성
+
+* app/api/posts/[id]/route.ts 파일 작성
 
   ```ts
-  export async function GET(request) {
-    const res = await fetch('https://api.fesp.shop/posts');
-    const data = await res.json();
+  import { NextRequest, NextResponse } from 'next/server';
 
-    return Response.json({ data });
+  export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const res = await fetch(`https://fesp-api.koyeb.app/market/posts/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Client-Id': 'openmarket',
+      },
+    });
+    const data = await res.json();
+    return NextResponse.json(data);
   }
   ```
 
-### 라우트 핸들러의 NextRequest, NextResponse
+### route handler의 NextRequest, NextResponse
 * Fetch API의 Request, Response를 확장하여 추가적인 편의 메서드 제공
 
 #### NextRequest 주요 기능
@@ -1075,14 +1078,7 @@ export function GET(request: NextRequest) {
   const userAgent = request.headers.get('user-agent');
   const authorization = request.headers.get('authorization');
   
-  // IP 주소 (Edge 런타임에서 사용 가능)
-  const ip = request.ip || request.headers.get('x-forwarded-for');
-  
-  // 지리적 정보 (Edge 런타임에서 사용 가능)
-  const country = request.geo?.country;
-  const city = request.geo?.city;
-  
-  return NextResponse.json({ query, token, userAgent, ip, country });
+  return NextResponse.json({ query, token, userAgent });
 }
 ```
 
@@ -1117,121 +1113,148 @@ export function POST(request: NextRequest) {
 ```
 
 # 6 Data Fetching
-* 데이터를 가져오는 방법
-  - 서버에서 fetch 함수 사용
-  - 서버에서 axios 같은 외부 라이브러리 사용
-  - 클라이언트에서 fetch, axios 같은 함수 사용
-  - 클라이언트에서 라우트 핸들러 호출
+## 6.1 데이터를 가져오는 방법
+### 6.1.1 클라이언트 컴포넌트
+* API 서버 직접 호출
+* route handler 호출
+  - router handler에서 API 서버 호출
+* `서버 함수`(`서버 액션`) 호출
+  - `서버 함수`에서 API 서버 호출
 
-## 6.1 Next.js의 fetch 함수
+### 6.1.2 서버 컴포넌트
+* API 서버 호출
+* 백엔드 코드 직접 개발(풀스택)
+
+## 6.2 Next.js의 fetch 함수
 * fetch API를 확장
   - GET 요청에 대해 URL과 옵션을 메모이제이션하고 여러 컴포넌트에서 호출하는 동일한 요청에 대해서 저장된 응답을 반환
     + 컴포넌트 트리의 여러 컴포넌트가 props을 이용해서 데이터를 전달할 필요 없이 fetch를 각각 호출해도 저장된 값을 사용하므로 성능에 영향이 없음
-    + generateMetadata, generateStaticParams, Layout, Page, Server Component에만 적용되고 라우트 핸들러는 컴포넌트 트리의 일부가 아니므로 적용 안됨
+    + route handler는 컴포넌트 트리의 일부가 아니므로 적용 안됨
     + 메모이제이션된 데이터는 컴포넌트 트리가 렌더링을 완료할 때까지 지속됨
-  - 서버 컴포넌트, 라우트 핸들러, 서버 액션에서 async/await와 함께 사용 가능
 
-
-## 6.2 서버 액션과 서버 함수
+## 6.3 `서버 액션`과 `서버 함수`
 * 서버 컴포넌트 뿐만 아니라 클라이언트 컴포넌트에서도 호출할 수 있는 서버 컴포넌트의 함수
-* 'use server' 지시어 사용해서 정의
+* 'use server' 지시어를 사용해서 정의
 
-### 6.2.1 서버 함수(Server Functions)
+### 6.3.1 `서버 함수`(Server Functions)
 * `use server` 지시어로 정의되는 모든 함수
 * 클라이언트 컴포넌트가 서버에서 실행되는 비동기 함수를 호출할 수 있게 해줌
-* 프레임워크가 자동으로 서버 함수에 대한 참조를 생성하고 클라이언트에 전달
+* 프레임워크가 자동으로 `서버 함수`에 대한 참조를 생성하고 클라이언트에 전달
 * 클라이언트에서 호출 시 React가 서버에 요청을 보내고 결과를 반환
 
-### 6.2.2 서버 액션(Server Actions)
-* 서버 함수 중에서 action prop으로 전달되거나 action 내부에서 호출되는 함수
-  - form의 submit 이벤트로 호출되는 서버 함수
+### 6.3.2 `서버 액션`(Server Actions)
+* `서버 함수` 중에서 action prop으로 전달되거나 action 핸들러 내부에서 호출되는 함수
+  - form의 submit 이벤트로 호출되는 `서버 함수`
 * GET 방식을 제외한 POST, PUT/PATCH, DELETE 작업에 사용(서버의 데이터 변경에 사용)
-* React에서 2024.9월에 기존 서버 액션 대신 서버 함수라는 용어를 새로 만들고 서버 액션은 form에서 사용하는 서버의 데이터 변경 목적의 서버 함수를 지칭
+* React에서 2024.9월에 기존 `서버 액션` 대신 `서버 함수`라는 용어를 새로 만들고 `서버 액션`은 form에서 사용하는 서버의 데이터 변경 목적의 `서버 함수`를 지칭
 
-### 6.2.3 용어 정리
+### 6.3.3 용어 정리
 ```
 서버에서 실행되는 모든 함수
 ├── 일반 함수 ('use server' 없음)
 │   └── 서버 컴포넌트 내부에서만 사용
-└── 서버 함수 ('use server' 있음)
-    ├── 서버 액션 (action prop으로 사용)
-    │   ├── 폼 액션: <form action={serverFn}>
+└── `서버 함수` ('use server' 있음)
+    ├── `서버 액션` (action prop으로 사용)
+    │   ├── 폼 액션: <form action={ serverFn }>
     │   ├── useActionState와 함께 사용
     │   └── useTransition과 함께 사용
-    └── 기타 서버 함수 (직접 호출)
+    └── 기타 `서버 함수` (직접 호출)
         ├── 클라이언트에서 직접 호출
         └── 서버에서 직접 호출
 ```
 
-### 6.2.4 사용 예시
+### 6.3.4 사용 예시
+#### `서버 액션`
+* 게시물 등록
+
 ```tsx
-// actions.ts - 서버 함수 파일
-'use server'
+// src/data/actions/boardAction.ts
+'use server';
 
-export async function fetchPosts() {
-  const posts = await db.posts.findMany();
-  return posts;
-}
+import { PostRes } from "@/types/board";
 
-export async function createPost(formData: FormData) {
-  const title = formData.get('title') as string;
-  await db.posts.create({ data: { title } });
-  revalidatePath('/posts');
+export async function createPost(prevState: PostRes, formData: FormData) {
+  const title = formData.get('title');
+  const content = formData.get('content');
+  const res = await fetch('https://fesp-api.koyeb.app/market/posts', {
+    method: 'POST',
+    body: JSON.stringify({ title, content }),
+    headers: {
+      'Client-Id': 'openmarket',
+    },
+  });
+  const data = await res.json();
+  return data;
 }
 ```
 
 ```tsx
-// PostsPage.tsx - 서버 컴포넌트
-import { fetchPosts, createPost } from './actions';
-import RefreshButton from './RefreshButton';
+// src/app/posts/new/RegistForm.tsx
+'use client';
 
-export default async function PostsPage() {
-  const posts = await fetchPosts();
-  
+import { createPost } from "@/data/actions/boardAction";
+import { useActionState } from "react";
+
+export default function RegistForm() {
+
+  const [state, formAction, isPending] = useActionState(createPost, null);
+
   return (
-    <div>
-      {/* 서버 액션: form action으로 사용 */}
-      <form action={createPost}>
-        <input name="title" placeholder="제목 입력" />
-        <button type="submit">게시글 작성</button>
-      </form>
-      
-      {/* 클라이언트 컴포넌트 - import로 직접 사용 */}
-      <RefreshButton />
-      
-      {posts.map(post => (
-        <div key={post.id}>{post.title}</div>
-      ))}
-    </div>
+    <form action={ formAction }>
+      <input type="text" name="title" placeholder="제목" />
+      <input type="text" name="content" placeholder="내용" />
+      <button type="submit" disabled={isPending}>등록</button>
+    </form>
+  )
+}
+```
+
+#### `서버 함수`
+* 게시물 목록 조회
+
+```tsx
+// src/data/functions/boardFetch.ts
+import { Post } from "@/types/board";
+
+export async function fetchPosts(): Promise<Post[]> {
+  const res = await fetch('https://fesp-api.koyeb.app/market/posts', {
+    headers: {
+      'Client-Id': 'openmarket',
+    },
+  });
+  const data = await res.json();
+  return data.item;
+}
+```
+
+```tsx
+// src/app/posts/page.tsx
+import Link from "next/link";
+import { fetchPosts } from "@/data/functions/boardFetch";
+
+export default async function ListPage() {
+  const list = await fetchPosts();
+  const posts = list.map(post => <li key={ post._id }><Link href={`/posts/${post._id}`}>{ post.title }</Link></li>);
+
+  return (
+    <>
+      <h1>목록 조회</h1>
+      <ul>
+        { posts }
+      </ul>
+    </>
   );
 }
 ```
 
-```tsx
-// RefreshButton.tsx - 클라이언트 컴포넌트
-'use client'
-import { fetchPosts } from './actions'; // 직접 import
-
-export default function RefreshButton() {
-  return (
-    <button onClick={async () => {
-      const freshPosts = await fetchPosts();
-      console.log('새로운 데이터:', freshPosts);
-    }}>
-      새로고침
-    </button>
-  );
-}
-```
-
-### 6.2.5 서버 함수 주요 특징
+### 6.3.5 `서버 함수` 주요 특징
 * 매개변수와 반환값은 직렬화 가능해야 함
   - string, number, bigint, boolean, undefined, null, symbol(Symbol.for로 등록된 global Symbol)
   - String, Array, Map, Set, TypedArray, ArrayBuffer
   - Date
   - FormData
   - Object
-  - 서버 함수 참조
+  - `서버 함수` 참조
   - Promise
   
 * 대부분 async 함수로 작성
@@ -1239,14 +1262,12 @@ export default function RefreshButton() {
   - 네트워크를 통한 호출이므로 비동기 처리가 자연스러움
 
 * 작동 원리
-  - 서버 함수에 대한 참조(reference) 또는 식별자가 클라이언트로 전송
+  - `서버 함수`에 대한 참조(reference) 또는 식별자(action ID)가 클라이언트로 전송
   - 클라이언트에서 호출 시 이 식별자를 통해 서버로 네트워크 요청을 보냄
-  - 서버에서 해당 식별자에 매핑된 실제 서버 함수를 실행
-  - 빌드 결과에서 확인
-    + `.next/server/app/...`에서 액션 매핑 테이블 확인 가능
-    + 실제 함수 코드는 서버에만 존재
+  - 서버에서 해당 식별자에 매핑된 실제 `서버 함수`를 실행
+  - 실제 함수 코드는 서버에만 존재
 
-### 6.2.6 서버 함수 정의
+### 6.3.6 `서버 함수` 정의
 
 #### 인라인 수준 정의
 * 서버 컴포넌트 내부에서 함수별로 'use server' 지시어 추가
@@ -1258,7 +1279,7 @@ export default function RefreshButton() {
     // 인라인 서버 함수
     async function createPost() {
       'use server'
-      await db.posts.create({ title: 'New Post' });
+      await db.posts.create({ title: '새글' });
     }
 
     return (
@@ -1282,22 +1303,22 @@ export default function RefreshButton() {
 export default function ClientComponent({ createPost }) {
   return (
     <button onClick={() => createPost()}>
-      Create Post
+      게시글 등록
     </button>
   );
 }
 ```
 
 #### 모듈 수준 정의  
-* 파일 첫줄에 'use server' 지시어로 모든 export 함수를 서버 함수로 정의
-* props로 클라이언트 컴포넌트에 전달하거나 클라이언트 컴포넌트에서 import 해서 사용
+* 파일 첫줄에 'use server' 지시어로 모든 export 함수를 `서버 함수`로 정의
+* 클라이언트 컴포넌트에서 import 해서 사용
 
   ```tsx
   // actions.ts
   'use server'
 
   export async function createPost() {
-    await db.posts.create({ title: 'New Post' });
+    await db.posts.create({ title: '새글' });
   }
 
   export async function updatePost(id, data) {
@@ -1306,21 +1327,7 @@ export default function ClientComponent({ createPost }) {
   ```
 
   ```tsx
-  // ServerComponent.tsx
-  import { createPost } from './actions';
-
-  export default function ServerComponent() {
-    return (
-      <form action={createPost}> {/* import로 직접 사용 */}
-        <button type="submit">Create</button>
-      </form>
-    );
-  }
-  ```
-
-  ```tsx
-  // ClientComponent.tsx
-  'use client' // 클라이언트 컴포넌트
+  'use client'
   import { createPost, updatePost } from './actions';
 
   export default function ClientComponent() {
@@ -1340,358 +1347,59 @@ export default function ClientComponent({ createPost }) {
   - props 드릴링 방지
   - 코드 구조가 깔끔함
 
-### 6.2.7 서버 함수 호출
-#### form 요소의 action 속성으로 호출
-* React는 HTML form 요소를 확장해서 action 속성에 서버 액션 지정 가능
+### 6.3.7 `서버 함수` 호출
+#### 6.3.7.1 form 요소의 action 속성으로 호출
+* React는 HTML form 요소를 확장해서 action 속성에 `서버 액션` 지정 가능
+
   ```tsx
-  'use client'
-  
-  export default function ClientComponent({ create }) {
-    return <form action={ create }>{/* ... */}</form>
+  'use client';
+  import { createPost } from "@/data/actions/boardAction";
+  export default function RegistForm() {
+    return (
+      <>
+        <form action={ createPost }>
+          <input type="text" name="title" placeholder="제목을 입력하세요" />
+          <textarea name="content" placeholder="내용을 입력하세요" />
+          <button type="submit">등록</button>
+        </form>
+      </>
+    )
   }
   ```
-  - 서버 액션이 호출되면 Form 내부의 입력 요소들 값이 저장된 FormData 객체가 자동으로 전달됨
+
+  - `서버 액션`이 호출되면 Form 내부의 입력 요소들 값이 저장된 FormData 객체가 자동으로 전달됨
   - 자바스크립트가 로드되기 이전이거나 비활성화 되었어도 폼 제출 가능
     + 자바스크립트가 로드되기 이전에 제출되면 큐에 담은 후 클라이언트 하이드레이션의 우선 순위로 지정됨
   - submit 이후에 새로고침 없음
 
-  ```tsx
-  export default function Page() {
-    async function createInvoice(formData) {
-      'use server'
-  
-      const rawFormData = {
-        customerId: formData.get('customerId'),
-        amount: formData.get('amount'),
-        status: formData.get('status'),
-      }
-    }
-  
-    return <form action={ createInvoice }>...</form>
-  }
-  ```
-
-* form 데이터에 추가 인자값 전달
-  - Function.prototype.bind()를 사용해서 인자값 미리 전달
-  - hidden input을 이용
-
-  ```tsx
-  'use client'
-  
-  import { updateUser } from './actions'
-  
-  export function UserProfile({ userId }) {
-    const updateUserWithId = updateUser.bind(null, userId); // bind
-  
-    return (
-      <form action={updateUserWithId}>
-        <input type="hidden" name="userId" value={userId} /> // hidden
-        <input type="text" name="name" />
-        <button type="submit">이름 수정</button>
-      </form>
-    )
-  }
-  ```
-
-  ```tsx
-  'use server'
-  
-  export async function updateUser(userId, formData) {
-    // ...
-  }
-  ```
-
-* pending 상태를 표시하려면 리액트의 useActionStatus 훅 사용
-  - `<form>` 요소의 자식으로 정의
-  - 리액트 훅이므로 클라이언트 컴포넌트에서만 사용 가능
-
-  ```tsx
-  import { SubmitButton } from '@/app/submit-button';
-  import { createItem } from '@/app/actions';
-  
-  // 서버 컴포넌트
-  export default async function Home() {
-    return (
-      <form action={createItem}>
-        <input type="text" name="field-name" />
-        <SubmitButton />
-      </form>
-    )
-  }
-  ```
-
-  ```tsx
-  // 클라이언트 컴포넌트
-  'use client'  
-  import { useActionStatus } from 'react-dom'; 
-  export function SubmitButton() {
-    const { pending } = useActionStatus();
-    return (
-      <button type="submit" disabled={pending}>추가</button>
-    )
-  }
-  ```
-
-#### form 요소 내부의 formAction 속성으로 호출
-* button 같은 폼 내부 요소의 formAction 속성이나 이벤트 핸들러 
-  - `<button formAction={}>`
-  - `<input type="submit" formAction={}>`
-  - `<input type="image" formAction={}>`
-
-#### 프로그래밍 방식으로 호출
-* form 요소의 requestSubmit() 함수를 직접 호출
-  ```tsx
-  'use client'
-  
-  export function Entry() {
-    const handleKeyDown = (e) => {
-      if (
-        (e.ctrlKey || e.metaKey) &&
-        (e.key === 'Enter' || e.key === 'NumpadEnter') // Ctrl + Enter
-      ) {
-        e.preventDefault()
-        e.currentTarget.form?.requestSubmit()
-      }
-    }
-  
-    return (
-      <div>
-        <textarea name="entry" rows={20} required onKeyDown={handleKeyDown} />
-      </div>
-    )
-  }
-  ```
-
-#### 이벤트 핸들러에서 호출
-```tsx
-'use client'
-
-import { incrementLike } from './actions'
-import { useState } from 'react'
-
-export default function LikeButton({ initialLikes }) {
-  const [likes, setLikes] = useState(initialLikes)
-
-  return (
-    <>
-      <p>Total Likes: {likes}</p>
-      <button
-        onClick={async () => {
-          const updatedLikes = await incrementLike()
-          setLikes(updatedLikes)
-        }}
-      >
-        Like
-      </button>
-    </>
-  )
-}
-```
-
-#### useEffect에서 호출
-* useEffect 훅에서 호출
-  - 게시물 상세보기 화면에서 조회수 증가
-    ```tsx
-    'use client'
-    
-    import { incrementViews } from './actions'
-    import { useState, useEffect } from 'react'
-    
-    export default function ViewCount({ initialViews }) {
-      const [views, setViews] = useState(initialViews)
-    
-      useEffect(() => {
-        const updateViews = async () => {
-          const updatedViews = await incrementViews()
-          setViews(updatedViews)
-        }
-    
-        updateViews()
-      }, [])
-    
-      return <p>Total Views: {views}</p>
-    }
-    ```
-
-### 6.2.8 유효성 검사
-* 클라이언트측 유효성 검사
-  - required, pattern, type="email" 등 HTML의 기본 유효성 검사 사용
-* 서버측 유효성 검사
-  - zod 같은 라이브러리 사용
-
-  ```tsx
-  'use server'
-  
-  import { z } from 'zod'
-  
-  const schema = z.object({
-    email: z.string({
-      invalid_type_error: 'Invalid Email',
-    }),
-  })
-  
-  export default async function createUser(formData) {
-    const validatedFields = schema.safeParse({
-      email: formData.get('email'),
-    })
-  
-    if (!validatedFields.success) {
-      return {
-        errors: validatedFields.error.flatten().fieldErrors,
-      }
-    }
-  
-  }
-  ```
-
-* 서버에서 필드를 검증한 후 클라이언트 컴포넌트에서 리액트의 useActionState 훅을 이용해서 사용자에게 메세지를 표시할 수 있음
-  ```tsx
-  'use server'
-  
-  export async function createUser(prevState, formData) {
-    // ...
-    return {
-      message: 'Please enter a valid email',
-    }
-  }
-  ```
-  ```tsx
-  'use client'
-  
-  import { useFormState } from 'react-dom'
-  import { createUser } from '@/app/actions'
-  
-  const initialState = {
-    message: '',
-  }
-  
-  export function Signup() {
-    const [state, formAction] = useFormState(createUser, initialState)
-  
-    return (
-      <form action={formAction}>
-        <label htmlFor="email">Email</label>
-        <input type="text" id="email" name="email" required />
-        {/* ... */}
-        <p>
-          {state?.message}
-        </p>
-        <button>Sign up</button>
-      </form>
-    )
-  }
-  ```
-
-### 6.2.9 에러 처리
-* 에러가 발생하면 가까운 error.tsx나 `<Suspense>` 에서 처리됨
-* try/catch로 에러 처리를 권장
-  ```tsx
-  'use server'
-  
-  export async function createTodo(prevState, formData) {
-    try {
-      // 서버 액션 호출
-
-    } catch (e) {
-      throw new Error('할일 추가에 실패했습니다.')
-    }
-  }
-  ```
-
-### 6.2.10 데이터 재검증
-* 서버 액션 작업이 완료되면 기존 캐시된 GET 요청의 결과를 revalidate 해야 갱신된 데이터로 다시 조회 가능
-  - revalidatePath(), revalidateTag()
-
-  ```tsx
-  'use server'
-  
-  import { revalidateTag } from 'next/cache'
-  
-  export async function createPost() {
-    try {
-      // ...
-    } catch (error) {
-      // ...
-    }
-    revalidatePath('/posts')
-    // 또는
-    revalidateTag('posts')
-  }
-  ```
-
-### 6.2.11 리디렉션
-* 서버 액션 완료 후 다른 페이지로 이동 시 redirect 사용
-
-  ```tsx
-  'use server'
-  
-  import { redirect } from 'next/navigation'
-  import { revalidateTag } from 'next/cache'
-  
-  export async function createPost(id) {
-    try {
-      // ...
-    } catch (error) {
-      // ...
-    }
-  
-    revalidateTag('posts') // Update cached posts
-    redirect(`/post/${id}`) // Navigate to the new post page
-  }
-  ```
-
-### 6.2.12 쿠키 관리
-* 서버 액션 내부에서 cookies API의 get, set, delete 사용
-  ```tsx
-  'use server'
-  
-  import { cookies } from 'next/headers'
-  
-  export async function exampleAction() {
-    // Get cookie
-    const value = cookies().get('name')?.value
-  
-    // Set cookie
-    cookies().set('name', 'Delba')
-  
-    // Delete cookie
-    cookies().delete('name')
-  }
-  ```
-
-### 6.2.13 클로저와 암호화
-* 컴포넌트 내부에 서버 액션을 정의하면 클로저 생성
-* 클로저는 컴포넌트 내부의 변수 접근 가능
-* 서버 액션이 호출 될 때마다 컴포넌트 내부 변수를 계속 사용해야 하므로 이 변수는 클라이어트와 서버간의 상태와 컨텍스트 유지를 위해 클라이언트로 전송되었다가 서버 액션이 호출되면 다시 서버로 전송되는데 이때 클라이언트에 민감한 값을 노출하지 않도록 자체 암호화되어 관리됨
-
-## 6.3 fetch 패턴과 모범 사례
-### 6.3.1 서버 컴포넌트 사용
+## 6.4 fetch 패턴과 모범 사례
+### 6.4.1 서버 컴포넌트 사용
 * 가능한 서버 컴포넌트를 사용해서 데이터 가져오기
   - 백엔드 데이터 리소스(DB 등)에 직접 액세스 가능
   - API 키나 액세스 토큰 같은 민감한 정보가 클라이언트에 노출되지 않음
   - 데이터 처리와 렌더링이 서버에서 발생하고 클라이언트는 HTML을 받기 때문에 렌더링 과정 없이 응답받은 HTML을 화면에 보여주기만 하면 되므로 브라우저의 작업 처리가 줄어듬
   - 클라이언트에서 여러번 요청할 작업을 한번의 요청으로 모든 데이터를 가져올 수 있음
-    + 폭포수 현상을 줄임
+    + 한 페이지에서 게시물 상세 조회 후 댓글 조회 같은 작업을 순차적으로 할때 발생하는 폭포수 현상을 줄임
     + Next.js 서버와 데이터 리소스(DB 등)가 보통 지리적으로 가까운 곳에 있기 때문에 네트워크 지연시간을 줄임
   - fetch API 호출 결과를 서버측에 캐싱하면 여러 클라이언트의 동일한 요청에 대해 데이터 리소스를 다시 가져올 필요 없이 캐시된 컨텐츠를 제공해서 빠름
 
-### 6.3.2 컴포넌트 트리간 동일한 데이터 전달하지 않기
+### 6.4.2 컴포넌트 트리간 동일한 데이터 전달하지 않기
 * 트리의 여러 컴포넌트가 동일한 데이터를 사용할 경우 하나의 컴포넌트에서 데이터를 가져온 후 props로 전달할 필요 없이 각 컴포넌트가 필요한 데이터를 직접 가져오도록 구성
   - 동일한 데이터를 여러번 요청해도 fetch의 메모이제이션에 의해 실제로 fetch가 여러번 발생하지 않음
 
-### 6.3.3 스트리밍과 서스펜스 활용
+### 6.4.3 스트리밍과 서스펜스 활용
 * 서버 컴포넌트와 중첩 레이아웃을 사용하면 데이터가 필요 없는 부분을 즉시 렌더링 하고 데이터를 가져오는 부분에는 로딩중 상태를 표시
 
 <img src="https://nextjs.org/_next/image?url=https%3A%2F%2Fh8DxKfmAPhn8O0p3.public.blob.vercel-storage.com%2Fdocs%2Flight%2Fserver-rendering-with-streaming.png&w=1920&q=75">
 
-### 6.3.4 병렬 및 순차 fetch
+### 6.4.4 병렬 및 순차 fetch
 
 <img src="https://nextjs.org/_next/image?url=https%3A%2F%2Fh8DxKfmAPhn8O0p3.public.blob.vercel-storage.com%2Fdocs%2Flight%2Fsequential-parallel-data-fetching.png&w=1920&q=75">
 
-#### 순차적 fetch
+#### 6.4.4.1 순차적 fetch
 * 이전 fetch 작업 후 다음 fetch 작업을 하기 때문에 폭포수 현상 발생
 * 다음 데이터를 가져올 때 이전 데이터가 필요한 경우 사용(성능 저하)
-* loading.tsx 페이지나 `<Suspense>`를 사용해서 데이터 스트리밍 중에 로딩중 상태를 보여주면 전체가 블로킹 되는 문제를 막을 수 있음
+* loading 페이지나 `<Suspense>`를 사용해서 데이터 스트리밍 중에 로딩중 상태를 보여주면 전체가 블로킹 되는 문제를 막을 수 있음
 
   - 사용자는 이미 로딩된 컨텐츠에 대해서는 인터렉션이 가능
   ```tsx
@@ -1727,7 +1435,7 @@ export default function LikeButton({ initialLikes }) {
   }
   ```
 
-#### 병렬 fetch
+#### 6.4.4.2 병렬 fetch
 * 데이터 가져오기 작업을 동시에 호출
 * 데이터간 종속성이 없을 경우 사용(성능 향상)
 
@@ -1791,14 +1499,15 @@ export default async function Page({
 ### 7.1.4 네트워크 경계
 * 클라이언트(웹 브라우저), 웹서버, 애플리케이션 서버(Next.js 서버), API 서버, DB 등 서로 다른 환경을 구분하는 개념
 * React는 클라이언트 사이드 렌더링으로 동작
-* Next.js는 클라이언트, 서버 사이드 렌더링으로 동작
+* Next.js는 서버 사이드 + 클라이언트 사이드 렌더링으로 동작
 
-## 7.2 서버 컴포넌트
+## 7.2 렌더링 방식
 ### 7.2.1 CSR vs. SSR
 #### 7.2.1.1 CSR(Client Side Rendering)
 * 리액트의 동작 방식
 * 클라이언트가 최초로 접속하면 head에 css, js 파일이 정의되어 있고 body가 비어있는 HTML 응답
 * index.html
+
   ```html
   <!doctype html>
   <html lang="en">
@@ -1831,7 +1540,7 @@ export default async function Page({
   - 자바스크립트 다운로드 중이라도 HTML 파싱이 완료되면 즉, DOM 생성 후 화면이 출력되면 정적인 상태의 화면을 사용자가 볼 수 있음
   - 전체 내용이 로드되기 전이라도 사용자가 링크를 클릭해서 다른 페이지로 이동을 할 수 있음
 4. 하이드레이션
-  - 다운로드 받은 자바스크립트를 이용해서 가상 DOM을 만들고 브라우저 DOM과 동기화 시키고 이벤트 추가 등의 작업이 끝나면 사용자와 상호작용 가능한 상태가 됨
+  - 다운로드 받은 자바스크립트를 이용해서 가상 DOM을 만들어 브라우저 DOM과 동기화 시키고 이벤트 추가 등의 작업이 끝나면 사용자와 상호작용 가능한 상태가 됨
 5. 리액트 앱으로 동작
   - 하이드레이션이 끝나면 일반적인 리액트 앱으로 동작(CSR)
 
@@ -1875,7 +1584,7 @@ export default async function Page({
   - HTML을 서버에서 만들어 주기때문에 인터렉션에 필요한 자바스크립트를 실행하기 전이라도 화면에 보여줄 수 있음
   - 구글 등 검색엔진의 페이지 순위 결정 요소 중 하나
 * SEO에 유리
-* 렌더링 작업을 청크로 분할해서 스트리밍하면 클라이언트는 전체 HTML을 다 받기전에도 페이지의 일부를 보여줄 수 있음
+* 렌더링 작업을 청크로 분할해서 스트리밍하면 클라이언트는 전체 HTML을 다 받기 전에도 페이지의 일부를 보여줄 수 있음
 * 코드 자동 분할
 
 ### 7.2.3 서버 컴포넌트 vs. 클라이언트 컴포넌트
@@ -1973,11 +1682,11 @@ export default async function Page({
 * 방법: fetch 호출 시 cache 옵션 설정, next.tags로 태그 지정, revalidateTag()로 재검증
 
   ```tsx
-  // 캐시됨 (Next.js 14)
-  const res = await fetch('https://api.example.com/posts');
+  // 기본으로 캐시됨 (Next.js 14)
+  const res = await fetch('https://fesp-api.koyeb.app/market/posts');
 
   // Next.js 15에서는 명시적 설정 필요
-  const res = await fetch('https://api.example.com/posts', { cache: 'force-cache' });
+  const res = await fetch('https://fesp-api.koyeb.app/market/posts', { cache: 'force-cache' });
   ```
 
 ## 8.2 Full Route Cache
@@ -1993,19 +1702,29 @@ export default async function Page({
     return [{ id: '1' }, { id: '2' }, { id: '3' }];
   }
 
-  export default async function Page({ params }) {
-    // 빌드 타임에 HTML 생성 후 캐시됨
-    return <div>Post {params.id}</div>;
+  export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    // 빌드 타임에 HTML 생성 후 캐시됨(1.html, 2.html, 3.html)
+    return <div>{ id }번 게시물</div>;
   }
   ```
 
   ```tsx
-  // Route Handler 정적 캐시
+  // app/api/config/route.ts
+  import { NextResponse } from 'next/server';
+
+  // 정적 캐싱 강제 (최초 요청시 응답 데이터를 캐시, 다시 빌드 전까지 사용)
   export const dynamic = 'force-static';
 
   export async function GET() {
-    // 이 응답이 빌드 타임에 생성되어 캐시됨
-    return Response.json({ message: 'Static response' });
+    const res = await fetch(`https://fesp-api.koyeb.app/market/config`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Client-Id': 'openmarket',
+      },
+    });
+    const data = await res.json();
+    return NextResponse.json(data);
   }
   ```
 
@@ -2014,7 +1733,7 @@ export default async function Page({
 * 대상: 방문한 페이지의 RSC Payload
 * 목적: 페이지 간 이동 시 빠른 탐색
 * 지속 시간: 세션 동안 또는 설정된 시간까지
-* 방법: next.config.ts에서 staleTimes 설정, Link 컴포넌트의 prefetch 속성 조정, router.refresh() 호출
+* 방법: next.config.ts에서 staleTimes 설정, Link 컴포넌트의 prefetch 속성 조정, router.prefetch('/posts'), router.refresh() 호출
 
   ```tsx
   // next.config.ts - 라우터 캐시 설정
@@ -2032,7 +1751,7 @@ export default async function Page({
 * 위치: 서버측 (렌더링 중)
 * 대상: 동일한 렌더링 사이클 내의 중복 fetch 요청
 * 목적: 컴포넌트 트리에서 중복 요청 방지
-* 지속 시간: 하나의 렌더링 완료까지만
+* 지속 시간: 렌더링 사이클 시작에서 완료시까지
 * 방법: 특별한 설정 불필요, 동일한 URL과 옵션으로 fetch 호출하면 자동으로 메모이제이션
 
   ```tsx
@@ -2054,14 +1773,17 @@ export default async function Page({
 
 * Next.js 14 vs 15 비교
 ```tsx
-// Next.js 14: 자동으로 캐시됨
+// Next.js 14: 자동으로 캐시됨 (기본값 cache: 'force-cache')
 const res = await fetch('https://api.example.com/posts');
 
-// Next.js 15: 캐시 안됨 (명시적 설정 필요)
-const res = await fetch('https://api.example.com/posts'); // cache: 'no-store' 기본값
+// Next.js 15: 캐시 안됨 (기본값 cache: 'no-cache')
+const res = await fetch('https://api.example.com/posts');
 
 // Next.js 15에서 캐시하려면 명시적 설정 필요
-const res = await fetch('https://api.example.com/posts', { cache: 'force-cache' });
+const res = await fetch('https://api.example.com/posts', { 
+  cache: 'force-cache', // 무기한 캐시
+  next: { revalidate: 60 }, // 시간 기반 재검증 (60초가 지나면 업데이트)
+});
 ```
 
 ### 캐시를 명시적으로 설정해도 여전히 캐시가 안되는 경우
@@ -2071,12 +1793,11 @@ const res = await fetch('https://api.example.com/posts', { cache: 'force-cache' 
 * cookies() 또는 headers() 함수 사용
   - header나 cookie를 꺼내는 작업은 동적으로 실행되어야 하므로 해당 컴포넌트는 동적 렌더링이 됨
 * 라우트 세그먼트에서 `dynamic = 'force-dynamic'` 설정
-* 서버 액션 내부의 fetch 요청
 
   ```tsx
   // 이런 경우들은 cache: 'force-cache'를 설정해도 캐시 안됨
   export default async function Page() {
-    const cookieStore = cookies(); // 동적 함수 사용
+    const cookieStore = await cookies(); // 동적 함수 사용
     const res = await fetch('https://api.example.com/posts', { 
       cache: 'force-cache' // 설정해도 캐시 안됨!
     });
@@ -2093,7 +1814,7 @@ const res = await fetch('https://api.example.com/posts', { cache: 'force-cache' 
     ```ts
     // Next.js 14 기본값: 'force-cache'
     // Next.js 15 기본값: 'no-store'
-    fetch('https://api.fesp.shop/posts', { cache: 'force-cache' });
+    fetch('https://fesp-api.koyeb.app/market/posts', { cache: 'force-cache' });
     ```
 
   - layout, page의 라우트 세그먼트 설정 옵션을 사용하면 layout이나 page 내의 모든 요청에 적용됨
@@ -2121,7 +1842,7 @@ const res = await fetch('https://api.example.com/posts', { cache: 'force-cache' 
 #### 시간 기반 재검증
 * next.revalidate 옵션으로 초단위 시간 설정
 ```tsx
-fetch('https://api.fesp.shop/posts', { next: { revalidate: 3600 } });
+fetch('https://fesp-api.koyeb.app/market/posts', { next: { revalidate: 3600 } });
 ```
 
 * 라우트 세그먼트 설정 옵션의 revalidate 값을 지정
@@ -2139,7 +1860,7 @@ export const revalidate = 3600;
 
 ```tsx
 // /posts/page.tsx
-const res = await fetch(`https://api.fesp.shop/posts?type=qna`, {
+const res = await fetch(`https://fesp-api.koyeb.app/market/posts?type=qna`, {
   next: { tags: ['posts', 'qna'] }
 });
 revalidateTag('posts'); // posts 태그가 붙어있는 캐시 삭제
@@ -2159,10 +1880,12 @@ revalidatePath('/posts'); // /posts URL의 캐시 삭제
   - 각 장치에 맞는 올바른 크기의 이미지를 자동으로 제공
   - WebP, AVIF 같은 현대 이미지 포맷을 사용
 * 시각적 안정성
-  - 이미지가 로딩될 때 발생하는 레이아웃 이동 현상 방지(width, height 속성 명시)
+  - 이미지가 로딩될 때 발생하는 레이아웃 이동 현상 방지(width, height 속성 필수)
 * 더 빠른 페이지 로드
   - 이미지가 뷰포트에 들어올 때 로드
-  - 선택적인 blurDataURL 속성으로 블러업 플레이스 홀드 지정
+  - 선택적인 blurDataURL 속성으로 블러 이미지 지정
+    + 작은 사이즈의 저화질 이미지를 먼저 보여주고 점차 선명한 이미지로 교체
+    + 블러 이미지는 `plaiceholder` 라이브러리나 온라인 도구를 이용해서 base64 방식으로 지정
 * 유연성
   - 원격 서버의 이미지를 요청에 따라 크기 조정
 
@@ -2225,9 +1948,9 @@ export default function DashboardLayout({
 * 구글, 네이버, 카카오 로그인
 
 ### 10.1.1 전략
-* OAuth/OpenID Connect(OIDC)
+* OAuth/OIDC(OpenID Connect)
   - 소셜 로그인, Single Sign-On(SSO)
-* 로그인(이메일 + 비밀번호)
+* id/pwd 로그인(이메일 + 비밀번호)
   - 일반적인 웹 애플리케이션의 인증 방법
 * 비밀번호 없는 토큰 기반 인증
   - 일회성 이메일 링크나 SMS 링크 등을 통해서 인증
@@ -2319,17 +2042,17 @@ function LoginButton() {
 * Next.js의 미들웨어를 이용해서 구현
 
 ### 10.2.1 미들웨어 구현 방법
-#### 미들웨어 설정
+#### 10.2.1.1 미들웨어 설정
 * 루트 디렉토리에 middleware.tsx 파일 생성
 * 토큰 확인 등을 통해 사용자 엑세스를 승인하는 로직 작성
 
-#### 보호된 경로 정의
+#### 10.2.1.2 보호된 경로 정의
 * 미들웨어의 matcher 옵션으로 인가가 필요하지 않은 경로를 지정
 
-#### 미들웨어 로직 작성
+#### 10.2.1.3 미들웨어 로직 작성
 * 인증 여부를 확인하는 로직 작성
 
-#### 무단 접근 처리
+#### 10.2.1.4 무단 접근 처리
 * 승인되지 않은 사용자는 오류 페이지를 보여주거나 로그인 페이지로 이동
 
 ```tsx
@@ -2387,7 +2110,7 @@ export async function serverAction() {
 }
 ```
 
-#### 라우트 핸들러
+#### route handler
 ```tsx
 export async function GET() {
   // User authentication and role verification
@@ -2446,10 +2169,10 @@ import NextAuth from "next-auth";
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [],
-})
+});
 ```
 
-#### NextAuth() 인자값
+#### 10.3.3.1 NextAuth() 인자값
 * providers: Credentials, Google, GitHub 등의 인증 공급자를 지정
 * session: 세션 관리 방식을 지정
 * pages: 사용자 정의 페이지 경로를 지정하며, 로그인 페이지의 기본값은 /auth/signin
@@ -2459,12 +2182,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   - jwt: JWT가 생성되거나 업데이트될 때 호출되며, 반환하는 값은 암호화되어 쿠키에 저장됨
   - session: jwt 콜백이 반환하는 token을 받아, 세션이 확인될 때마다 호출되며, 반환하는 값은 클라이언트에서 확인할 수 있음(2번 이상 호출될 수 있음)
 
-#### callbacks 핸들러 호출 순서
+#### 10.3.3.2 callbacks 핸들러 호출 순서
 * 로그인: signIn > redirect > jwt > session
 * 세션 업데이트: jwt > session
 * 세션 확인: session
 
-#### NextAuth() 리턴값
+#### 10.3.3.3 NextAuth() 리턴값
 * handlers: 프로젝트의 인증 관리를 위한 API 라우트(GET, POST 함수) 객체
 * signIn: 사용자 로그인을 시도하는 비동기 함수
 * signOut: 사용자 로그아웃을 시도하는 비동기 함수
@@ -2473,7 +2196,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 ### 10.3.4 구글 로그인
 * <https://next-auth.js.org/providers/google> 참고
 
-#### 키발급
+#### 10.3.4.1 키발급
 ##### 구글 클라우드의 API 서비스로 이동
 * https://console.cloud.google.com/apis
 
@@ -2494,7 +2217,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   - 승인된 리디렉션 URL
     + http://localhost:3000/api/auth/callback/google
 
-#### 코드 수정
+#### 10.3.4.2 코드 수정
 * .env에 client_id와 client_secret 추가
 ```
 GOOGLE_CLIENT_ID=abc123
@@ -2549,7 +2272,7 @@ const nextConfig = {
 ### 10.3.5 깃허브 로그인
 * <https://next-auth.js.org/providers/github> 참고
 
-#### 키발급
+#### 10.3.5.1 키발급
 ##### 깃허브 개발자 설정으로 이동
 * https://github.com/settings/developers
 
@@ -2559,7 +2282,7 @@ const nextConfig = {
   - Authorization callback URL: http://localhost:3000/api/auth/callback/github
   - Register application
 
-#### 코드 수정
+#### 10.3.5.2 코드 수정
 * .env에 client_id와 client_secret 추가
 ```
 GITHUB_CLIENT_ID=aaabb12
