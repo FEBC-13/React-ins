@@ -802,7 +802,6 @@
 * 
 
 * 게시물 목록에서 새로고침 한 후 뒤로가기 누르면 RootLayout에 콘솔이 여러번 찍힘
-* 프로덕션에서 Link의 prefetch=true일때 전체를 미리 가져오지 않음
 
 #### 회고(1시간)
 * 과제 2일차 정리
@@ -812,39 +811,48 @@
 * 할일 목록 API 서버 호출
   - hooks/useAxiosInstance 작성
   - TodoList에 fetchTodoList() 작성
-* 할일 등록 API 서버 호출
-  - TodoList의 fetchTodoList -> TodoInput에 전달
-  - TodoInput handleAdd()에서 서버 호출로 수정 후 fetchTodoList() 호출 
-* 할일 삭제 API 서버 호출
-  - TodoList의 fetchTodoList -> TodoItem에 전달
-  - TodoInput handleDelete()에서 서버 호출로 수정 후 fetchTodoList() 호출 
-* 할일 수정 API 서버 호출
-  - TodoList의 toggleDone()에서 서버 호출로 수정 후 fetchTodoList() 호출
-
 
 ### 23일차(2025.07.02 수)
 #### 오전(3시간)
-* 
+* 라우팅용 특수 파일
+  - loading
+  - error
+  - not-found
+  - router handler
 
-#### 오후(3시간)
-* 
+#### 오후(4시간)
+* Data fetching
+* 게시물 등록까지
 
 #### 회고(1시간)
 * 
 
 #### 병아리반(1시간)
-* 
+* 패스
 
 ### 24일차(2025.07.03 목)
 #### 오전(3시간)
-* 
+* 설명
 
 #### 오후(3시간)
-* 
+* 등록 후 목록으로 이동
+  - 목록 캐시 설정 추가
+  - 목록 revalidate
+
+* 설명(9. 최적화 까지, 인증은 안함)
 
 #### 회고(1시간)
 * 
 
 #### 병아리반(1시간)
-* 
+* 할일 목록 상태로 반영
+
+* 할일 등록 API 서버 호출
+  - TodoList의 fetchList -> TodoInput에 전달
+  - TodoInput handleAdd()에서 서버 호출로 수정 후 fetchTodoList() 호출 
+* 할일 삭제 API 서버 호출
+  - TodoList의 fetchList -> TodoItem에 전달
+  - TodoInput handleDelete()에서 서버 호출로 수정 후 fetchTodoList() 호출 
+* 할일 수정 API 서버 호출
+  - TodoList의 toggleDone()에서 서버 호출로 수정 후 fetchTodoList() 호출
 
