@@ -20,12 +20,12 @@ export default async function RootPage() {
           <div className="bg-white p-6 rounded shadow dark:bg-gray-800">
             <h3 className="text-xl font-bold mb-2">자유 게시판</h3>
             <p className="mb-4">자유롭게 이야기를 나누세요.</p>
-            <Link href="/info" className="text-orange-500 hover:underline">바로가기</Link>
+            <Link href="/free" className="text-orange-500 hover:underline">바로가기</Link>
           </div>
           <div className="bg-white p-6 rounded shadow dark:bg-gray-800">
             <h3 className="text-xl font-bold mb-2">질문 게시판</h3>
             <p className="mb-4">궁금한 점을 질문하고 답변을 받아보세요.</p>
-            <Link href="/info" className="text-orange-500 hover:underline">바로가기</Link>
+            <Link href="/qna" className="text-orange-500 hover:underline">바로가기</Link>
           </div>
         </div>
       </section>
