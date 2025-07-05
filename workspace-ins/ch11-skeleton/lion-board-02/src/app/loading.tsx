@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
-    <div>
+    <main className="flex-1 flex items-center justify-center">
       로딩중...
-    </div>
+    </main>
   );
 }
